@@ -1,0 +1,12 @@
+project:
+  type: book
+
+book:
+  title: "Methods Brown Bag"
+  chapters:
+    - index.qmd
+    - sessions/01-intro.qmd
+
+format:
+  html:
+    theme: cosmo

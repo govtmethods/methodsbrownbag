@@ -1,7 +1,50 @@
-/.quarto/
-**/*.quarto_ipynb
-
-.DS_Store
-.Rproj.user/
+# =========================
+# Quarto build output
+# =========================
+_book/
 .quarto/
-_site/
+*_files/
+*_cache/
+
+# If you ever render to docs/ locally
+docs/
+
+# =========================
+# LaTeX / PDF intermediate files
+# =========================
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# =========================
+# R
+# =========================
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+
+# renv cache (do NOT ignore renv.lock)
+renv/library/
+renv/staging/
+renv/python/
+
+# =========================
+# macOS
+# =========================
+.DS_Store
+
+# =========================
+# VS Code
+# =========================
+.vscode/
+
+# =========================
+# Misc
+# =========================
+*.tmp
+*.swp

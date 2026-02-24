@@ -5,10 +5,46 @@ book:
   title: "Methods Brown Bag"
   chapters:
     - index.qmd
-    - sessions/01-intro.qmd
+    - chapters/01-intro.qmd
+    # ...
 
 format:
   html:
-    theme: cosmo
-    
-    
+    theme: cosmo        # <-- your original theme (or whatever you prefer)
+    css: styles.scss
+    embed-resources: true
+    toc: true
+    toc-depth: 3
+    include-in-header:
+      text: |
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Caslon+Text:wght@400;600&display=swap" rel="stylesheet">
+
+        <script>
+          (function () {
+            const KEY = "gm_theme";
+            const root = document.documentElement;
+
+            function applyTheme(value) {
+              if (value === "dark") root.setAttribute("data-theme", "dark");
+              else root.removeAttribute("data-theme");
+            }
+
+            applyTheme(localStorage.getItem(KEY) || "light");
+
+            window.__gmToggleTheme = function () {
+              const curr = root.getAttribute("data-theme") === "dark" ? "dark" : "light";
+              const next = (curr === "dark") ? "light" : "dark";
+              localStorage.setItem(KEY, next);
+              applyTheme(next);
+            };
+          })();
+        </script>
+
+    include-before-body:
+      - _includes/gm-controls.html
+
+  pdf:
+    output-file: Methods-Brown-Bag.pdf
+    toc: true

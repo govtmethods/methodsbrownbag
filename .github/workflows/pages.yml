@@ -30,6 +30,22 @@ jobs:
       - name: Restore R packages (renv)
         uses: r-lib/actions/setup-renv@v2
 
+      # add this for PDF rendering
+      - name: Install TinyTeX (for PDF)
+        uses: r-lib/actions/setup-tinytex@v2
+
+      # Optional: helps avoid missing LaTeX packages causing random failures
+      - name: Install common LaTeX packages
+        run: |
+          tlmgr install \
+            latexmk \
+            collection-fontsrecommended \
+            xcolor \
+            bookmark \
+            ulem \
+            fvextra \
+            upquote || true
+
       - name: Render
         run: quarto render
 

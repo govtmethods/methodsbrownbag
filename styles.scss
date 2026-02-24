@@ -1,0 +1,186 @@
+/* ============================================================================
+   Govt Methods — Quarto Book skin
+   Goal: keep DEFAULT Quarto book layout/theme, but match landing typography/bg,
+   add theme toggle + PDF button.
+   ============================================================================ */
+
+/* ---- THEME TOKENS (from landing) ---- */
+:root {
+  --gm-bg: #fbfbf9;
+  --gm-fg: #1f2d3a;
+  --gm-muted: #3a3a3a;
+  --gm-rule: rgba(31, 45, 58, 0.18);
+
+  --gm-link: rgba(31, 45, 58, 0.88);
+  --gm-title-hover: #1f5ea8;
+
+  --gm-serif: "Libre Caslon Text", Georgia, "Times New Roman", serif;
+  --gm-sans: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+html[data-theme="dark"] {
+  --gm-bg: #0f1114;
+  --gm-fg: rgba(255, 255, 255, 0.92);
+  --gm-muted: rgba(255, 255, 255, 0.72);
+  --gm-rule: rgba(255, 255, 255, 0.16);
+
+  --gm-link: rgba(255, 255, 255, 0.86);
+  --gm-title-hover: #ffd166;
+
+  color-scheme: dark;
+}
+
+/* ---- apply tokens to Bootstrap/Quarto surfaces without changing layout ---- */
+body {
+  background: var(--gm-bg);
+  color: var(--gm-fg);
+  font-family: var(--gm-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* help Bootstrap-based themes inherit */
+  --bs-body-bg: var(--gm-bg);
+  --bs-body-color: var(--gm-fg);
+  --bs-border-color: var(--gm-rule);
+  --bs-link-color: var(--gm-link);
+  --bs-link-hover-color: var(--gm-title-hover);
+}
+
+a {
+  color: var(--gm-link);
+}
+a:hover {
+  color: var(--gm-title-hover);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Headings: match landing “serif titles” feel */
+h1, h2, h3, h4, h5 {
+  font-family: var(--gm-serif);
+  letter-spacing: -0.01em;
+}
+
+/* Make common Quarto containers match paper background */
+#quarto-content,
+.content,
+.page-columns,
+#quarto-sidebar,
+.sidebar,
+.navbar,
+header,
+footer {
+  background: var(--gm-bg);
+}
+
+/* Sidebar/nav borders look like landing rules */
+#quarto-sidebar,
+.sidebar,
+.navbar {
+  border-color: var(--gm-rule) !important;
+}
+
+/* Code blocks: keep readable in both themes */
+pre, code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+pre {
+  border: 1px solid var(--gm-rule);
+  background: rgba(31, 45, 58, 0.04);
+}
+html[data-theme="dark"] pre {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Tables: subtle rules */
+table {
+  border-color: var(--gm-rule);
+}
+thead, tbody, tfoot, tr, td, th {
+  border-color: var(--gm-rule) !important;
+}
+
+/* ============================================================================
+   Floating controls (PDF + theme toggle)
+   ============================================================================ */
+.gm-controls {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 2000;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* PDF button: small pill, consistent with landing styling */
+.gm-pdf-btn {
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 12px;
+  border-radius: 999px;
+
+  border: 1px solid var(--gm-rule);
+  background: transparent;
+  color: var(--gm-fg);
+  font-size: 0.95rem;
+  text-decoration: none;
+
+  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease, color 120ms ease;
+}
+
+.gm-pdf-btn:hover {
+  transform: translateY(-1px);
+  color: var(--gm-title-hover);
+  border-color: rgba(31, 94, 168, 0.35);
+  background: rgba(31, 45, 58, 0.03);
+}
+
+html[data-theme="dark"] .gm-pdf-btn:hover {
+  border-color: rgba(255, 209, 102, 0.45);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Theme toggle button (copied behavior from landing) */
+.gm-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+
+  background: transparent;
+  border: 1px solid var(--gm-rule);
+  color: var(--gm-muted);
+
+  cursor: pointer;
+  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease, color 120ms ease;
+}
+
+.gm-theme-toggle:hover {
+  transform: translateY(-1px);
+  color: var(--gm-fg);
+  border-color: rgba(31, 94, 168, 0.35);
+  background: rgba(31, 45, 58, 0.03);
+}
+
+html[data-theme="dark"] .gm-theme-toggle:hover {
+  border-color: rgba(255, 209, 102, 0.45);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.gm-theme-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+/* On very small screens, avoid covering the nav button area */
+@media (max-width: 520px) {
+  .gm-controls { top: 8px; right: 8px; }
+  .gm-pdf-btn { display: none; } /* optional: hide PDF button on tiny screens */
+}

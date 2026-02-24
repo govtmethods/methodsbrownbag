@@ -1,0 +1,38 @@
+<aside class="sd-right" aria-label="Recommended resources">
+  <div class="sd-card">
+    <div class="sd-card__title">Recommended</div>
+
+    <div class="sd-rec">
+      <a class="sd-rec__title" href="#">Slides &amp; materials</a>
+      <div class="sd-rec__meta">Downloadable PDFs / links</div>
+    </div>
+
+    <div class="sd-rec">
+      <a class="sd-rec__title" href="#">Reading list</a>
+      <div class="sd-rec__meta">Core references for this module</div>
+    </div>
+
+    <div class="sd-rec">
+      <a class="sd-rec__title" href="#">Code templates</a>
+      <div class="sd-rec__meta">Reproducible scripts &amp; examples</div>
+    </div>
+
+    <div class="sd-divider"></div>
+
+    <div class="sd-card__title">Article metrics</div>
+    <div class="sd-metrics">
+      <div class="sd-metric"><span>Last updated</span><span class="sd-metric__val" id="sd-last-updated"></span></div>
+      <div class="sd-metric"><span>Estimated read</span><span class="sd-metric__val">~6 min</span></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      // lightweight “Last updated” that doesn’t require a build step
+      const el = document.getElementById("sd-last-updated");
+      if (!el) return;
+      const d = new Date(document.lastModified);
+      el.textContent = isNaN(d.getTime()) ? "" : d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "2-digit" });
+    })();
+  </script>
+</aside>

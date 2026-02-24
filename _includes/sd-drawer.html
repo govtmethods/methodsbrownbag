@@ -1,0 +1,33 @@
+<div class="sd-overlay" id="sd-overlay" hidden></div>
+
+<script>
+  (function () {
+    const btn = document.getElementById("sd-chapters-btn");
+    const overlay = document.getElementById("sd-overlay");
+    const root = document.documentElement;
+
+    function openDrawer() {
+      root.setAttribute("data-chapters", "open");
+      overlay.hidden = false;
+      overlay.setAttribute("aria-hidden", "false");
+    }
+
+    function closeDrawer() {
+      root.removeAttribute("data-chapters");
+      overlay.hidden = true;
+      overlay.setAttribute("aria-hidden", "true");
+    }
+
+    btn && btn.addEventListener("click", function () {
+      const open = root.getAttribute("data-chapters") === "open";
+      if (open) closeDrawer();
+      else openDrawer();
+    });
+
+    overlay && overlay.addEventListener("click", closeDrawer);
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeDrawer();
+    });
+  })();
+</script>

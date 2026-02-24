@@ -1,5 +1,5 @@
 ---
-title: "Session 1"
+lightbox: true
 ---
 
-This is Session 1.
+# Session 1 {.unnumbered}

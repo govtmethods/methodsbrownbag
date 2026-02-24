@@ -1,7 +1,7 @@
 ---
-title: "Methods Brown Bag"
+lightbox: true
 ---
 
-# Welcome
+# Welcome {.unnumbered}
 
 This is the Brown Bag book home page.

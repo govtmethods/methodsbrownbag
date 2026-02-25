@@ -50,3 +50,10 @@ renv/python/
 *.swp
 /.quarto/
 **/*.quarto_ipynb
+
+# Intermediate files
+index.*.md
+site_libs/
+chapters/*.md
+*_files/
+_book/

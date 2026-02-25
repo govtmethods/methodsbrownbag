@@ -6,15 +6,21 @@ book:
   chapters:
     - index.qmd
     - chapters/01-intro.qmd
-    # ...
+    - chapters/02-Under-Regression.qmd
 
 format:
   html:
-    theme: cosmo        # <-- your original theme (or whatever you prefer)
+    theme: cosmo
+    fig-path: "figures/html/"
+    fig-format: png
     css: styles.scss
     embed-resources: true
     toc: true
     toc-depth: 3
+    code-fold: true
+    code-overflow: wrap
+    number-sections: false
+    highlight-style: kate
     include-in-header:
       text: |
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,3 +54,15 @@ format:
   pdf:
     output-file: Methods-Brown-Bag.pdf
     toc: true
+    code-fold: true
+    code-overflow: wrap
+    number-sections: false
+    highlight-style: kate
+    fig-path: "figures/pdf/"
+    fig-format: pdf
+
+execute:
+  freeze: false
+
+# Only set this if you REALLY need the intermediate md kept for troubleshooting
+keep-md: true

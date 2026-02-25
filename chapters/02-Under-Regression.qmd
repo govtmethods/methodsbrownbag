@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 	include = TRUE,
 	#dpi = 600,
 	tidy.opts=list(width.cutoff=40),
-	tidy=FALSE
+	tidy=FALSE 
 )
 options(kableExtra.auto_format = FALSE)
 if (knitr::is_latex_output()) {

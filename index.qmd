@@ -1,5 +1,8 @@
 ---
 lightbox: true
+format:
+  html:
+    toc: true
 ---
 
 # Welcome {.unnumbered}

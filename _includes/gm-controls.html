@@ -1,61 +1,117 @@
 <div class="gm-controls" role="navigation" aria-label="Site controls">
   <!-- View PDF -->
-  <a class="gm-icon-btn" href="Methods-Brown-Bag.pdf" target="_blank" rel="noopener" aria-label="View PDF" title="View PDF">
+  <a
+    class="gm-icon-btn gm-pdf-btn"
+    href="Methods-Brown-Bag.pdf"
+    target="_blank"
+    rel="noopener"
+    aria-label="View PDF"
+    title="View PDF"
+  >
     <svg class="gm-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M7 3.5h7l3 3V20a1.5 1.5 0 0 1-1.5 1.5H7A1.5 1.5 0 0 1 5.5 20V5A1.5 1.5 0 0 1 7 3.5Z"
             stroke="currentColor" stroke-width="1.6" />
       <path d="M14 3.5V7h3.5" stroke="currentColor" stroke-width="1.6" />
       <path d="M8 14.2c1.1-1.3 2.5-2 4-2s2.9.7 4 2c-1.1 1.3-2.5 2-4 2s-2.9-.7-4-2Z"
             stroke="currentColor" stroke-width="1.6" />
-      <path d="M12 14.2h0" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" />
+      <circle cx="12" cy="14.2" r="0.9" fill="currentColor" />
     </svg>
   </a>
 
   <!-- Theme toggle -->
-  <button class="gm-icon-btn" type="button" aria-label="Toggle theme" title="Toggle theme"
-          onclick="window.__gmToggleTheme && window.__gmToggleTheme()">
+  <button
+    class="gm-icon-btn"
+    type="button"
+    aria-label="Toggle theme"
+    title="Toggle theme"
+    onclick="window.__gmToggleTheme && window.__gmToggleTheme()"
+  >
     <svg class="gm-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M12 3v2.2M12 18.8V21M4.2 12H3M21 12h-1.2M6.1 6.1 4.6 4.6M19.4 19.4l-1.5-1.5M17.9 6.1l1.5-1.5M4.6 19.4l1.5-1.5"
-        stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
       <path d="M12 7.2a4.8 4.8 0 1 0 0 9.6a4.8 4.8 0 0 0 0-9.6Z"
-        stroke="currentColor" stroke-width="1.6"/>
+            stroke="currentColor" stroke-width="1.6"/>
     </svg>
   </button>
 </div>
 
+<style>
+  .gm-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .gm-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .gm-icon {
+    width: 1.15rem;
+    height: 1.15rem;
+    display: block;
+    overflow: visible;
+    flex: 0 0 auto;
+  }
+</style>
+
 <script>
 (function () {
-  const controls = document.querySelector(".gm-controls");
-  if (!controls) return;
+  function setPdfHref() {
+    const pdfLink = document.querySelector(".gm-pdf-btn");
+    if (!pdfLink) return;
+
+    const inChapters = window.location.pathname.includes("/chapters/");
+    pdfLink.setAttribute("href", inChapters ? "../Methods-Brown-Bag.pdf" : "Methods-Brown-Bag.pdf");
+  }
 
   function mountIntoSidebar() {
+    const controls = document.querySelector(".gm-controls");
+    if (!controls) return false;
+
     const sidebar = document.getElementById("quarto-sidebar");
     if (!sidebar) return false;
 
-    // Where the title usually lives in Quarto book sidebar
-    const titleBlock =
+    if (controls.dataset.mounted === "true") return true;
+
+    const anchor =
       sidebar.querySelector(".sidebar-title") ||
       sidebar.querySelector(".sidebar-header") ||
-      sidebar.querySelector(".sidebar-search") ||
-      sidebar;
+      sidebar.querySelector("#quarto-search") ||
+      sidebar.querySelector(".sidebar-search");
 
-    // Move controls directly below the title block
-    titleBlock.insertAdjacentElement("afterend", controls);
-    controls.setAttribute("data-mounted", "true");
+    if (!anchor) return false;
+
+    anchor.insertAdjacentElement("afterend", controls);
+    controls.dataset.mounted = "true";
     return true;
   }
 
-  // Try immediately (covers most cases)
-  if (mountIntoSidebar()) return;
+  function initControls() {
+    setPdfHref();
 
-  // Otherwise wait until Quarto finishes building sidebar
-  const obs = new MutationObserver(() => {
-    if (mountIntoSidebar()) obs.disconnect();
-  });
+    if (mountIntoSidebar()) return;
 
-  obs.observe(document.documentElement, { childList: true, subtree: true });
+    const obs = new MutationObserver(() => {
+      if (mountIntoSidebar()) obs.disconnect();
+    });
 
-  // Safety: stop observing after 5 seconds
-  setTimeout(() => obs.disconnect(), 5000);
+    obs.observe(document.documentElement, { childList: true, subtree: true });
+    setTimeout(() => obs.disconnect(), 5000);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initControls, { once: true });
+  } else {
+    initControls();
+  }
 })();
 </script>

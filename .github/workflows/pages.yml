@@ -27,10 +27,8 @@ jobs:
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
         with:
-          r-version: "4.5.2"   # optional but strongly recommended for stability
+          r-version: "4.5.2"
 
-      # System libraries needed to compile common R packages from source on Ubuntu
-      # (curl/xml2/openssl + ragg/systemfonts/textshaping stacks)
       - name: Install system dependencies (R packages)
         run: |
           sudo apt-get update
@@ -51,11 +49,9 @@ jobs:
       - name: Restore R packages (renv)
         uses: r-lib/actions/setup-renv@v2
 
-      # add this for PDF rendering
       - name: Install TinyTeX (for PDF)
         uses: r-lib/actions/setup-tinytex@v2
 
-      # Optional: helps avoid missing LaTeX packages causing random failures
       - name: Install common LaTeX packages
         run: |
           tlmgr install \
@@ -68,7 +64,17 @@ jobs:
             upquote || true
 
       - name: Render
-        run: quarto render
+        run: quarto render --no-clean
+
+      - name: Copy PDF into _book
+        run: |
+          if [ -f "_book/Methods-Brown-Bag.pdf" ]; then
+            echo "PDF already present in _book"
+          elif [ -f "Methods-Brown-Bag.pdf" ]; then
+            cp "Methods-Brown-Bag.pdf" "_book/Methods-Brown-Bag.pdf"
+          else
+            echo "PDF not found after render"
+          fi
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

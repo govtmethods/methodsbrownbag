@@ -1,5 +1,6 @@
 project:
   type: book
+  output-dir: _book
 
 book:
   title: "Methods Brown Bag"
@@ -14,7 +15,6 @@ format:
     fig-path: "figures/html/"
     fig-format: png
     css: styles.scss
-    embed-resources: true
     toc: true
     toc-depth: 3
     code-fold: true
@@ -32,23 +32,44 @@ format:
             const KEY = "gm_theme";
             const root = document.documentElement;
 
-            function applyTheme(value) {
-              if (value === "dark") root.setAttribute("data-theme", "dark");
-              else root.removeAttribute("data-theme");
+            function getStoredTheme() {
+              try {
+                return localStorage.getItem(KEY);
+              } catch (e) {
+                return null;
+              }
             }
 
-            applyTheme(localStorage.getItem(KEY) || "light");
+            function setStoredTheme(value) {
+              try {
+                localStorage.setItem(KEY, value);
+              } catch (e) {
+                // no-op when localStorage is unavailable
+              }
+            }
+
+            function applyTheme(value) {
+              if (value === "dark") {
+                root.setAttribute("data-theme", "dark");
+                root.setAttribute("data-bs-theme", "dark");
+              } else {
+                root.removeAttribute("data-theme");
+                root.setAttribute("data-bs-theme", "light");
+              }
+            }
+
+            applyTheme(getStoredTheme() || "light");
 
             window.__gmToggleTheme = function () {
               const curr = root.getAttribute("data-theme") === "dark" ? "dark" : "light";
-              const next = (curr === "dark") ? "light" : "dark";
-              localStorage.setItem(KEY, next);
+              const next = curr === "dark" ? "light" : "dark";
+              setStoredTheme(next);
               applyTheme(next);
             };
           })();
         </script>
 
-    include-before-body:
+    include-after-body:
       - _includes/gm-controls.html
 
   pdf:
@@ -64,5 +85,4 @@ format:
 execute:
   freeze: false
 
-# Only set this if you REALLY need the intermediate md kept for troubleshooting
 keep-md: true

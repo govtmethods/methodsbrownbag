@@ -28,12 +28,26 @@ html[data-theme="dark"] {
   --gm-title-hover: #ffd166;
 
   color-scheme: dark;
+
+  /* help Bootstrap surfaces actually switch too */
+  --bs-body-bg: var(--gm-bg);
+  --bs-body-color: var(--gm-fg);
+  --bs-border-color: var(--gm-rule);
+  --bs-link-color: var(--gm-link);
+  --bs-link-hover-color: var(--gm-title-hover);
+  --bs-emphasis-color: var(--gm-fg);
+  --bs-secondary-color: var(--gm-muted);
+  --bs-secondary-bg: rgba(255, 255, 255, 0.04);
 }
 
 /* ---- apply tokens to Bootstrap/Quarto surfaces without changing layout ---- */
+html,
 body {
   background: var(--gm-bg);
   color: var(--gm-fg);
+}
+
+body {
   font-family: var(--gm-sans);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -60,46 +74,131 @@ a:hover {
 h1, h2, h3, h4, h5 {
   font-family: var(--gm-serif);
   letter-spacing: -0.01em;
+  color: var(--gm-fg);
 }
 
-/* Make common Quarto containers match paper background */
+/* Make Quarto/Bootstrap layout surfaces match theme */
 #quarto-content,
-.content,
-.page-columns,
+#quarto-content .content,
+#quarto-document-content,
+#quarto-margin-sidebar,
 #quarto-sidebar,
+#quarto-sidebar > *,
 .sidebar,
+.sidebar-content,
+.sidebar-menu-container,
+.page-columns,
+.page-full,
+.quarto-container,
+main.content,
+.content,
 .navbar,
 header,
-footer {
+footer,
+nav {
   background: var(--gm-bg);
+  color: var(--gm-fg);
 }
 
 /* Sidebar/nav borders look like landing rules */
 #quarto-sidebar,
 .sidebar,
-.navbar {
+.navbar,
+#quarto-margin-sidebar {
   border-color: var(--gm-rule) !important;
 }
 
+/* Sidebar text and links */
+#quarto-sidebar .sidebar-title,
+#quarto-sidebar .sidebar-item,
+#quarto-sidebar .sidebar-item-text,
+#quarto-sidebar .sidebar-link,
+#quarto-sidebar .menu-text,
+#quarto-sidebar .sidebar-section,
+#quarto-sidebar .sidebar-tools-main,
+#quarto-sidebar .sidebar-item-container,
+#quarto-sidebar .sidebar-menu-container {
+  color: var(--gm-fg);
+}
+
+#quarto-sidebar .sidebar-link:hover,
+#quarto-sidebar .sidebar-item-text:hover,
+#quarto-sidebar .menu-text:hover {
+  color: var(--gm-title-hover);
+}
+
+/* Right-hand TOC column */
+#quarto-margin-sidebar,
+#quarto-margin-sidebar .nav-link,
+#quarto-margin-sidebar nav,
+#quarto-margin-sidebar .toc-title {
+  color: var(--gm-fg);
+  background: var(--gm-bg);
+}
+
+#quarto-margin-sidebar .nav-link:hover,
+#quarto-margin-sidebar .nav-link.active {
+  color: var(--gm-title-hover);
+}
+
+/* Search input + common controls */
+input,
+textarea,
+select,
+.form-control,
+#quarto-search input {
+  background: transparent;
+  color: var(--gm-fg);
+  border-color: var(--gm-rule);
+}
+
+input::placeholder,
+textarea::placeholder,
+#quarto-search input::placeholder {
+  color: var(--gm-muted);
+}
+
+html[data-theme="dark"] .form-control,
+html[data-theme="dark"] #quarto-search input {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--gm-fg);
+  border-color: var(--gm-rule);
+}
+
 /* Code blocks: keep readable in both themes */
-pre, code {
+pre,
+code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
 }
+
 pre {
   border: 1px solid var(--gm-rule);
   background: rgba(31, 45, 58, 0.04);
+  color: var(--gm-fg);
 }
+
 html[data-theme="dark"] pre {
   background: rgba(255, 255, 255, 0.06);
+}
+
+code {
+  color: inherit;
 }
 
 /* Tables: subtle rules */
 table {
   border-color: var(--gm-rule);
 }
-thead, tbody, tfoot, tr, td, th {
+
+thead,
+tbody,
+tfoot,
+tr,
+td,
+th {
   border-color: var(--gm-rule) !important;
+  color: var(--gm-fg);
 }
 
 /* ============================================================================
@@ -107,23 +206,19 @@ thead, tbody, tfoot, tr, td, th {
    These are inserted under the Quarto sidebar title via gm-controls.html
    ============================================================================ */
 
-/* Container row under sidebar title */
-.gm-controls{
+.gm-controls {
   display: flex;
   gap: 10px;
   padding: 0.25rem 0.75rem 0.75rem 0.75rem;
 }
 
 /* If you *really* want to hide until mounted (optional):
-   Uncomment the next rule. I recommend leaving it OFF until everything works. */
-/*
-.gm-controls:not([data-mounted="true"]){
+.gm-controls:not([data-mounted="true"]) {
   display: none;
 }
 */
 
-/* Matched icon buttons */
-.gm-icon-btn{
+.gm-icon-btn {
   width: 38px;
   height: 38px;
   border-radius: 999px;
@@ -146,20 +241,20 @@ thead, tbody, tfoot, tr, td, th {
     color 120ms ease;
 }
 
-.gm-icon-btn:hover{
+.gm-icon-btn:hover {
   transform: translateY(-1px);
   color: var(--gm-fg);
   border-color: rgba(31, 94, 168, 0.35);
   background: rgba(31, 45, 58, 0.03);
 }
 
-html[data-theme="dark"] .gm-icon-btn:hover{
+html[data-theme="dark"] .gm-icon-btn:hover {
   border-color: rgba(255, 209, 102, 0.45);
   background: rgba(255, 255, 255, 0.04);
 }
 
 /* Icon sizing */
-.gm-icon{
+.gm-icon {
   width: 18px;
   height: 18px;
   display: block;
@@ -167,15 +262,17 @@ html[data-theme="dark"] .gm-icon-btn:hover{
 
 /* Small-screen polish: reduce padding so it doesn't crowd sidebar */
 @media (max-width: 520px) {
-  .gm-controls{
+  .gm-controls {
     padding: 0.2rem 0.5rem 0.6rem 0.5rem;
     gap: 8px;
   }
-  .gm-icon-btn{
+
+  .gm-icon-btn {
     width: 36px;
     height: 36px;
   }
-  .gm-icon{
+
+  .gm-icon {
     width: 17px;
     height: 17px;
   }
@@ -186,13 +283,6 @@ Source - https://stackoverflow.com/a/76610918
 Posted by Shafee, modified by community. See post 'Timeline' for change history
 Retrieved 2026-02-25, License - CC BY-SA 4.0
 */
-
-/*
-Source - https://stackoverflow.com/a/76610918
-Posted by Shafee, modified by community. See post 'Timeline' for change history
-Retrieved 2026-02-25, License - CC BY-SA 4.0
-*/
-
 .cell-output {
   background-color: #FAD5A5;
   border-radius: 4px;

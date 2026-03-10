@@ -57,3 +57,4 @@ site_libs/
 chapters/*.md
 *_files/
 _book/
+*.tex

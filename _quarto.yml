@@ -7,7 +7,9 @@ book:
   chapters:
     - index.qmd
     - chapters/01-intro.qmd
+    - chapters/02-github.qmd
     - chapters/02-Under-Regression.qmd
+    
 
 format:
   html:

@@ -63,7 +63,7 @@ format:
         })();
         </script>
 
-    include-after-body:
+    include-before-body:
       - _includes/gm-controls.html
 
   pdf:

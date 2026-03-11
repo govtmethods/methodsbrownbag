@@ -9,7 +9,6 @@ book:
     - chapters/01-intro.qmd
     - chapters/02-github.qmd
     - chapters/02-Under-Regression.qmd
-    
 
 format:
   html:
@@ -23,6 +22,7 @@ format:
     code-overflow: wrap
     number-sections: false
     highlight-style: kate
+
     include-in-header:
       text: |
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,45 +30,37 @@ format:
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Caslon+Text:wght@400;600&display=swap" rel="stylesheet">
 
         <script>
-          (function () {
-            const KEY = "gm_theme";
-            const root = document.documentElement;
+        (function () {
+          const KEY = "gm_theme";
+          const root = document.documentElement;
 
-            function getStoredTheme() {
-              try {
-                return localStorage.getItem(KEY);
-              } catch (e) {
-                return null;
-              }
+          function getStoredTheme() {
+            try { return localStorage.getItem(KEY); }
+            catch(e) { return null; }
+          }
+
+          function setStoredTheme(v) {
+            try { localStorage.setItem(KEY, v); }
+            catch(e) {}
+          }
+
+          function applyTheme(v) {
+            if (v === "dark") {
+              root.setAttribute("data-theme", "dark");
+            } else {
+              root.removeAttribute("data-theme");
             }
+          }
 
-            function setStoredTheme(value) {
-              try {
-                localStorage.setItem(KEY, value);
-              } catch (e) {
-                // no-op when localStorage is unavailable
-              }
-            }
+          applyTheme(getStoredTheme() || "light");
 
-            function applyTheme(value) {
-              if (value === "dark") {
-                root.setAttribute("data-theme", "dark");
-                root.setAttribute("data-bs-theme", "dark");
-              } else {
-                root.removeAttribute("data-theme");
-                root.setAttribute("data-bs-theme", "light");
-              }
-            }
-
-            applyTheme(getStoredTheme() || "light");
-
-            window.__gmToggleTheme = function () {
-              const curr = root.getAttribute("data-theme") === "dark" ? "dark" : "light";
-              const next = curr === "dark" ? "light" : "dark";
-              setStoredTheme(next);
-              applyTheme(next);
-            };
-          })();
+          window.__gmToggleTheme = function () {
+            const curr = root.getAttribute("data-theme") === "dark" ? "dark" : "light";
+            const next = curr === "dark" ? "light" : "dark";
+            setStoredTheme(next);
+            applyTheme(next);
+          };
+        })();
         </script>
 
     include-after-body:

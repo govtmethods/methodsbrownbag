@@ -35,42 +35,46 @@
   </button>
 </div>
 
-<style>
-  .gm-controls {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .gm-icon-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    background: transparent;
-    border: 0;
-    color: inherit;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  .gm-icon {
-    width: 1.15rem;
-    height: 1.15rem;
-    display: block;
-    overflow: visible;
-    flex: 0 0 auto;
-  }
-</style>
-
 <script>
 (function () {
+  const KEY = "gm_theme";
+  const root = document.documentElement;
+
+  if (!window.__gmToggleTheme) {
+    function applyTheme(v) {
+      if (v === "dark") root.setAttribute("data-theme", "dark");
+      else root.removeAttribute("data-theme");
+    }
+
+    function getStoredTheme() {
+      try { return localStorage.getItem(KEY); }
+      catch (e) { return null; }
+    }
+
+    function setStoredTheme(v) {
+      try { localStorage.setItem(KEY, v); }
+      catch (e) {}
+    }
+
+    applyTheme(getStoredTheme() || "light");
+
+    window.__gmToggleTheme = function () {
+      const curr = root.getAttribute("data-theme") === "dark" ? "dark" : "light";
+      const next = curr === "dark" ? "light" : "dark";
+      setStoredTheme(next);
+      applyTheme(next);
+    };
+  }
+
   function setPdfHref() {
     const pdfLink = document.querySelector(".gm-pdf-btn");
     if (!pdfLink) return;
 
     const inChapters = window.location.pathname.includes("/chapters/");
-    pdfLink.setAttribute("href", inChapters ? "../Methods-Brown-Bag.pdf" : "Methods-Brown-Bag.pdf");
+    pdfLink.setAttribute(
+      "href",
+      inChapters ? "../Methods-Brown-Bag.pdf" : "Methods-Brown-Bag.pdf"
+    );
   }
 
   function mountIntoSidebar() {

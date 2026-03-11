@@ -18,8 +18,6 @@ editor_options:
 knitr::include_graphics("git-supreme.png")
 ```
 
-# Version Control with Git and Github {.unnumbered}
-
 ## What is Version Control?
 
 Version Control System (VCS) is keeps records of changes made to files/files over time. Using a VCS enables us to revisit and/or restore older version of files, in case we made a mistake or even if we need to revisit our thinking as a process progressed. Think **Google Docs**.  

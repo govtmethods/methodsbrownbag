@@ -4,10 +4,13 @@ date: August 29, 2025
 author: 
   - name: Parushya
 lightbox: true
+editor: 
+  markdown: 
+    wrap: 72
+bibliography: references.bib
 ---
 
 ![](rprofane.png)
-
 
 ## Why Programming or Coding? (Revisiting)
 
@@ -16,10 +19,9 @@ and automating the formalization task to be done repetitively. It
 improves efficiency, enhances reproducibility, and boosts creativity
 when it comes to finding new patterns in your data.
 
-Benchmarks for reproducible data and statistical
-analyses:[^file-workflow-1]
+Benchmarks for reproducible data and statistical analyses:[^01-intro-1]
 
-[^file-workflow-1]: Inspired by the summary provided by Prof [Aaron
+[^01-intro-1]: Inspired by the summary provided by Prof [Aaron
     Williams](https://aaronrwilliams.com/about)' course on Data Analysis
     offered at McCourt School. Strongly recommended to learn good coding
     using R
@@ -50,13 +52,12 @@ computational research is reproducible, transparent, and robust. Here’s
 a summary of the key points:
 
 | Rule | Description | Notes |
-|---------------|-------------------------------------------|---------------|
+|----------------|---------------------------------------|----------------|
 | Documentation | Track how results are produced, including all steps in the analysis workflow. | Keep short notes on reults |
 | Automation | Minimize manual data manipulation by using scripts and documenting any manual changes. | Make changes to raw data in your scripts |
 | Version Control | Use version control systems for all custom scripts to track changes and maintain reproducibility. | Using Github |
 | Comprehensive Records | Archive all versions of external programs used, all intermediate results, and exact observation conditions. | Keep notes about data in comments |
 | Accessibility | Make raw data, scripts, and results publicly accessible to enhance transparency and replication. | Maintainig good workflow |
-
 
 ## File Management and Workflow
 
@@ -100,7 +101,7 @@ the library.
 **Key Differences Between Absolute and Relative Paths**
 
 | **Feature** | **Absolute Path** | **Relative Path** |
-|----------------|-----------------------------------|---------------------|
+|------------------|----------------------------------|---------------------|
 | **Starting Point** | Starts from the root directory of the file system. | Starts from the current working directory. |
 | **Portability** | Not portable—specific to the user's system. | Highly portable—adapts to different systems. |
 | **Ease of Sharing** | Harder to share; others must update paths. | Easier to share; no changes needed if structure is consistent. |
@@ -146,9 +147,9 @@ knitr::include_graphics("new-project.png")
 **Exercise**
 
 1.  Do this process again, this time creating a new project in the the
-    existing directory of math camp files. That is, the folder
-    where you have been saving R scripts and `.qmd` file associated with
-    math camp 2025. Name it `mathcamp2025`
+    existing directory of math camp files. That is, the folder where you
+    have been saving R scripts and `.qmd` file associated with math
+    camp 2025. Name it `mathcamp2025`
 
 2.  Go to the folder on your system, and click the `.RProj` file.
 
@@ -230,8 +231,8 @@ workflow smoother. Let's do it with the following exercise.
 
 2.  In the qmd file we were working in, add an R chunk.
 
-3.  Load the library `here` with the following code. Run the code line by
-    line
+3.  Load the library `here` with the following code. Run the code line
+    by line
 
 ```{r}
 #| eval: false
@@ -366,7 +367,9 @@ paper.
 8.  Remember to use `here()` package extensively in both, scripts and
     quarto files, when loading or saving the data.
 
-9.  You can zip the whole project folder for sharing. The
-    receiver will just need to unzip and run the code after starting the
-    associated `.RProj` file, without changing file paths on their
-    computer.
+9.  You can zip the whole project folder for sharing. The receiver will
+    just need to unzip and run the code after starting the associated
+    `.RProj` file, without changing file paths on their computer.
+
+# References
+

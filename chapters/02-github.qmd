@@ -1,6 +1,10 @@
 ---
+title: "Version Control with Git and Github"
+date: September 04, 2025
 lightbox: true
 bibliography: references.bib
+author: 
+  - name: Parushya
 editor_options: 
   chunk_output_type: console
 ---

@@ -35,11 +35,11 @@ if (knitr::is_latex_output()) {
 
 
 
-### Acknowledgement
+**Acknowledgement**
 
 This session borrows from the open-source lecture materials by Jeremy Orloff and Jonathan Bloom, [MIT, Central Limit Theorem and the Law of Large Numbers](https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/mit18_05_s22_class06-prep-b.pdf), and from the lecture slides in the courses Quantitative Methods I and III (Georgetown University, PhD in Government).
 
-# Law of Large Numbers:
+## Law of Large Numbers:
 
 Suppose that each random variable $X_i$ is an independent flip of a coin, where each head flip is coded as 1 and each tail flip as 0. $\overline{X}_n$ would be the "headcount" of n flips. We expect the share of heads to be half. This is not guaranteed however, due to the element of random error.
 
@@ -49,7 +49,7 @@ One way of testing this is to consider the coin flip as a random variable drawn 
 
 What we're looking to see is the clustering of the average around 0.5. To do that, we will look at the probability of getting a sample average within a tenth of 0.5 (a share of heads in a sample of coin flips between 40 and 60 percent). We expect the probability of landing in that range to increase the more flips we conduct:
 
-## A flip of a fair coin:
+### A flip of a fair coin:
 
 ```{r}
 cat("n = 10: ", "pbinom(6, 10, 0.5) - pbinom(3, 10, 0.5)", " = ", pbinom(6, 10, 0.5) -pbinom(3, 10, 0.5))
@@ -76,7 +76,7 @@ Another mathematical formulation of this intuition is embodied in the **Strong**
 
 $$ Pr(\lim_{n \rightarrow \infty} \overline{X}_n = \mu) = 1$$
 
-## Frequency and density histograms:
+### Frequency and density histograms:
 
 ```{r c0}
 x <- c(0.5, 1, 1, 1.5, 1.5, 1.5, 2, 2, 2, 2)
@@ -203,7 +203,7 @@ p2
 p1 + p2
 ```
 
-## From density histograms to PDFs:
+### From density histograms to PDFs:
 
 The Probability Density Function of a given distribution is the continuous analog of the density histogram. One could also say that the density histogram is an empirical estimate or snap shot of the PDF. The density histogram is drawn using finite data. The Probability Density Function shows the overall density under ever more observations and a diminishing bin-width, i.e., it is a smooth, theoretical limit of the histogram.
 
@@ -246,7 +246,7 @@ ggplot(df, aes(x = x)) +
 
 ```
 
-# Central Limit Theorem:
+## Central Limit Theorem:
 
 The CLT states that the relative proportions of different outcomes from a group of random variables (independent and identically distributed) will be approximately normal. This holds no matter the initial underlying distribution of the random variables.
 

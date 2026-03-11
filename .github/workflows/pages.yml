@@ -17,6 +17,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -29,52 +30,22 @@ jobs:
         with:
           r-version: "4.5.2"
 
-      - name: Install system dependencies (R packages)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            pkg-config \
-            libcurl4-openssl-dev \
-            libssl-dev \
-            libxml2-dev \
-            libfontconfig1-dev \
-            libfreetype6-dev \
-            libharfbuzz-dev \
-            libfribidi-dev \
-            libpng-dev \
-            libtiff5-dev \
-            libjpeg-dev \
-            libwebp-dev
-
       - name: Restore R packages (renv)
         uses: r-lib/actions/setup-renv@v2
 
-      - name: Install TinyTeX (for PDF)
-        uses: r-lib/actions/setup-tinytex@v2
-
-      - name: Install common LaTeX packages
+      # Install LaTeX from Ubuntu packages instead of TinyTeX.
+      # This avoids the tlmgr update bottleneck that was hanging your build.
+      - name: Install TeX Live
         run: |
-          tlmgr install \
-            latexmk \
-            collection-fontsrecommended \
-            xcolor \
-            bookmark \
-            ulem \
-            fvextra \
-            upquote || true
+          sudo apt-get update
+          sudo apt-get install -y \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-xetex \
+            latexmk
 
       - name: Render
         run: quarto render --no-clean
-
-      - name: Copy PDF into _book
-        run: |
-          if [ -f "_book/Methods-Brown-Bag.pdf" ]; then
-            echo "PDF already present in _book"
-          elif [ -f "Methods-Brown-Bag.pdf" ]; then
-            cp "Methods-Brown-Bag.pdf" "_book/Methods-Brown-Bag.pdf"
-          else
-            echo "PDF not found after render"
-          fi
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

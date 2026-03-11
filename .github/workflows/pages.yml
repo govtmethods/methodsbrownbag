@@ -33,19 +33,31 @@ jobs:
       - name: Restore R packages (renv)
         uses: r-lib/actions/setup-renv@v2
 
-      # Install LaTeX from Ubuntu packages instead of TinyTeX.
-      # This avoids the tlmgr update bottleneck that was hanging your build.
       - name: Install TeX Live
         run: |
           sudo apt-get update
           sudo apt-get install -y \
             texlive-latex-extra \
             texlive-fonts-recommended \
+            texlive-luatex \
             texlive-xetex \
+            lmodern \
             latexmk
 
       - name: Render
         run: quarto render --no-clean
+
+      - name: Copy PDF into _book
+        run: |
+          mkdir -p _book
+          if [ -f "_book/Methods-Brown-Bag.pdf" ]; then
+            echo "PDF already present in _book"
+          elif [ -f "Methods-Brown-Bag.pdf" ]; then
+            cp "Methods-Brown-Bag.pdf" "_book/Methods-Brown-Bag.pdf"
+          else
+            echo "PDF not found after render"
+            exit 1
+          fi
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

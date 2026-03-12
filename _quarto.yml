@@ -4,6 +4,12 @@ project:
 
 book:
   title: "Methods Brown Bag"
+ # author:
+ # - "Editors (2025-26)"
+ # - "Sara Mohammadi(PhD $1^{st}$ Year)"
+ # - "Parushya (PhD $4^{th}$ Year)"
+  repo-url: https://github.com/govtmethods/methodsbrownbag
+  repo-actions: [source, issue]
   chapters:
     - index.qmd
     - chapters/01-intro.qmd
@@ -12,61 +18,25 @@ book:
 
 format:
   html:
-    theme: cosmo
-    fig-path: "figures/html/"
-    fig-format: png
-    css: styles.scss
+    theme:
+      light: journal # styles-light.scss]
+      dark: cyborg # styles-dark.scss]
     toc: true
     toc-depth: 3
     code-fold: true
     code-overflow: wrap
     number-sections: false
     highlight-style: kate
-
+    fig-path: "figures/html/"
+    fig-format: png
     include-in-header:
       text: |
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Caslon+Text:wght@400;600&display=swap" rel="stylesheet">
 
-        <script>
-        (function () {
-          const KEY = "gm_theme";
-          const root = document.documentElement;
-
-          function getStoredTheme() {
-            try { return localStorage.getItem(KEY); }
-            catch(e) { return null; }
-          }
-
-          function setStoredTheme(v) {
-            try { localStorage.setItem(KEY, v); }
-            catch(e) {}
-          }
-
-          function applyTheme(v) {
-            if (v === "dark") {
-              root.setAttribute("data-theme", "dark");
-            } else {
-              root.removeAttribute("data-theme");
-            }
-          }
-
-          applyTheme(getStoredTheme() || "light");
-
-          window.__gmToggleTheme = function () {
-            const curr = root.getAttribute("data-theme") === "dark" ? "dark" : "light";
-            const next = curr === "dark" ? "light" : "dark";
-            setStoredTheme(next);
-            applyTheme(next);
-          };
-        })();
-        </script>
-
-    include-before-body:
-      - _includes/gm-controls.html
-
   pdf:
+    documentclass: report
     output-file: Methods-Brown-Bag.pdf
     toc: true
     code-fold: true
@@ -75,8 +45,12 @@ format:
     highlight-style: kate
     fig-path: "figures/pdf/"
     fig-format: pdf
+    fontsize: 10pt
+    linestretch: 1.15
+    geometry: margin=1.1in
 
 execute:
   freeze: false
 
 keep-md: true
+lightbox: true

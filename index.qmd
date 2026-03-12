@@ -1,10 +1,7 @@
----
-lightbox: true
-format:
-  html:
-    toc: true
----
-
 # Welcome {.unnumbered}
+
+[Govt Methods](https://govtmethods.github.io/) / **Methods Brown Bag**
+
+[Download PDF version](Methods-Brown-Bag.pdf)
 
 This is the Brown Bag book home page.

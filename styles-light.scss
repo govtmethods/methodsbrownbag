@@ -1,0 +1,120 @@
+/*-- scss:defaults --*/
+
+// Govt Methods light palette
+$primary: #1f5ea8 !default;
+$body-bg: #fbfbf9 !default;
+$body-color: #1f2d3a !default;
+$link-color: rgba(31, 45, 58, 0.88) !default;
+$link-hover-color: #1f5ea8 !default;
+
+$font-family-sans-serif: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !default;
+$headings-font-family: "Libre Caslon Text", Georgia, "Times New Roman", serif !default;
+
+$code-color: #1f5ea8 !default;
+$code-bg: rgba(31, 45, 58, 0.08) !default;
+$border-color: rgba(31, 45, 58, 0.18) !default;
+
+/*-- scss:rules --*/
+
+html,
+body {
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  letter-spacing: 0;
+}
+
+a {
+  text-underline-offset: 3px;
+}
+
+.sidebar-title,
+h1, h2, h3, h4, h5, h6,
+.title,
+.quarto-title-block .title {
+  letter-spacing: -0.01em;
+}
+
+.sidebar-title {
+  font-family: $headings-font-family;
+  font-weight: 600;
+}
+
+div.sidebar-item-container .active,
+.sidebar nav[role="doc-toc"] ul > li > a.active,
+.sidebar nav[role="doc-toc"] ul > li > ul > li > a.active {
+  font-weight: 700;
+}
+
+#TOC .nav-link,
+nav[role="doc-toc"] a {
+  color: rgba(31, 45, 58, 0.72);
+}
+
+#TOC .nav-link.active,
+nav[role="doc-toc"] .active,
+nav[role="doc-toc"] a.active {
+  color: #1f5ea8 !important;
+  font-weight: 600;
+}
+
+#quarto-sidebar,
+.sidebar,
+.navbar,
+div.sidebar-item-container,
+.sidebar nav[role="doc-toc"] {
+  border-color: rgba(31, 45, 58, 0.18) !important;
+}
+
+h2 {
+  margin-top: 2rem;
+  margin-bottom: 0.9rem;
+}
+
+h3 {
+  margin-top: 1.5rem;
+}
+
+pre,
+div.sourceCode {
+  border: 1px solid rgba(31, 45, 58, 0.18);
+  background: rgba(31, 45, 58, 0.04);
+  border-radius: 0.4rem;
+}
+
+pre code {
+  background: transparent !important;
+}
+
+code:not(pre code),
+p code,
+li code,
+td code,
+span code {
+  background: rgba(31, 45, 58, 0.08);
+  color: #1f5ea8;
+  padding: 0.12rem 0.32rem;
+  border-radius: 0.25rem;
+}
+
+table,
+thead,
+tbody,
+tfoot,
+tr,
+td,
+th {
+  border-color: rgba(31, 45, 58, 0.18) !important;
+}
+
+hr,
+blockquote {
+  border-color: rgba(31, 45, 58, 0.18);
+}
+
+.quarto-title-banner {
+  background: transparent !important;
+}

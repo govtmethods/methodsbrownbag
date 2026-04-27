@@ -35,6 +35,14 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y \
             libuv1-dev \
+            libcurl4-openssl-dev \
+            libssl-dev \
+            libxml2-dev \
+            libfontconfig1-dev \
+            libharfbuzz-dev \
+            libfribidi-dev \
+            libfreetype6-dev \
+            libpng-dev \
             texlive-latex-extra \
             texlive-fonts-recommended \
             texlive-fonts-extra \

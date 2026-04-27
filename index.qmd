@@ -1,7 +1,63 @@
 # Welcome {.unnumbered}
 
-[Govt Methods](https://govtmethods.github.io/) / **Methods Brown Bag**
+**Methods Brown Bag** is a workshop series run by graduate students in the Department of Government at Georgetown University. Each session covers a tool, workflow, or research design concept — with reproducible examples in R and Quarto.
 
-[Download PDF version](Methods-Brown-Bag.pdf)
+Sessions are held during the academic year. Materials from past sessions are collected here as a living reference.
 
-This is the Brown Bag book home page.
+[Download PDF](https://govtmethods.github.io/methodsbrownbag/Methods-Brown-Bag.pdf){.btn .btn-outline-secondary .btn-sm}
+
+---
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div id="gm-session-list" class="gm-index">
+  <!-- populated from chapters-meta.json at page load -->
+</div>
+```
+:::
+
+::: {.content-visible when-format="pdf"}
+```{r}
+#| echo: false
+#| results: asis
+library(yaml)
+
+or_empty <- function(x) if (is.null(x) || identical(x, "NULL")) "" else as.character(x)
+
+get_file <- function(ch) {
+  if (is.character(ch)) ch
+  else if (is.list(ch) && !is.null(ch$file)) ch$file
+  else NULL
+}
+
+config        <- yaml.load_file("_quarto.yml")
+chapter_files <- Filter(Negate(is.null), lapply(config$book$chapters, function(ch) {
+  f <- get_file(ch)
+  if (is.null(f) || f == "index.qmd") NULL else f
+}))
+
+for (i in seq_along(chapter_files)) {
+  f <- chapter_files[[i]]
+  if (!file.exists(f)) next
+  lines  <- readLines(f, warn = FALSE)
+  delims <- which(trimws(lines) == "---")
+  if (length(delims) < 2) next
+  parsed <- tryCatch(
+    yaml.load(paste(lines[(delims[1] + 1):(delims[2] - 1)], collapse = "\n")),
+    error = function(e) NULL
+  )
+  if (is.null(parsed)) next
+
+  title <- or_empty(parsed$title)
+  authors <- parsed$author
+  author_str <- if (is.null(authors)) "" else
+    paste(sapply(authors, function(a) or_empty(if (is.list(a)) a$name else a)), collapse = ", ")
+  date_str <- or_empty(parsed$date)
+
+  meta <- Filter(nchar, c(author_str, date_str))
+  cat("**Session ", i, " — ", title, "**  \n", sep = "")
+  if (length(meta)) cat(paste(meta, collapse = " · "), "\n")
+  cat("\n")
+}
+```
+:::

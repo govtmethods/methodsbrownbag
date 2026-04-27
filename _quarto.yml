@@ -1,6 +1,8 @@
 project:
   type: book
   output-dir: _book
+  post-render:
+    - Rscript _scripts/build-chapter-meta.R
 
 book:
   title: "Methods Brown Bag"
@@ -18,9 +20,7 @@ book:
 
 format:
   html:
-    theme:
-      light: journal # styles-light.scss]
-      dark: cyborg # styles-dark.scss]
+    theme: [journal, styles.scss]
     toc: true
     toc-depth: 3
     code-fold: true
@@ -34,6 +34,87 @@ format:
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Caslon+Text:wght@400;600&display=swap" rel="stylesheet">
+        <script>
+          // Theme: apply stored preference before first paint
+          (function () {
+            const KEY = "gm_theme";
+            const root = document.documentElement;
+            function applyTheme(v) {
+              if (v === "dark") root.setAttribute("data-theme", "dark");
+              else root.removeAttribute("data-theme");
+            }
+            applyTheme(localStorage.getItem(KEY) || "light");
+            window.__gmToggleTheme = function () {
+              const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+              localStorage.setItem(KEY, next);
+              applyTheme(next);
+            };
+          })();
+
+          // chapters-meta: fetch and apply to sidebar + index listing
+          (function () {
+            function bookRoot() {
+              // Derive book root from a known site_libs script path
+              const s = document.querySelector('script[src*="site_libs"]');
+              if (s) {
+                const m = s.src.match(/(https?:\/\/[^/]+(?:\/[^/]+)*?)\/site_libs\//);
+                if (m) return m[1];
+              }
+              // Fallback: strip /chapters/filename from current path
+              const p = window.location.pathname;
+              const idx = p.indexOf('/chapters/');
+              return idx !== -1 ? window.location.origin + p.slice(0, idx) : window.location.origin + p.replace(/\/[^/]*$/, '');
+            }
+
+            document.addEventListener("DOMContentLoaded", function () {
+              fetch(bookRoot() + "/chapters-meta.json")
+                .then(r => r.json())
+                .then(function (chapters) {
+
+                  // ── Sidebar: append author below each chapter link ──────────
+                  document.querySelectorAll("#quarto-sidebar .sidebar-link").forEach(function (link) {
+                    const href = link.getAttribute("href") || "";
+                    const match = chapters.find(function (c) {
+                      return href.replace(/^\.\.\//, "").split("/").pop() === c.href.split("/").pop();
+                    });
+                    if (match && match.author) {
+                      const tag = document.createElement("span");
+                      tag.className = "gm-sidebar-author";
+                      tag.textContent = match.author;
+                      link.appendChild(tag);
+                    }
+                  });
+
+                  // ── Index listing: render session cards ────────────────────
+                  const container = document.getElementById("gm-session-list");
+                  if (!container) return;
+                  container.innerHTML = chapters.map(function (c, i) {
+                    const kicker = "Session " + (i + 1) + (c.date ? " · " + c.date : "");
+                    const author = c.author ? '<p class="gm-item-desc">' + c.author + "</p>" : "";
+                    return '<a href="' + c.href + '" class="gm-item">' +
+                      '<div class="gm-item-kicker">' + kicker + "</div>" +
+                      '<div class="gm-item-title">' + c.title + "</div>" +
+                      author +
+                      "</a>";
+                  }).join("");
+                })
+                .catch(function () {}); // silently fail if JSON not yet generated
+            });
+          })();
+
+          // Mobile breadcrumb: show current chapter below collapsed navbar
+          document.addEventListener("DOMContentLoaded", function () {
+            const active = document.querySelector("#quarto-sidebar .sidebar-item-text.sidebar-link.active, #quarto-sidebar .active > .sidebar-item-text");
+            if (!active) return;
+            const label = document.createElement("div");
+            label.id = "gm-chapter-label";
+            label.textContent = active.textContent.trim();
+            const header = document.getElementById("quarto-header");
+            if (header) header.insertAdjacentElement("afterend", label);
+          });
+        </script>
+    include-before-body:
+      - _includes/gm-controls.html
 
   pdf:
     documentclass: report

@@ -1,8 +1,22 @@
 <div class="gm-controls" role="navigation" aria-label="Site controls">
+
+  <!-- Home -->
+  <a
+    class="gm-icon-btn"
+    href="https://govtmethods.github.io/"
+    aria-label="Government Methods home"
+    title="Government Methods home"
+  >
+    <svg class="gm-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1H15v-5h-6v5H4a1 1 0 0 1-1-1V10.5Z"
+            stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    </svg>
+  </a>
+
   <!-- View PDF -->
   <a
     class="gm-icon-btn gm-pdf-btn"
-    href="Methods-Brown-Bag.pdf"
+    href="https://govtmethods.github.io/methodsbrownbag/Methods-Brown-Bag.pdf"
     target="_blank"
     rel="noopener"
     aria-label="View PDF"
@@ -10,17 +24,16 @@
   >
     <svg class="gm-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M7 3.5h7l3 3V20a1.5 1.5 0 0 1-1.5 1.5H7A1.5 1.5 0 0 1 5.5 20V5A1.5 1.5 0 0 1 7 3.5Z"
-            stroke="currentColor" stroke-width="1.6" />
-      <path d="M14 3.5V7h3.5" stroke="currentColor" stroke-width="1.6" />
-      <path d="M8 14.2c1.1-1.3 2.5-2 4-2s2.9.7 4 2c-1.1 1.3-2.5 2-4 2s-2.9-.7-4-2Z"
-            stroke="currentColor" stroke-width="1.6" />
-      <circle cx="12" cy="14.2" r="0.9" fill="currentColor" />
+            stroke="currentColor" stroke-width="1.6"/>
+      <path d="M14 3.5V7h3.5" stroke="currentColor" stroke-width="1.6"/>
+      <path d="M12 11v5M9.5 13.5 12 16l2.5-2.5"
+            stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </a>
 
-  <!-- Theme toggle -->
+  <!-- Theme toggle (sidebar, desktop) -->
   <button
-    class="gm-icon-btn"
+    class="gm-icon-btn gm-theme-btn"
     type="button"
     aria-label="Toggle theme"
     title="Toggle theme"
@@ -33,6 +46,7 @@
             stroke="currentColor" stroke-width="1.6"/>
     </svg>
   </button>
+
 </div>
 
 <script>
@@ -45,77 +59,78 @@
       if (v === "dark") root.setAttribute("data-theme", "dark");
       else root.removeAttribute("data-theme");
     }
-
     function getStoredTheme() {
-      try { return localStorage.getItem(KEY); }
-      catch (e) { return null; }
+      try { return localStorage.getItem(KEY); } catch (e) { return null; }
     }
-
     function setStoredTheme(v) {
-      try { localStorage.setItem(KEY, v); }
-      catch (e) {}
+      try { localStorage.setItem(KEY, v); } catch (e) {}
     }
-
     applyTheme(getStoredTheme() || "light");
-
     window.__gmToggleTheme = function () {
-      const curr = root.getAttribute("data-theme") === "dark" ? "dark" : "light";
-      const next = curr === "dark" ? "light" : "dark";
+      const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
       setStoredTheme(next);
       applyTheme(next);
     };
   }
 
-  function setPdfHref() {
-    const pdfLink = document.querySelector(".gm-pdf-btn");
-    if (!pdfLink) return;
-
-    const inChapters = window.location.pathname.includes("/chapters/");
-    pdfLink.setAttribute(
-      "href",
-      inChapters ? "../Methods-Brown-Bag.pdf" : "Methods-Brown-Bag.pdf"
-    );
-  }
-
   function mountIntoSidebar() {
     const controls = document.querySelector(".gm-controls");
     if (!controls) return false;
-
     const sidebar = document.getElementById("quarto-sidebar");
     if (!sidebar) return false;
-
     if (controls.dataset.mounted === "true") return true;
-
     const anchor =
       sidebar.querySelector(".sidebar-title") ||
       sidebar.querySelector(".sidebar-header") ||
       sidebar.querySelector("#quarto-search") ||
       sidebar.querySelector(".sidebar-search");
-
     if (!anchor) return false;
-
     anchor.insertAdjacentElement("afterend", controls);
     controls.dataset.mounted = "true";
     return true;
   }
 
-  function initControls() {
-    setPdfHref();
+  // Inject a compact toggle button into the navbar for mobile screens
+  function mountNavbarToggle() {
+    if (document.getElementById("gm-navbar-toggle")) return;
+    const navbar = document.querySelector(".navbar .container-fluid, .navbar > .container");
+    if (!navbar) return;
 
+    const btn = document.createElement("button");
+    btn.id = "gm-navbar-toggle";
+    btn.type = "button";
+    btn.setAttribute("aria-label", "Toggle theme");
+    btn.setAttribute("title", "Toggle theme");
+    btn.className = "gm-icon-btn";
+    btn.innerHTML = '<svg class="gm-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">' +
+      '<path d="M12 3v2.2M12 18.8V21M4.2 12H3M21 12h-1.2M6.1 6.1 4.6 4.6M19.4 19.4l-1.5-1.5M17.9 6.1l1.5-1.5M4.6 19.4l1.5-1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>' +
+      '<path d="M12 7.2a4.8 4.8 0 1 0 0 9.6a4.8 4.8 0 0 0 0-9.6Z" stroke="currentColor" stroke-width="1.6"/>' +
+      '</svg>';
+    btn.onclick = function () { window.__gmToggleTheme && window.__gmToggleTheme(); };
+
+    // Insert before the hamburger toggler so it appears left of it
+    const toggler = navbar.querySelector(".navbar-toggler");
+    if (toggler) {
+      navbar.insertBefore(btn, toggler);
+    } else {
+      navbar.appendChild(btn);
+    }
+  }
+
+  function init() {
+    mountNavbarToggle();
     if (mountIntoSidebar()) return;
-
     const obs = new MutationObserver(() => {
       if (mountIntoSidebar()) obs.disconnect();
     });
-
     obs.observe(document.documentElement, { childList: true, subtree: true });
     setTimeout(() => obs.disconnect(), 5000);
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initControls, { once: true });
+    document.addEventListener("DOMContentLoaded", init, { once: true });
   } else {
-    initControls();
+    init();
   }
 })();
 </script>

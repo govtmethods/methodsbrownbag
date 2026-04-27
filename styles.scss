@@ -1,304 +1,410 @@
-/* ============================================================================
-   Methods Brown Bag — unified light/dark theme
-   ============================================================================ */
+/*-- scss:defaults --*/
 
-/* -------------------------
-   1. Base tokens: light mode
-   ------------------------- */
+// Typography — baked into Bootstrap at compile time
+$font-family-sans-serif: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !default;
+$headings-font-family:   "Libre Caslon Text", Georgia, "Times New Roman", serif !default;
+$headings-font-weight:   700 !default;
+$line-height-base:       1.65 !default;
+
+// Palette — light (Bootstrap uses these for compiled component defaults)
+$primary:        #1f5ea8 !default;
+$body-bg:        #fbfbf9 !default;
+$body-color:     #1f2d3a !default;
+$link-color:     #1f5ea8 !default;
+$link-hover-color: #17497f !default;
+$border-color:   rgba(31, 45, 58, 0.18) !default;
+
+// Code
+$code-color: #1f5ea8 !default;
+$code-bg:    rgba(31, 45, 58, 0.08) !default;
+
+// Grid — widen body column (default journal caps at ~850px, too narrow)
+$grid-body-width: 1100px !default;
+
+/*-- scss:rules --*/
+
+// ── Runtime tokens: light ─────────────────────────────────────────────────────
 :root {
-  --gm-bg: #fbfbf9;
-  --gm-fg: #1f2d3a;
-  --gm-muted: #4a5560;
-  --gm-rule: rgba(31, 45, 58, 0.16);
-
-  --gm-link: #1f5ea8;
-  --gm-link-hover: #17497f;
-
-  --gm-sidebar-bg: #f6f6f2;
-  --gm-sidebar-fg: #1f2d3a;
-  --gm-sidebar-muted: #5b6670;
-
-  --gm-toc-fg: #4c5863;
-  --gm-toc-active: #1f5ea8;
-
-  --gm-inline-code-bg: rgba(31, 45, 58, 0.08);
-  --gm-inline-code-fg: #1f5ea8;
-
-  --gm-mark-bg: rgba(31, 94, 168, 0.12);
-  --gm-mark-fg: inherit;
-
+  --gm-bg:              #fbfbf9;
+  --gm-fg:              #1f2d3a;
+  --gm-muted:           #4a5560;
+  --gm-rule:            rgba(31, 45, 58, 0.16);
+  --gm-link:            #1f5ea8;
+  --gm-link-hover:      #17497f;
+  --gm-sidebar-bg:      #fbfbf9;
+  --gm-toc-active:      #1f5ea8;
+  --gm-code-bg:         rgba(31, 45, 58, 0.06);
+  --gm-code-fg:         #1f5ea8;
   --gm-serif: "Libre Caslon Text", Georgia, "Times New Roman", serif;
-  --gm-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --gm-sans:  "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
-/* -------------------------
-   2. Dark mode tokens
-   ------------------------- */
+// ── Runtime tokens: dark (toggled via data-theme="dark") ─────────────────────
 html[data-theme="dark"] {
-  --gm-bg: #0b0f14;
-  --gm-fg: #e9edf2;
-  --gm-muted: #b3bcc7;
-  --gm-rule: rgba(255, 255, 255, 0.12);
-
-  --gm-link: #ffd166;
-  --gm-link-hover: #ffe19a;
-
-  --gm-sidebar-bg: #0a0e13;
-  --gm-sidebar-fg: #e9edf2;
-  --gm-sidebar-muted: #b5bec8;
-
-  --gm-toc-fg: #b5bec8;
-  --gm-toc-active: #ffd166;
-
-  --gm-inline-code-bg: rgba(255, 255, 255, 0.10);
-  --gm-inline-code-fg: #ffd166;
-
-  --gm-mark-bg: rgba(255, 209, 102, 0.18);
-  --gm-mark-fg: #f6f7f9;
+  --gm-bg:           #0f1114;
+  --gm-fg:           rgba(255, 255, 255, 0.92);
+  --gm-muted:        rgba(255, 255, 255, 0.55);
+  --gm-rule:         rgba(255, 255, 255, 0.12);
+  --gm-link:         #ffd166;
+  --gm-link-hover:   #ffe19a;
+  --gm-sidebar-bg:   #0f1114;
+  --gm-toc-active:   #ffd166;
+  --gm-code-bg:      rgba(255, 255, 255, 0.07);
+  --gm-code-fg:      #ffd166;
 }
 
-/* -------------------------
-   3. Global page styling
-   ------------------------- */
-html,
-body {
+// ── Base ──────────────────────────────────────────────────────────────────────
+html, body {
   background: var(--gm-bg) !important;
   color: var(--gm-fg) !important;
   font-family: var(--gm-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-body {
-  line-height: 1.65;
-}
-
-/* Consistent width across index + chapters */
-#quarto-document-content,
-main.content,
-.content,
-.page-columns,
-.page-full {
-  max-width: none;
-}
-
-main.content,
-#quarto-document-content {
-  max-width: 980px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Typography */
-h1, h2, h3, h4, h5, h6,
-.quarto-title .title,
-.title,
-header h1 {
-  font-family: var(--gm-serif);
-  color: var(--gm-fg);
-}
-
-p, li, td, th {
-  color: var(--gm-fg);
-}
-
-hr {
-  border-color: var(--gm-rule);
-}
-
-/* Links */
 a {
   color: var(--gm-link);
+  text-underline-offset: 2px;
 }
 
 a:hover {
   color: var(--gm-link-hover);
+  text-decoration-color: currentColor;
 }
 
-/* -------------------------
-   4. Sidebar
-   ------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--gm-serif);
+  letter-spacing: -0.01em;
+  color: var(--gm-fg);
+}
+
+h2 { margin-top: 2rem; margin-bottom: 0.9rem; }
+h3 { margin-top: 1.5rem; }
+
+hr { border-color: var(--gm-rule); }
+
+p, li, td, th { color: var(--gm-fg); }
+
+// ── Navbar ────────────────────────────────────────────────────────────────────
+.navbar, header.navbar {
+  background: var(--gm-bg) !important;
+  border-bottom: 1px solid var(--gm-rule);
+
+  .navbar-brand, .navbar-title, .nav-link {
+    color: var(--gm-fg) !important;
+    font-family: var(--gm-serif);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-link:hover { color: var(--gm-link) !important; }
+}
+
+// ── Sidebar ───────────────────────────────────────────────────────────────────
 #quarto-sidebar,
 .sidebar,
-#quarto-sidebar-glass,
 .quarto-sidebar {
   background: var(--gm-sidebar-bg) !important;
-  color: var(--gm-sidebar-fg) !important;
   border-right: 1px solid var(--gm-rule);
 }
 
-#quarto-sidebar .sidebar-title,
-#quarto-sidebar .sidebar-item,
-#quarto-sidebar .menu-text,
+#quarto-sidebar .sidebar-title {
+  font-family: var(--gm-serif);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--gm-fg) !important;
+}
+
 #quarto-sidebar .sidebar-link,
-.sidebar nav[role="doc-toc"] a,
 .sidebar-item-text {
-  color: var(--gm-sidebar-fg) !important;
+  color: var(--gm-fg) !important;
 }
 
-#quarto-sidebar .sidebar-item:hover,
 #quarto-sidebar .sidebar-link:hover,
-#quarto-sidebar .menu-text:hover {
+#quarto-sidebar .sidebar-item:hover .sidebar-link {
   color: var(--gm-link) !important;
 }
 
-#quarto-sidebar input,
-#quarto-sidebar .aa-Input,
-#quarto-sidebar .search-input {
-  background: rgba(255, 255, 255, 0.85);
-  color: #111827;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-}
-
-html[data-theme="dark"] #quarto-sidebar input,
-html[data-theme="dark"] #quarto-sidebar .aa-Input,
-html[data-theme="dark"] #quarto-sidebar .search-input {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--gm-fg);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-/* -------------------------
-   5. Right TOC
-   ------------------------- */
-#TOC,
-nav[role="doc-toc"] {
-  color: var(--gm-toc-fg);
-}
-
-#TOC a,
-nav[role="doc-toc"] a {
-  color: var(--gm-toc-fg) !important;
-  transition: color 0.15s ease;
-}
-
-#TOC a:hover,
-nav[role="doc-toc"] a:hover {
+div.sidebar-item-container .active > .menu-text,
+div.sidebar-item-container .active > .sidebar-link {
   color: var(--gm-link) !important;
-}
-
-#TOC .active,
-#TOC a.active,
-nav[role="doc-toc"] .active,
-nav[role="doc-toc"] a.active {
-  color: var(--gm-toc-active) !important;
   font-weight: 600;
 }
 
-nav[role="doc-toc"] ul > li > a.active,
-#TOC ul > li > a.active {
+#quarto-sidebar input,
+#quarto-sidebar .search-input {
+  background: rgba(255, 255, 255, 0.85);
+  color: #111;
+  border: 1px solid var(--gm-rule);
+}
+
+html[data-theme="dark"] #quarto-sidebar input,
+html[data-theme="dark"] #quarto-sidebar .search-input {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--gm-fg);
+  border-color: var(--gm-rule);
+}
+
+// ── TOC (right column) ────────────────────────────────────────────────────────
+#TOC a, nav[role="doc-toc"] a {
+  color: var(--gm-muted) !important;
+  transition: color 0.15s;
+}
+
+#TOC a:hover, nav[role="doc-toc"] a:hover {
+  color: var(--gm-link) !important;
+}
+
+#TOC a.active, nav[role="doc-toc"] a.active {
+  color: var(--gm-toc-active) !important;
+  font-weight: 600;
   border-left: 2px solid var(--gm-toc-active);
-  padding-left: 0.55rem;
+  padding-left: 0.5rem;
 }
 
-/* -------------------------
-   6. Content blocks
-   ------------------------- */
-pre,
-.sourceCode,
-div.sourceCode {
-  border-radius: 10px;
+// ── Content background ────────────────────────────────────────────────────────
+#quarto-content,
+.content,
+.page-columns,
+main.content,
+#quarto-document-content {
+  background: var(--gm-bg);
 }
 
-pre code {
-  background: transparent !important;
+// ── Code blocks ───────────────────────────────────────────────────────────────
+pre, div.sourceCode {
+  border: 1px solid var(--gm-rule);
+  background: var(--gm-code-bg) !important;
+  border-radius: 6px;
 }
 
-/* Inline code: fixes white highlight issue */
+pre code { background: transparent !important; }
+
 code:not(pre code) {
-  background: var(--gm-inline-code-bg) !important;
-  color: var(--gm-inline-code-fg) !important;
-  padding: 0.12rem 0.35rem;
-  border-radius: 0.32rem;
-  font-size: 0.92em;
+  background: var(--gm-code-bg) !important;
+  color: var(--gm-code-fg) !important;
+  padding: 0.11rem 0.32rem;
+  border-radius: 0.25rem;
+  font-size: 0.91em;
 }
 
-/* Marks / highlighted text */
-mark {
-  background: var(--gm-mark-bg) !important;
-  color: var(--gm-mark-fg) !important;
-  padding: 0.08rem 0.22rem;
-  border-radius: 0.22rem;
-}
-
-/* Prevent accidental white highlight boxes in dark mode */
+// Prevent syntax-highlighter white boxes in dark mode
 html[data-theme="dark"] .highlight,
 html[data-theme="dark"] .sourceCode span[style*="background"],
 html[data-theme="dark"] .cell-output mark {
   background-color: transparent !important;
 }
 
-/* -------------------------
-   7. Code folding buttons
-   ------------------------- */
-.code-fold-btn,
-summary {
-  color: var(--gm-link);
+// ── Tables ────────────────────────────────────────────────────────────────────
+table { color: var(--gm-fg); }
+thead, tbody, tfoot, tr, td, th { border-color: var(--gm-rule) !important; }
+
+// ── Code-fold button ──────────────────────────────────────────────────────────
+.code-fold-btn, summary { color: var(--gm-link); }
+.code-fold-btn:hover, summary:hover { color: var(--gm-link-hover); }
+
+// ── Chapter title block ───────────────────────────────────────────────────────
+// Target: #title-block-header.quarto-title-block.default (no .quarto-title-banner
+// unless title-block-banner: true is set in the .qmd YAML)
+#title-block-header,
+.quarto-title-block {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem !important;
+  border-bottom: 1px solid var(--gm-rule) !important;
 }
 
-.code-fold-btn:hover,
-summary:hover {
-  color: var(--gm-link-hover);
-}
-
-/* -------------------------
-   8. Tables
-   ------------------------- */
-table {
+// Chapter title (h1 inside .quarto-title)
+#title-block-header .title,
+.quarto-title-block .title {
+  font-family: var(--gm-serif);
+  font-size: clamp(1.6rem, 2vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
   color: var(--gm-fg);
+  margin-bottom: 0.45rem;
 }
 
-thead,
-tbody,
-tr,
-td,
-th {
-  border-color: var(--gm-rule) !important;
-}
-
-/* -------------------------
-   9. Theme toggle styling
-   ------------------------- */
-.gm-toggle-wrap {
+// Meta row: collapse into a single inline line "Author · Date"
+.quarto-title-meta {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 0.65rem 0 1rem 0;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0;
+  margin-top: 0.3rem;
 }
 
-.gm-toggle-btn {
-  appearance: none;
-  border: 1px solid var(--gm-rule);
-  background: transparent;
-  color: var(--gm-sidebar-fg);
-  border-radius: 999px;
-  padding: 0.25rem 0.65rem;
-  font-size: 0.9rem;
-  line-height: 1.2;
-  cursor: pointer;
+// Hide the "Author" / "Published" label headings
+.quarto-title-meta-heading { display: none; }
+
+// Meta values: small muted sans
+.quarto-title-meta-contents {
+  font-family: var(--gm-sans);
+  font-size: 0.84rem;
+  color: var(--gm-muted);
+
+  p, p.date { margin: 0; color: var(--gm-muted); }
 }
 
-.gm-toggle-btn:hover {
-  color: var(--gm-link);
-  border-color: var(--gm-link);
+// Dot separator before the second+ meta item
+.quarto-title-meta div + div .quarto-title-meta-contents::before {
+  content: "\00a0·\00a0";
+  color: var(--gm-muted);
 }
 
-.gm-toggle-label {
-  font-size: 0.9rem;
-  color: var(--gm-sidebar-muted);
+// ── Mobile chapter breadcrumb ─────────────────────────────────────────────────
+// On narrow screens, inject current chapter name under the navbar brand
+// so users know where they are when the sidebar is collapsed
+#gm-chapter-label {
+  display: none;
+  font-family: var(--gm-sans);
+  font-size: 0.78rem;
+  color: var(--gm-muted);
+  padding: 0.2rem 1rem 0.35rem;
+  border-bottom: 1px solid var(--gm-rule);
+  background: var(--gm-bg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* -------------------------
-   10. Mobile
-   ------------------------- */
-@media (max-width: 991.98px) {
-  main.content,
-  #quarto-document-content {
-    max-width: 100%;
+@media (max-width: 991px) {
+  #gm-chapter-label { display: block; }
+}
+
+// ── Dark-mode Bootstrap surface overrides ────────────────────────────────────
+html[data-theme="dark"] {
+  .navbar, header.navbar { background: var(--gm-bg) !important; }
+  #quarto-sidebar, .sidebar { background: var(--gm-sidebar-bg) !important; }
+  #quarto-content, .content, .page-columns, main.content { background: var(--gm-bg); }
+  table { color: var(--gm-fg); }
+  .quarto-title-banner { background: transparent !important; }
+}
+
+// ── Sidebar author labels (injected by chapters-meta.json JS) ────────────────
+.gm-sidebar-author {
+  display: block;
+  font-size: 0.73rem;
+  color: var(--gm-muted);
+  font-style: italic;
+  margin-top: 0.1rem;
+  line-height: 1.3;
+}
+
+// ── Index page session listing (mirrors landing page gm-index/gm-item) ────────
+.gm-index {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+
+.gm-item {
+  display: block;
+  text-decoration: none;
+  padding: 0.7rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: background 140ms ease, border-color 140ms ease;
+
+  &:hover {
+    background: rgba(31, 45, 58, 0.04);
+    border-color: var(--gm-rule);
+    text-decoration: none;
   }
 }
 
-main.content,
-#quarto-document-content {
-  max-width: 980px;
-  margin-left: auto;
-  margin-right: auto;
+html[data-theme="dark"] .gm-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.gm-item-kicker {
+  font-family: var(--gm-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--gm-muted);
+  margin-bottom: 0.2rem;
+}
+
+.gm-item-title {
+  font-family: var(--gm-serif);
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--gm-fg);
+  margin-bottom: 0.15rem;
+  transition: color 140ms ease;
+}
+
+.gm-item:hover .gm-item-title {
+  color: var(--gm-link);
+}
+
+.gm-item-desc {
+  margin: 0;
+  font-family: var(--gm-sans);
+  font-size: 0.88rem;
+  color: var(--gm-muted);
+}
+
+// ── gm-controls sidebar buttons ───────────────────────────────────────────────
+.gm-controls {
+  display: flex;
+  gap: 8px;
+  padding: 0.25rem 0.75rem 0.75rem;
+}
+
+.gm-icon-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--gm-rule);
+  background: transparent;
+  color: var(--gm-muted);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 120ms ease, border-color 120ms ease,
+              background 120ms ease, color 120ms ease;
+}
+
+.gm-icon-btn:hover {
+  transform: translateY(-1px);
+  color: var(--gm-fg);
+  border-color: rgba(31, 94, 168, 0.4);
+  background: rgba(31, 45, 58, 0.04);
+  text-decoration: none;
+}
+
+html[data-theme="dark"] .gm-icon-btn:hover {
+  border-color: rgba(255, 209, 102, 0.45);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.gm-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+@media (max-width: 520px) {
+  .gm-controls { padding: 0.2rem 0.5rem 0.6rem; gap: 6px; }
+  .gm-icon-btn { width: 32px; height: 32px; }
+}
+
+// ── Mobile navbar theme toggle ────────────────────────────────────────────────
+// Injected by gm-controls.html into the navbar; hidden on desktop where the
+// sidebar button is always reachable.
+#gm-navbar-toggle {
+  display: none;
+  margin-right: 0.4rem;
+}
+
+@media (max-width: 991px) {
+  #gm-navbar-toggle { display: inline-flex; }
 }

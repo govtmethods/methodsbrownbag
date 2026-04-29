@@ -1,7 +1,7 @@
 ---
 title: "Introduction to Python and Text-as-Data"
 author: "Samirah Jaigirdar"
-date: "Fall 2025"
+date: October 26, 2025
 ---
 
 *The code in this session was adapted from Will Horn and Yaoyao Dai's classes at ICPSR 2025.*

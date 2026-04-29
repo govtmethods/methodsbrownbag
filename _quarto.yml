@@ -19,6 +19,7 @@ book:
     - chapters/02-Under-Regression.qmd
     - chapters/03-Vibe-coding.qmd
     - chapters/04-text-as-data.qmd
+    - chapters/05-network-analysis.qmd
 
 format:
   html:

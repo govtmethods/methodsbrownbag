@@ -3,8 +3,8 @@ title: "Vibe Coding for Research: Integrating LLMs into Academic Research Workfl
 subtitle: "A practical guide for graduate students on using large language models across the research pipeline"
 author: "John Severini"
 date: "March 12, 2026"
-bibliography: "John-Vibe Coding/brownbag.bib"
-csl: "John-Vibe Coding/chicago-author-date.csl"
+bibliography: John-Vibe-Coding/brownbag.bib
+csl: John-Vibe-Coding/chicago-author-date.csl
 nocite: |
   @dreyfuss2025human, @gibney2026slop, @meyerson2025million, @rabanser2026reliability
 ---
@@ -28,11 +28,11 @@ This is a methods document. It teaches you how to set up and maintain a producti
 **Appendices** include templates, resources, and the Claude Code/VS Code alternative setup.
 
 ::: {.content-visible when-format="html" style="text-align: center"}
-![The full research pipeline. Part I covers the research design phase (Literature Review, Research Design, Data Design), which feeds into Part II's implementation phase (AGENTS.md, Memory, Spec Docs, and Code).]("John-Vibe Coding/images/pipeline_overview.svg"){width=100% fig-align="center"}
+![The full research pipeline. Part I covers the research design phase (Literature Review, Research Design, Data Design), which feeds into Part II's implementation phase (AGENTS.md, Memory, Spec Docs, and Code).](John-Vibe-Coding/images/pipeline_overview.svg){width=100% fig-align="center"}
 :::
 
 :::{.content-visible when-format="pdf" style="text-align: center"}
-![The full research pipeline. Part I covers the research design phase (Literature Review, Research Design, Data Design), which feeds into Part II's implementation phase (AGENTS.md, Memory, Spec Docs, and Code).]("John-Vibe Coding/images/pipeline_overview.png"){width=100% fig-align="center"}
+![The full research pipeline. Part I covers the research design phase (Literature Review, Research Design, Data Design), which feeds into Part II's implementation phase (AGENTS.md, Memory, Spec Docs, and Code).](John-Vibe-Coding/images/pipeline_overview.png){width=100% fig-align="center"}
 :::
 
 ### How Today's Session Works
@@ -125,7 +125,7 @@ LLMs read tokens. [Tokens](https://en.wikipedia.org/wiki/Large_language_model#To
 The [context window](https://en.wikipedia.org/wiki/Context_window) is the total amount of text the model can "see" at any given moment. Think of it as the model's working memory (the analogy is imperfect but useful enough for practical purposes). As of this writing, leading models like Claude Opus 4.6 have context windows of approximately 200,000 tokens, or roughly 150,000 words (the equivalent of several hundred pages of academic text); Gemini 3.1 is comparable. This sounds like a lot, but it fills up faster than you expect. Everything in a conversation occupies space in the context window: your messages, the model's responses, any files it has read, the project's custom instructions, and the full conversation history. You can check the current breakdown at any time by typing `/context` in the agent chat.
 
 ::: {style="text-align: center"}
-![The `/context` command shows a live breakdown of how the context window is being used.]("John-Vibe Coding/images/context_window_terminal.png"){width=100% fig-align="center"}
+![The `/context` command shows a live breakdown of how the context window is being used.](John-Vibe-Coding/images/context_window_terminal.png){width=100% fig-align="center"}
 :::
 
 #### Compacting
@@ -141,11 +141,11 @@ Compacting has direct practical consequences. If you gave the agent detailed ins
 Context is obviously also important, so you'll need to balance keeping the context window fresh with keeping the AI focused on the tasks at hand. This is a genuine tradeoff, and getting it right is a core skill you'll develop over time.
 
 ::: {.content-visible when-format="html" style="text-align: center"}
-![How a context window fills over the course of a session, and what happens after compacting.]("John-Vibe Coding/images/context_window_stages.svg"){width=100% fig-align="center"}
+![How a context window fills over the course of a session, and what happens after compacting.](John-Vibe-Coding/images/context_window_stages.svg){width=100% fig-align="center"}
 :::
 
 :::{.content-visible when-format="pdf" style="text-align: center"}
-![How a context window fills over the course of a session, and what happens after compacting.]("John-Vibe Coding/images/context_window_stages.png"){width=100% fig-align="center"}
+![How a context window fills over the course of a session, and what happens after compacting.](John-Vibe-Coding/images/context_window_stages.png){width=100% fig-align="center"}
 :::
 
 A few rules of thumb:
@@ -257,7 +257,7 @@ For the purposes of this guide, git serves the primary function of making it saf
 Antigravity's built-in git support and the GitLens extension make most of this visual and clickable if you prefer not to use the command line for git operations.
 
 ::: {style="text-align: center"}
-![The source control sidebar panel in VS Code/Antigravity.]("John-Vibe Coding/images/vscode_git_commit.png"){fig-align="center"}
+![The source control sidebar panel in VS Code/Antigravity.](John-Vibe-Coding/images/vscode_git_commit.png){width=80% fig-align="center"}
 :::
 
 #### The Minimum Viable Git Workflow
@@ -443,7 +443,7 @@ Open your project folder in Antigravity and open the agent chat panel. Your firs
 Antigravity offers two interaction modes worth knowing about. **Plan mode** generates a detailed implementation plan before acting, which is useful for complex, multi-step tasks. **Fast mode** executes instructions immediately, which is better for quick fixes and small changes. For most research coding tasks, plan mode is the safer default.
 
 ::: {style="text-align: center"}
-![The dropdown menu for Plan and Fast modes in Antigravity.]("John-Vibe Coding/images/antigravity_modes.png"){fig-align="center"}
+![The dropdown menu for Plan and Fast modes in Antigravity.](John-Vibe-Coding/images/antigravity_modes.png){width=80% fig-align="center"}
 :::
 
 #### Monitoring the Context Window
@@ -453,7 +453,7 @@ As always, recall the context management principles. As a session progresses, th
 When the context window is getting full, the best practice is to finish your current task and start a new session. The new session will re-read your AGENTS.md and start with a clean context, informed by whatever updates you have made to your project files.
 
 ::: {style="text-align: center"}
-![The context indicator will appear once the context window gets large enough.]("John-Vibe Coding/images/claude_context_remaining.png"){fig-align="center"}
+![The context indicator will appear once the context window gets large enough.](John-Vibe-Coding/images/claude_context_remaining.png){width=80% fig-align="center"}
 :::
 
 One trick I like to use is to ask the agent to create a "handover document" (usually just a markdown file) that summarizes the current conversation. This informs the next conversation with the most immediately pertinent information without flooding the AGENTS.md or memory docs with details that are only relevant for the current task.
@@ -817,3 +817,5 @@ The workflow in VS Code with Claude Code is essentially the same as described in
 2. **Context monitoring:** In the terminal version, context usage is displayed at the bottom of the session interface as a percentage or token count. In the VS Code extension, it is visible in the sidebar panel. When it approaches capacity, finish your task, commit, and start a new session.
 
 Everything else -- git, project organization, spec documents, delegating tasks, reviewing code, iterating -- works the same way.
+
+## References {.unnumbered}

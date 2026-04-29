@@ -3,10 +3,6 @@ title: "Vibe Coding for Research: Integrating LLMs into Academic Research Workfl
 subtitle: "A practical guide for graduate students on using large language models across the research pipeline"
 author: "John Severini"
 date: "March 12, 2026"
-bibliography: John-Vibe-Coding/brownbag.bib
-csl: John-Vibe-Coding/chicago-author-date.csl
-nocite: |
-  @dreyfuss2025human, @gibney2026slop, @meyerson2025million, @rabanser2026reliability
 ---
 
 ## Introduction

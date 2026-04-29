@@ -16,10 +16,10 @@ book:
     - index.qmd
     - chapters/01-intro.qmd
     - chapters/02-github.qmd
-    - chapters/02-Under-Regression.qmd
-    - chapters/03-Vibe-coding.qmd
-    - chapters/04-text-as-data.qmd
     - chapters/05-network-analysis.qmd
+    - chapters/02-Under-Regression.qmd
+    - chapters/04-text-as-data.qmd
+    - chapters/03-Vibe-coding.qmd
 
 format:
   html:
@@ -160,3 +160,10 @@ execute:
 
 keep-md: true
 lightbox: true
+
+bibliography:
+  - chapters/references.bib
+  - chapters/John-Vibe-Coding/brownbag.bib
+csl: chapters/John-Vibe-Coding/chicago-author-date.csl
+nocite: |
+  @dreyfuss2025human, @gibney2026slop, @meyerson2025million, @rabanser2026reliability

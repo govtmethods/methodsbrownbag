@@ -1,0 +1,523 @@
+---
+title: "Introduction to Python and Text-as-Data"
+author: "Samirah Jaigirdar"
+date: "Fall 2025"
+---
+
+*The code in this session was adapted from Will Horn and Yaoyao Dai's classes at ICPSR 2025.*
+
+---
+
+## Why Python for Text Data Analysis?
+
+Python is a general-purpose, object-oriented programming language that emphasizes code readability. It is well suited for deploying machine learning at a large scale. Relevant libraries for data science include:
+
+- **Numpy** -- Large Dimensional Arrays
+- **Pandas** -- Data Manipulation & Analysis
+- **Matplotlib** -- Data Visualizations
+
+## What is Colab?
+
+[Google Colab](https://colab.research.google.com/) is a browser-based notebook with a free GPU/CPU. It allows you to run Python code in a Jupyter notebook environment without any setup on your device. You can combine executable code with text, images, and LaTeX in a single document, and share the Colab doc with anyone for collaborative editing. Colab also has Google AI built in (if you opt in) that can help fix your code.
+
+When you open Colab, first:
+
+- Mount Google Drive (every time)
+- Upload CSV/files on the sidebar
+- Load packages and libraries (every time)
+
+```python
+from google.colab import drive
+drive.mount('/content/drive')
+```
+
+---
+
+## Syntax Differences: Python and R
+
+### Blocks by Indentation
+
+In Python, **colon + indentation** defines blocks. No braces. Conditions evaluate to `True` or `False`.
+
+```python
+x = 7
+if x > 5:            # colon starts a block
+    print("big")     # 4 spaces indent
+else:
+    print("small")
+```
+
+### 0-Based Indexing and Slicing
+
+`stop` is exclusive.
+
+```python
+nums = [10, 20, 30, 40, 50]
+first        = nums[0]      # 10
+last         = nums[-1]     # 50
+sub          = nums[1:4]    # [20, 30, 40]  (stops before index 4)
+every2       = nums[::2]    # [10, 30, 50]
+reversed_nums = nums[::-1]  # [50, 40, 30, 20, 10]
+```
+
+### Assignment (=) vs. Equality (==)
+
+```python
+a = 3      # assign
+b = 3
+a == b     # True (equality check)
+```
+
+### Common Operations vs. R
+
+**Filter:**
+
+```r
+# R
+df %>% filter(year > 2010, country == "India")
+```
+```python
+# Python
+df.query("year > 2010 and country == 'India'")
+```
+
+**Select columns:**
+
+```r
+# R
+df %>% select(country, year, gdp)
+```
+```python
+# Python
+df[["country", "year", "gdp"]]
+```
+
+**Mutate:**
+
+```r
+# R
+df %>% mutate(gdp_pc = gdp / pop,
+              decade = floor(year / 10) * 10)
+```
+```python
+# Python (pandas)
+df.assign(gdp_pc = df["gdp"] / df["pop"],
+          decade = (df["year"] // 10) * 10)
+```
+
+**Left join:**
+
+```r
+# R
+left_join(df_left, df_right, by = "id")
+```
+```python
+# Python
+df_left.merge(df_right, on="id", how="left")
+```
+
+---
+
+## If/Elif/Else
+
+In Python, `colon + indentation` defines blocks. We use `if` for the first test, `elif` for additional mutually exclusive branches, and `else` as the fallback. Strings are **case-sensitive**, so we often normalize with `.strip().lower()`.
+
+### If/Elif/Else Pattern
+
+```python
+# if <condition>:
+#     <do something>
+# elif <another condition>:
+#     <do something else>
+# else:
+#     <fallback>
+```
+
+```python
+x = 90
+
+if x > 10:
+    msg = "x is big"
+elif x == 10:
+    msg = "x is exactly 10"
+else:
+    msg = "x is small"
+
+print(msg)
+```
+```
+x is big
+```
+
+**Common gotchas and rules:**
+
+- End each `if`, `elif`, `else` line with a colon `:`
+- Indentation defines the code block (use 4 spaces; be consistent)
+- Conditions are booleans (`True` or `False`)
+- Strings are case-sensitive (`"Canada"` ≠ `"canada"`)
+
+### Example: Weather
+
+```python
+today_weather = input("Weather today (rainy/sunny/cloudy/other)? ").strip().lower()
+
+if today_weather == "rainy":
+    print("Grab an umbrella!")
+elif today_weather == "sunny":
+    print("Grab some shades!")
+elif today_weather == "cloudy":
+    temp = input("Cloudy—cold or hot? ").strip().lower()
+    if temp == "cold":
+        print("Wear a sweater!")
+    else:
+        print("Wear a long sleeve!")
+else:
+    print("Wear whatever you like!")
+```
+
+---
+
+## Loops
+
+**While** loops repeat until a condition changes. **For** loops repeat a known number of times (e.g., over a range or a list). `range(start, stop, step)` excludes `stop` — off-by-one errors are common.
+
+### While Loop
+
+```python
+# while <condition>:
+#     <do stuff>
+#     <update something>  # prevents an infinite loop
+
+countdown = 3
+while countdown > 0:
+    print("T-minus", countdown)
+    countdown -= 1  # update!
+print("Liftoff")
+```
+```
+T-minus 3
+T-minus 2
+T-minus 1
+Liftoff
+```
+
+If you run a loop and it gets stuck in an infinite loop, hit the **stop** icon on the cell or **Restart runtime**.
+
+### For Loop
+
+Use when you know how many items/iterations. With numbers: `range(start, stop, step)` (`stop` is exclusive).
+
+```python
+for i in range(1, 6):  # 1,2,3,4,5
+    print("i =", i)
+```
+```
+i = 1
+i = 2
+i = 3
+i = 4
+i = 5
+```
+
+You can also loop over characters in a string:
+
+```python
+for char in "Georgetown":
+    print(char + "!")
+```
+```
+G!
+e!
+o!
+r!
+g!
+e!
+t!
+o!
+w!
+n!
+```
+
+---
+
+## Lists and Dictionaries
+
+### Lists
+
+Lists use square brackets `[]` and have order. They can hold any mix of items and allow duplicates.
+
+- Create/see length: use `len(...)` to count items.
+- Access: zero-based indexing (`items[0]`) and slicing (`items[a:b:c]`; stop is exclusive).
+
+Common actions:
+
+- Add one item: `.append(...)`
+- Add many items: `.extend([...])`
+- Insert at a position: `.insert(index, value)`
+- Remove & return last (or by index): `.pop()` / `.pop(i)`
+- Membership test: `x in items`
+
+When to use: ordered data, sequences (e.g., tokens in a sentence, a list of URLs to scrape).
+
+### Dictionaries
+
+Dictionaries use curly braces `{}` and store key → value pairs. Keys are unique; order isn't the point (though Python preserves insertion order).
+
+Common actions:
+
+- Create: `{key: value, ...}`
+- Add / update: `dict[key] = value`
+- Merge: `.update({...})`
+
+Lookup:
+
+- Direct: `dict[key]` (errors if missing — good when a missing key means your data is broken and you want to fail fast)
+- Safe: `dict.get(key, default)` (returns the default if key is missing; no error)
+
+When to use: fast lookups, mappings (e.g., country → capital, word → count, url → last_seen).
+
+**Important:** dictionaries are case-sensitive (`"canada"` ≠ `"Canada"`).
+
+### Slicing and Filtering
+
+```python
+fruits = ["apple", "banana", "cherry", "date", "elderberry",
+          "fig", "grape", "grapefruit", "strawberry", "peach",
+          "raspberry", "watermelon", "lychee", "pear", "acai"]
+
+# Filtering with a for-loop
+short_fruit = []
+long_fruit  = []
+
+for fruit in fruits:
+    if len(fruit) < 6:
+        short_fruit.append(fruit)
+    else:
+        long_fruit.append(fruit)
+
+print("Short-name fruits:", short_fruit)
+print("Long-name fruits:", long_fruit)
+```
+```
+Short-name fruits: ['apple', 'date', 'fig', 'grape', 'peach', 'pear', 'acai']
+Long-name fruits: ['banana', 'cherry', 'elderberry', 'grapefruit', 'strawberry', 'raspberry', 'watermelon', 'lychee']
+```
+
+```python
+# Slicing examples
+print("First 3:", fruits[:3])
+print("Last 3:", fruits[-3:])
+print("Every other:", fruits[::2])
+print("Middle block (3..6):", fruits[3:7])
+print("Reversed:", fruits[::-1])
+```
+```
+First 3: ['apple', 'banana', 'cherry']
+Last 3: ['lychee', 'pear', 'acai']
+Every other: ['apple', 'cherry', 'elderberry', 'grape', 'strawberry', 'raspberry', 'lychee', 'acai']
+Middle block (3..6): ['date', 'elderberry', 'fig', 'grape']
+Reversed: ['acai', 'pear', 'lychee', 'watermelon', 'raspberry', 'peach', 'strawberry', 'grapefruit', 'grape', 'fig', 'elderberry', 'date', 'cherry', 'banana', 'apple']
+```
+
+### Dictionary of Lists
+
+A common structure is a **dict of lists**: a category key pointing to a list of members. This is great for lookups, counts per group, and nested iteration.
+
+```python
+democrats  = ["Kamala Harris", "Zohran Mamdani", "Bernie Sanders", "Pete Buttigieg"]
+republicans = ["Greg Abbott", "Ted Cruz", "Marco Rubio", "George Bush"]
+
+political_dictionary = {
+    "Democrat":   democrats,
+    "Republican": republicans,
+}
+
+print(political_dictionary)
+```
+```
+{'Democrat': ['Kamala Harris', 'Zohran Mamdani', 'Bernie Sanders', 'Pete Buttigieg'], 'Republican': ['Greg Abbott', 'Ted Cruz', 'Marco Rubio', 'George Bush']}
+```
+
+Appending to the original list is reflected through the dict (mutability):
+
+```python
+democrats.append("Barack Obama")
+republicans.append("Nikki Haley")
+```
+
+To avoid duplicates, check membership first:
+
+```python
+name = "Barack Obama"
+if name not in political_dictionary["Democrat"]:
+    political_dictionary["Democrat"].append(name)
+```
+
+You can also append directly through the dictionary:
+
+```python
+political_dictionary["Democrat"].append("Ned Lamont")
+political_dictionary["Republican"].append("Mike Johnson")
+```
+
+```python
+print(political_dictionary)
+```
+```
+{'Democrat': ['Kamala Harris', 'Zohran Mamdani', 'Bernie Sanders', 'Pete Buttigieg', 'Barack Obama', 'Ned Lamont'], 'Republican': ['Greg Abbott', 'Ted Cruz', 'Marco Rubio', 'George Bush', 'Nikki Haley', 'Mike Johnson']}
+```
+
+```python
+print("\nCounts →",
+      "Democrat:", len(political_dictionary["Democrat"]),
+      "| Republican:", len(political_dictionary["Republican"]))
+```
+```
+Counts → Democrat: 6 | Republican: 6
+```
+
+---
+
+## APIs
+
+**What:** An Application Programming Interface is a doorway for apps (and you) to request structured data from a service.
+
+**Why it matters for Text-as-Data:** APIs give you clean JSON you can turn into DataFrames, skip messy scraping, and stay within provider rules.
+
+**How:**
+
+- You send an HTTP request to an endpoint (a URL).
+- You include parameters that specify what you want.
+- You get a response with a status code and a JSON body (usually).
+- You read the JSON, extract fields, and save to CSV.
+
+**Security and keys:**
+
+- Some APIs need an API key. Treat it like a password.
+- Do not paste keys into public Colabs or GitHub.
+- Keep keys offline or in a private place.
+
+**JSON:** Javascript Object Notation files store structured data in a simple, human-readable way. In Python, use the `json` library to interact with JSON files. JSON → Python maps cleanly: object → dict, array → list, string → str, true/false → True/False, null → None.
+
+To check a website's scraping policy: `root-website-url/robots.txt`. For User-Agent guidance, see: <https://scrapeops.io/web-scraping-playbook/web-scraping-guide-header-user-agents/>
+
+---
+
+## Web Scraping
+
+Load these packages every time you restart Colab:
+
+```python
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+from time import sleep
+```
+
+### The American Presidency Project
+
+The [American Presidency Project](https://www.presidency.ucsb.edu) is a collection of speeches by American presidents and vice-presidents, hosted by the University of California, Santa Barbara. No API needed.
+
+`requests` downloads pages, `BeautifulSoup` parses HTML, and `pandas` turns rows into a table. A `User-Agent` header is included in `headers = {'User-Agent': 'Mozilla/5.0'}` — common practice to indicate browser compatibility; reuse this on every request.
+
+```python
+base_url  = 'https://www.presidency.ucsb.edu'
+root_page = '/documents/app-categories/spoken-addresses-and-remarks/presidential/eulogies?items_per_page=10'
+headers   = {'User-Agent': 'Mozilla/5.0'}
+
+response = requests.get(base_url + root_page, headers=headers)
+soup     = BeautifulSoup(response.text, 'html.parser')
+
+# soup.find_all(tagname, attrs={key:value})
+```
+
+Extract URLs of all articles on the page:
+
+```python
+links = soup.find_all('div', attrs={'class': 'field-title'})
+len(links)  # 10
+```
+
+```python
+links[0]
+```
+```html
+<div class="field-title">
+<p><a href="/documents/remarks-memorial-service-for-charlie-kirk-glendale-arizona">Remarks at a Memorial Service for Charlie Kirk in Glendale, Arizona</a></p> </div>
+```
+
+```python
+# soup's .a.get('href') looks for tag <a> and extracts the href attribute
+links[0].a.get('href')
+# '/documents/remarks-memorial-service-for-charlie-kirk-glendale-arizona'
+```
+
+```python
+article_urls = [link.find('a').get('href') for link in links]
+```
+
+Before looping everything, fetch one article to make sure selectors work:
+
+```python
+article = requests.get(base_url + article_urls[0])
+soup    = BeautifulSoup(article.text, "html.parser")
+content = soup.find('div', attrs={'class': 'field-docs-content'}).text
+```
+
+If links come back empty, the page structure or class name likely changed — inspect and tweak the selector. In a hardened version, wrap these with a small helper that returns `""` when a node is missing to avoid `NoneType` crashes.
+
+Extract all articles and metadata. The `sleep(0.5)` is there to be polite and avoid rate limits — it tells the website you are not a bot, and when scraping many documents it stops the server from crashing:
+
+```python
+Speech = []
+for url in article_urls:
+    article   = requests.get(base_url + url)
+    soup_doc  = BeautifulSoup(article.text, "html.parser")
+    title     = soup_doc.find('div', attrs={'class': 'field-ds-doc-title'}).text
+    date      = soup_doc.find('div', attrs={'class': 'field-docs-start-date-time'}).text
+    content   = soup_doc.find('div', attrs={'class': 'field-docs-content'}).text
+    candidate = soup_doc.find('h3',  attrs={'class': 'diet-title'}).text
+    Speech.append({'title': title, 'candidate': candidate,
+                   'content': content, 'date': date, 'url': url})
+    sleep(0.5)
+```
+
+`Speech` (a list of dicts) becomes a DataFrame:
+
+```python
+df_speeches = pd.DataFrame(Speech)
+df_speeches
+```
+
+Save to Google Drive. Saving to `/content/…csv` also works and shows up in the Colab Files pane:
+
+```python
+data_path = '/content/drive/My Drive/'
+df_speeches.to_csv(data_path + 'speeches.csv', index=False)
+```
+
+### Grabbing All Links Across Pages
+
+For sites with multiple pages, loop over the page parameter. Test one page before looping:
+
+```python
+base_url  = 'https://www.presidency.ucsb.edu'
+root_page = '/documents/app-categories/spoken-addresses-and-remarks/presidential/eulogies?items_per_page=10&page=0'
+headers   = {'User-Agent': 'Mozilla/5.0'}
+
+response = requests.get(base_url + root_page, headers=headers)
+soup     = BeautifulSoup(response.text, 'html.parser')
+```
+
+```python
+links_all = []
+for page in range(0, 6):  # Pages 0–5
+    page_url = f"/documents/app-categories/spoken-addresses-and-remarks/presidential/eulogies?items_per_page=10&page={page}"
+    response = requests.get(base_url + page_url)
+    soup     = BeautifulSoup(response.text, 'html.parser')
+    links    = soup.find_all('div', attrs={'class': 'field-title'})
+    links_all.extend([link.find('a').get('href') for link in links])
+    sleep(0.5)
+
+# Note: this method grabs links only, not the speeches themselves.
+```

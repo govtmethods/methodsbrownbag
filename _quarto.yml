@@ -18,6 +18,7 @@ book:
     - chapters/02-github.qmd
     - chapters/02-Under-Regression.qmd
     - chapters/03-Vibe-coding.qmd
+    - chapters/04-text-as-data.qmd
 
 format:
   html:

@@ -1,7 +1,10 @@
 ---
 title: "Text Analysis: Principles and Basic Application"
 date: March 19, 2026
-author: Minha Kim & Samirah Jaigirdar
+author:
+  - "Minha Kim"
+  - "Samirah Jaigirdar"
+freeze: auto
 ---
 
 ```{r}

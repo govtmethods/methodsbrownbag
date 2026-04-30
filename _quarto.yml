@@ -123,6 +123,7 @@ format:
     documentclass: report
     output-file: Methods-Brown-Bag.pdf
     toc: true
+    toc-depth: 2
     code-fold: true
     code-overflow: wrap
     number-sections: false
@@ -135,6 +136,7 @@ format:
     include-in-header:
       text: |
         \usepackage{xcolor}
+        \usepackage{float}
         \usepackage{fancyhdr}
         \fancypagestyle{plain}{%
           \fancyhf{}%
@@ -145,12 +147,39 @@ format:
         }
         \pagestyle{fancy}
         \fancyhf{}
+        \fancyhead[L]{\small\color{gray}\leftmark}
+        \fancyhead[R]{\small\color{gray}\rightmark}
         \fancyfoot[L]{\small\color{gray}Rendered \today}
         \fancyfoot[R]{\small\color{gray}\thepage}
-        \renewcommand{\headrulewidth}{0pt}
+        \renewcommand{\headrulewidth}{0.3pt}
+        \renewcommand{\headrule}{{\color{gray}\hrule width\headwidth height\headrulewidth \vskip-\headrulewidth}}
         \renewcommand{\footrulewidth}{0pt}
+        \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+        \renewcommand{\sectionmark}[1]{\markright{#1}}
         \usepackage{fvextra}
         \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\{\}}
+        \RecustomVerbatimEnvironment{verbatim}{Verbatim}{breaklines,breakanywhere}
+        \AtBeginDocument{\hypersetup{colorlinks=true,linkcolor=[RGB]{0,96,107},urlcolor=[RGB]{0,96,107},citecolor=[RGB]{0,96,107}}}
+        \setkeys{Gin}{height=0.85\textheight,keepaspectratio}
+        \newfontfamily\titlefont[BoldFont={TeX Gyre Heros Bold}]{TeX Gyre Heros}
+        \renewcommand{\maketitle}{%
+          \begin{titlepage}%
+            \centering%
+            \vspace*{3cm}%
+            {\fontsize{52}{62}\selectfont\titlefont\bfseries\color[RGB]{0,96,107}Methods Brown Bag\par}%
+            \vspace{0.25cm}%
+            {\fontsize{14}{18}\selectfont\titlefont\color[RGB]{0,96,107}Compendium of Sessions\par}%
+            \vspace{2.5cm}%
+            {\normalsize\color{gray}Rendered \today\par}%
+            \vspace{1.8cm}%
+            {\large\itshape Editors\par}%
+            \vspace{0.6cm}%
+            {\large Parushya\\[0.3em]Sara Mohammadi\\[0.3em]Claude\par}%
+            \vspace{2cm}%
+            {\normalsize\href{https://govtmethods.github.io/}{govtmethods.github.io}\par}%
+            \vfill%
+          \end{titlepage}%
+        }
 
 filters:
   - _filters/chapter-author.lua
@@ -165,5 +194,3 @@ bibliography:
   - chapters/references.bib
   - chapters/John-Vibe-Coding/brownbag.bib
 csl: chapters/John-Vibe-Coding/chicago-author-date.csl
-nocite: |
-  @dreyfuss2025human, @gibney2026slop, @meyerson2025million, @rabanser2026reliability

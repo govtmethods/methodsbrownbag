@@ -28,7 +28,7 @@ This is a methods document. It teaches you how to set up and maintain a producti
 :::
 
 :::{.content-visible when-format="pdf" style="text-align: center"}
-![The full research pipeline. Part I covers the research design phase (Literature Review, Research Design, Data Design), which feeds into Part II's implementation phase (AGENTS.md, Memory, Spec Docs, and Code).](John-Vibe-Coding/images/pipeline_overview.png){width=100% fig-align="center"}
+![The full research pipeline. Part I covers the research design phase (Literature Review, Research Design, Data Design), which feeds into Part II's implementation phase (AGENTS.md, Memory, Spec Docs, and Code).](John-Vibe-Coding/images/pipeline_overview.png){width=90% fig-align="center" fig-pos="H"}
 :::
 
 ### How Today's Session Works
@@ -141,7 +141,7 @@ Context is obviously also important, so you'll need to balance keeping the conte
 :::
 
 :::{.content-visible when-format="pdf" style="text-align: center"}
-![How a context window fills over the course of a session, and what happens after compacting.](John-Vibe-Coding/images/context_window_stages.png){width=100% fig-align="center"}
+![How a context window fills over the course of a session, and what happens after compacting.](John-Vibe-Coding/images/context_window_stages.png){width=90% fig-align="center" fig-pos="H"}
 :::
 
 A few rules of thumb:
@@ -813,5 +813,15 @@ The workflow in VS Code with Claude Code is essentially the same as described in
 2. **Context monitoring:** In the terminal version, context usage is displayed at the bottom of the session interface as a percentage or token count. In the VS Code extension, it is visible in the sidebar panel. When it approaches capacity, finish your task, commit, and start a new session.
 
 Everything else -- git, project organization, spec documents, delegating tasks, reviewing code, iterating -- works the same way.
+
+## Additional Material to Read {.unnumbered}
+
+@dreyfuss2025human study how humans learn to use AI tools over time, finding that early hands-on experience shapes long-run adoption patterns in ways that initial training alone does not.
+
+@gibney2026slop documents the growing problem of low-quality AI-generated content flooding computer science venues, and examines what peer review and editorial processes can do to address it.
+
+@meyerson2025million demonstrate a system that completes a million-step coding task with near-zero errors by combining careful task decomposition with verification at each step --- a useful benchmark for thinking about what reliable agentic workflows actually require.
+
+@rabanser2026reliability propose a framework for measuring and improving the reliability of AI agents in real-world deployments, distinguishing between failure modes that compound versus those that remain bounded.
 
 ## References {.unnumbered}

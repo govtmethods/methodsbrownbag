@@ -370,5 +370,5 @@ paper.
     just need to unzip and run the code after starting the associated
     `.RProj` file, without changing file paths on their computer.
 
-# References
+## References {.unnumbered}
 

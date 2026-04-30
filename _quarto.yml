@@ -16,10 +16,12 @@ book:
     - index.qmd
     - chapters/01-intro.qmd
     - chapters/02-github.qmd
-    - chapters/05-network-analysis.qmd
-    - chapters/02-Under-Regression.qmd
-    - chapters/04-text-as-data.qmd
-    - chapters/03-Vibe-coding.qmd
+    - chapters/03-network-analysis.qmd
+    - chapters/04-Under-Regression.qmd
+    - chapters/05-text-as-data.qmd
+    - chapters/06-formal-logic.qmd
+    - chapters/07-Vibe-coding.qmd
+    - chapters/08-text-as-data-principles.qmd
 
 format:
   html:
@@ -194,3 +196,6 @@ bibliography:
   - chapters/references.bib
   - chapters/John-Vibe-Coding/brownbag.bib
 csl: chapters/John-Vibe-Coding/chicago-author-date.csl
+
+resources:
+  - "chapters/Minha Kim and Samirah/toy_dataset_100.csv"

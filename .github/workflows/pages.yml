@@ -5,6 +5,18 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  # Monthly canary. A green checkmark only ever describes the last run, so
+  # dependency rot (an evicted package cache, a new system library) stays
+  # invisible until someone pushes. This surfaces it on a schedule instead.
+  #
+  # A scheduled run deploys as well as builds -- deliberately. The point is to
+  # exercise the real publish path, not a subset of it; republishing identical
+  # output is harmless. See DECISIONS.md.
+  #
+  # GitHub suspends scheduled workflows after 60 days with no commits and mails
+  # the owner. Expect that during a quiet stretch; any push resets the clock.
+  schedule:
+    - cron: "0 6 1 * *"
   workflow_dispatch:
 
 permissions:

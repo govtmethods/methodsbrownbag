@@ -4,7 +4,6 @@ date: March 19, 2026
 author:
   - "Minha Kim"
   - "Samirah Jaigirdar"
-freeze: auto
 ---
 
 ```{r}
@@ -271,7 +270,12 @@ You can download the dataset used in this session: [`toy_dataset_100.csv`](Minha
 ```{r, message=FALSE, warning=FALSE}
 # NB: `quanteda` is not the only package to work with text in R. Other competitors are tm, text2vec, and even base R.
 # These packages follow a similar logic for processing text data.
-pacman::p_load(readr, quanteda, dplyr, tidytext, stringr, quanteda.textstats)
+library(readr)
+library(quanteda)
+library(dplyr)
+library(tidytext)
+library(stringr)
+library(quanteda.textstats)
 ```
 
 Let's explore the data! For demonstration purposes, we made a toy dataset with just 100 tweets for now, but for much larger datasets, you can use `glimpse()` to check where the text is stored in your dataset. You can also first sample the dataset to explore.
@@ -455,7 +459,6 @@ Identifying meaningful n-grams
 
 ```{r}
 #| results: "hide"
-pacman::p_load(quanteda.textstats)
 # Pre-process tokens once
 t_tweets <- tokens(tweets_corpus, remove_punct = TRUE, remove_numbers = TRUE) %>%
   tokens_tolower() %>%

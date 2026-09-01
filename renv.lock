@@ -30,6 +30,16 @@
       ],
       "Hash": "8952055890918ed495311e754a5bb3d8"
     },
+    "ISOcodes": {
+      "Package": "ISOcodes",
+      "Version": "2026.03.28",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "5413efb029bc5418c0f6b8031ce13c99"
+    },
     "MASS": {
       "Package": "MASS",
       "Version": "7.3-65",
@@ -82,6 +92,32 @@
       ],
       "Hash": "45f0398006e83a5b10b72a90663d8d8c"
     },
+    "Rcpp": {
+      "Package": "Rcpp",
+      "Version": "1.1.1-1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "methods",
+        "utils"
+      ],
+      "Hash": "8842cfd023a523ec9e011b9e4aab50ef"
+    },
+    "RcppArmadillo": {
+      "Package": "RcppArmadillo",
+      "Version": "15.2.6-1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "Rcpp",
+        "methods",
+        "stats",
+        "utils"
+      ],
+      "Hash": "8e4fa15d805764b296e55f57ae02b3ce"
+    },
     "Rdpack": {
       "Package": "Rdpack",
       "Version": "2.6.6",
@@ -106,6 +142,13 @@
         "utils"
       ],
       "Hash": "9da85950949574264f92f91f0e23de26"
+    },
+    "SnowballC": {
+      "Package": "SnowballC",
+      "Version": "0.7.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "46da3912f69e3e6258a033802c4af32e"
     },
     "askpass": {
       "Package": "askpass",
@@ -512,6 +555,16 @@
       "Repository": "CRAN",
       "Hash": "aa5e1cd11c2d15497494c5292d7ffcc8"
     },
+    "fastmatch": {
+      "Package": "fastmatch",
+      "Version": "1.1-8",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "d93dbf3c37930e4247481526bfc89b1a"
+    },
     "fontawesome": {
       "Package": "fontawesome",
       "Version": "0.5.3",
@@ -835,6 +888,16 @@
       ],
       "Hash": "0f9a864bbd7ce0232ad05cb76249cc1a"
     },
+    "janeaustenr": {
+      "Package": "janeaustenr",
+      "Version": "1.0.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "26f391e42073877818f2d4f0470dca24"
+    },
     "jquerylib": {
       "Package": "jquerylib",
       "Version": "0.1.4",
@@ -1035,6 +1098,16 @@
       ],
       "Hash": "b1d2ea08d5d392831fbc32c872362b06"
     },
+    "nsyllable": {
+      "Package": "nsyllable",
+      "Version": "1.0.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "1b4597ff3ffce588ac437a7ca69b0fc1"
+    },
     "openssl": {
       "Package": "openssl",
       "Version": "2.3.4",
@@ -1141,6 +1214,20 @@
       ],
       "Hash": "f4625e061cb2865f111b47ff163a5ca6"
     },
+    "proxyC": {
+      "Package": "proxyC",
+      "Version": "0.5.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "Matrix",
+        "R",
+        "Rcpp",
+        "RcppArmadillo",
+        "methods"
+      ],
+      "Hash": "50c041cb663f6973a1739577ecb32af8"
+    },
     "ps": {
       "Package": "ps",
       "Version": "1.9.1",
@@ -1166,6 +1253,46 @@
         "vctrs"
       ],
       "Hash": "0154ac5b9ef4df1a7be3a54602e781cf"
+    },
+    "quanteda": {
+      "Package": "quanteda",
+      "Version": "4.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "Matrix",
+        "R",
+        "Rcpp",
+        "SnowballC",
+        "fastmatch",
+        "jsonlite",
+        "lifecycle",
+        "magrittr",
+        "methods",
+        "stopwords",
+        "stringi",
+        "xml2",
+        "yaml"
+      ],
+      "Hash": "82cc5932bfbd711aa44a9d54f10b322e"
+    },
+    "quanteda.textstats": {
+      "Package": "quanteda.textstats",
+      "Version": "0.97.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "Matrix",
+        "R",
+        "Rcpp",
+        "RcppArmadillo",
+        "methods",
+        "nsyllable",
+        "proxyC",
+        "quanteda",
+        "stringi"
+      ],
+      "Hash": "2898e0b95d24869aa6f4c537f77e1b5f"
     },
     "ragg": {
       "Package": "ragg",
@@ -1482,6 +1609,17 @@
       ],
       "Hash": "8272a042d44ce3f1ba762ef5c20f01d7"
     },
+    "stopwords": {
+      "Package": "stopwords",
+      "Version": "2.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "ISOcodes",
+        "R"
+      ],
+      "Hash": "82036936cbed392a250d2e6ee6ef2e53"
+    },
     "stringi": {
       "Package": "stringi",
       "Version": "1.8.7",
@@ -1631,6 +1769,29 @@
       ],
       "Hash": "829f27b9c4919c16b593794a6344d6c0"
     },
+    "tidytext": {
+      "Package": "tidytext",
+      "Version": "0.4.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "Matrix",
+        "R",
+        "cli",
+        "dplyr",
+        "generics",
+        "janeaustenr",
+        "lifecycle",
+        "methods",
+        "purrr",
+        "rlang",
+        "stringr",
+        "tibble",
+        "tokenizers",
+        "vctrs"
+      ],
+      "Hash": "76d1a4d224be2136c4ea14c615680410"
+    },
     "tidyverse": {
       "Package": "tidyverse",
       "Version": "2.0.0",
@@ -1691,6 +1852,19 @@
         "xfun"
       ],
       "Hash": "03af3ad04817f3019de8ee5c73dab807"
+    },
+    "tokenizers": {
+      "Package": "tokenizers",
+      "Version": "0.3.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "Rcpp",
+        "SnowballC",
+        "stringi"
+      ],
+      "Hash": "76d35ebfaaf291e08c15696c9f2ec96d"
     },
     "trust": {
       "Package": "trust",

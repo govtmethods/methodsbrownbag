@@ -3,6 +3,8 @@ name: Deploy book with GitHub Pages
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -11,7 +13,9 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  # Scoped by ref: without this a pull-request build shares the "pages" group
+  # with main and can cancel a deploy already in flight.
+  group: pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -73,11 +77,14 @@ jobs:
           fi
 
       - name: Upload Pages artifact
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           path: _book
 
   deploy:
+    # Pull requests get the build as a status check, but never publish.
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     needs: build
     environment:

@@ -35,6 +35,7 @@ $grid-body-width: 1100px !default;
   --gm-toc-active:      #1f5ea8;
   --gm-code-bg:         rgba(31, 45, 58, 0.06);
   --gm-code-fg:         #1f5ea8;
+  --gm-code-border:     rgba(31, 45, 58, 0.12);
   --gm-serif: "Libre Caslon Text", Georgia, "Times New Roman", serif;
   --gm-sans:  "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
@@ -51,6 +52,7 @@ html[data-theme="dark"] {
   --gm-toc-active:   #ffd166;
   --gm-code-bg:      rgba(255, 255, 255, 0.07);
   --gm-code-fg:      #ffd166;
+  --gm-code-border:  rgba(255, 255, 255, 0.14);
 }
 
 // ── Base ──────────────────────────────────────────────────────────────────────
@@ -173,7 +175,7 @@ main.content,
 
 // ── Code blocks ───────────────────────────────────────────────────────────────
 pre, div.sourceCode {
-  border: 1px solid var(--gm-rule);
+  border: 1px solid var(--gm-code-border);
   background: var(--gm-code-bg) !important;
   border-radius: 6px;
 }
@@ -255,26 +257,6 @@ thead, tbody, tfoot, tr, td, th { border-color: var(--gm-rule) !important; }
   color: var(--gm-muted);
 }
 
-// ── Mobile chapter breadcrumb ─────────────────────────────────────────────────
-// On narrow screens, inject current chapter name under the navbar brand
-// so users know where they are when the sidebar is collapsed
-#gm-chapter-label {
-  display: none;
-  font-family: var(--gm-sans);
-  font-size: 0.78rem;
-  color: var(--gm-muted);
-  padding: 0.2rem 1rem 0.35rem;
-  border-bottom: 1px solid var(--gm-rule);
-  background: var(--gm-bg);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-@media (max-width: 991px) {
-  #gm-chapter-label { display: block; }
-}
-
 // ── Dark-mode Bootstrap surface overrides ────────────────────────────────────
 html[data-theme="dark"] {
   .navbar, header.navbar { background: var(--gm-bg) !important; }
@@ -350,13 +332,7 @@ html[data-theme="dark"] .gm-item:hover {
   color: var(--gm-muted);
 }
 
-// ── gm-controls sidebar buttons ───────────────────────────────────────────────
-.gm-controls {
-  display: flex;
-  gap: 8px;
-  padding: 0.25rem 0.75rem 0.75rem;
-}
-
+// ── Icon buttons (used by .gm-bar-tools in the top bar) ───────────────────────
 .gm-icon-btn {
   width: 34px;
   height: 34px;
@@ -393,18 +369,205 @@ html[data-theme="dark"] .gm-icon-btn:hover {
 }
 
 @media (max-width: 520px) {
-  .gm-controls { padding: 0.2rem 0.5rem 0.6rem; gap: 6px; }
-  .gm-icon-btn { width: 32px; height: 32px; }
+  .gm-icon-btn { width: 30px; height: 30px; }
 }
 
-// ── Mobile navbar theme toggle ────────────────────────────────────────────────
-// Injected by gm-controls.html into the navbar; hidden on desktop where the
-// sidebar button is always reachable.
-#gm-navbar-toggle {
-  display: none;
-  margin-right: 0.4rem;
+// ── GM top bar ────────────────────────────────────────────────────────────────
+// Injected by _includes/gm-sitenav.html, which relocates #gm-topbar into
+// #quarto-header at parse time. Two rows: the site nav (ported from
+// gm-landing/styles.scss, so the three sites match) and a breadcrumb row.
+//
+// Positioning is deliberately NOT set here. The landing's .gm-sitenav is
+// position:sticky, but here the ancestor #quarto-header is .fixed-top and owns
+// positioning — and a nested sticky inside headroom's transformed element
+// creates a containing-block trap.
+//
+// Heights are fixed, and --gm-topbar-h reserves the space before first paint.
+// quarto-nav.js later overwrites body padding-top and sidebar top with the
+// measured value, so these rules must NOT be !important: they are a pre-paint
+// placeholder that the real measurement corrects.
+
+:root {
+  --gm-topbar-h: 78px;  // 44 (site nav) + 34 (breadcrumb)
 }
 
-@media (max-width: 991px) {
-  #gm-navbar-toggle { display: inline-flex; }
+#gm-topbar { display: none; }
+#quarto-header > #gm-topbar { display: block; }
+
+body.nav-sidebar { padding-top: var(--gm-topbar-h); }
+
+#quarto-content .sidebar {
+  top: var(--gm-topbar-h);
+  max-height: calc(100vh - var(--gm-topbar-h));
 }
+
+// Quarto's own breadcrumb duplicates row 2; it is mobile-only and unstyled.
+.quarto-secondary-nav nav.quarto-page-breadcrumbs { display: none; }
+
+// ── Row 1: site nav ───────────────────────────────────────────────────────────
+.gm-sitenav {
+  height: 44px;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 1.4rem;
+  border-bottom: 1px solid var(--gm-rule);
+  background: var(--gm-bg);
+}
+
+.gm-sitenav-home {
+  font-family: var(--gm-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gm-fg);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.gm-sitenav-home:hover { color: var(--gm-link); text-decoration: none; }
+
+.gm-sitenav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  min-width: 0;
+  // Never wrap: a second line would break the --gm-topbar-h reservation.
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gm-sitenav-links::-webkit-scrollbar { display: none; }
+
+.gm-sitenav-links a {
+  font-family: var(--gm-sans);
+  font-size: 0.8rem;
+  color: var(--gm-muted);
+  text-decoration: none;
+  transition: color 120ms ease;
+  white-space: nowrap;
+}
+
+.gm-sitenav-links a:hover { color: var(--gm-fg); text-decoration: none; }
+
+.gm-sitenav-links a[aria-current="page"] {
+  color: var(--gm-fg);
+  font-weight: 500;
+}
+
+// ── Row 2: breadcrumb + tools ─────────────────────────────────────────────────
+.gm-crumbbar {
+  height: 34px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 1.4rem;
+  border-bottom: 1px solid var(--gm-rule);
+  background: var(--gm-bg);
+}
+
+.gm-crumbs { min-width: 0; }
+
+.gm-crumbs ol {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.gm-crumbs li {
+  font-family: var(--gm-sans);
+  font-size: 0.78rem;
+  color: var(--gm-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Separator is decorative, so it lives in CSS rather than in the markup.
+.gm-crumbs li + li::before {
+  content: "/";
+  margin: 0 0.5rem;
+  color: var(--gm-rule);
+}
+
+.gm-crumbs a { color: var(--gm-muted); text-decoration: none; }
+.gm-crumbs a:hover { color: var(--gm-fg); text-decoration: none; }
+.gm-crumbs li[aria-current="page"] { color: var(--gm-fg); }
+
+.gm-bar-tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+
+// Tools sit in a 34px row, so shrink the shared icon button to fit.
+.gm-bar-tools .gm-icon-btn { width: 26px; height: 26px; }
+.gm-bar-tools .gm-icon { width: 14px; height: 14px; }
+
+.gm-pager-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--gm-rule);
+  color: var(--gm-muted);
+  font-size: 0.95rem;
+  line-height: 1;
+  text-decoration: none;
+  transition: color 120ms ease, border-color 120ms ease;
+}
+
+.gm-pager-btn:hover { color: var(--gm-fg); text-decoration: none; }
+
+// Kept in the layout, not removed, so the row does not shift between pages.
+.gm-pager-btn.is-disabled { opacity: 0.3; cursor: default; }
+
+@media (max-width: 560px) {
+  .gm-sitenav  { padding: 0 1rem; }
+  .gm-crumbbar { padding: 0 1rem; }
+  .gm-sitenav-links { gap: 0.9rem; }
+  .gm-sitenav-links a { font-size: 0.75rem; }
+  // The first two crumbs are reachable from row 1; the page is what matters here.
+  .gm-crumbs li:not(:last-child) { display: none; }
+  .gm-crumbs li + li::before { content: none; }
+}
+
+// ── Prev/next chapter navigation (bottom of page) ─────────────────────────────
+// Quarto renders this already; it just arrives in Bootstrap grey.
+.page-navigation {
+  border-top: 1px solid var(--gm-rule);
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+}
+
+.page-navigation .nav-page a,
+.page-navigation a.pagination-link {
+  color: var(--gm-muted);
+  text-decoration: none;
+  font-family: var(--gm-sans);
+  transition: color 120ms ease;
+}
+
+.page-navigation .nav-page a:hover,
+.page-navigation a.pagination-link:hover {
+  color: var(--gm-link);
+  text-decoration: none;
+}
+
+.page-navigation .nav-page-text { font-size: 0.88rem; }
+
+// Quarto ships these at 1.8rem, which towers over our type scale.
+.page-navigation .nav-page .bi { font-size: 1.1rem; }

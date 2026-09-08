@@ -1,0 +1,188 @@
+<!--
+  Government Methods — shared top bar for the book sites.
+
+  BYTE-IDENTICAL between gm-methodsbrownbag and gm-mathcamp. Nothing book-specific
+  belongs in this file: the book title and root URL are read from the rendered
+  sidebar, and the PDF href and active site link both derive from
+  window.__gmPdfHref (set in each book's _quarto.yml include-in-header).
+  Verify with:
+    diff gm-methodsbrownbag/_includes/gm-sitenav.html gm-mathcamp/_includes/gm-sitenav.html
+
+  Injected via include-before-body, so it lands inside <main class="content">.
+  The script below immediately relocates it into #quarto-header, which is the
+  whole trick: site_libs/quarto-nav/quarto-nav.js measures header.fixed-top in
+  headerOffset() and writes body padding-top, sidebar top and sidebar max-height
+  from it, re-running on a ResizeObserver. Nesting inside the header means Quarto
+  does every offset calculation for us. Any other placement means fighting inline
+  styles with !important.
+
+  It cannot flash in the wrong place: #gm-topbar is display:none unconditionally
+  and only becomes visible via `#quarto-header > #gm-topbar`, so it is
+  unrenderable until it arrives at its destination.
+-->
+<div id="gm-topbar" hidden>
+  <nav class="gm-sitenav" aria-label="Site navigation">
+    <a href="https://govtmethods.github.io/" class="gm-sitenav-home">Government Methods</a>
+    <div class="gm-sitenav-links">
+      <a href="https://govtmethods.github.io/methodsbrownbag/" data-gm-site="/methodsbrownbag/">Brown Bag</a>
+      <a href="https://govtmethods.github.io/mathcamp/" data-gm-site="/mathcamp/">Math Camp</a>
+      <a href="https://govtmethods.github.io/about.html">About</a>
+      <a href="https://govtmethods.github.io/submit.html">Submit</a>
+      <a href="https://govtmethods.github.io/ask.html">Ask</a>
+    </div>
+  </nav>
+
+  <div class="gm-crumbbar">
+    <nav class="gm-crumbs" aria-label="Breadcrumb">
+      <ol></ol>
+    </nav>
+    <div class="gm-bar-tools">
+      <a class="gm-icon-btn gm-pdf-btn" id="gm-pdf-link" target="_blank" rel="noopener"
+         aria-label="View PDF" title="View PDF" hidden>
+        <svg class="gm-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M7 3.5h7l3 3V20a1.5 1.5 0 0 1-1.5 1.5H7A1.5 1.5 0 0 1 5.5 20V5A1.5 1.5 0 0 1 7 3.5Z"
+                stroke="currentColor" stroke-width="1.6"/>
+          <path d="M14 3.5V7h3.5" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M12 11v5M9.5 13.5 12 16l2.5-2.5"
+                stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <button class="gm-icon-btn gm-theme-btn" type="button"
+              aria-label="Toggle theme" title="Toggle theme"
+              onclick="window.__gmToggleTheme && window.__gmToggleTheme()">
+        <svg class="gm-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 3v2.2M12 18.8V21M4.2 12H3M21 12h-1.2M6.1 6.1 4.6 4.6M19.4 19.4l-1.5-1.5M17.9 6.1l1.5-1.5M4.6 19.4l1.5-1.5"
+                stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M12 7.2a4.8 4.8 0 1 0 0 9.6a4.8 4.8 0 0 0 0-9.6Z"
+                stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var HOME = "https://govtmethods.github.io/";
+
+  // ── Mount ───────────────────────────────────────────────────────────────────
+  // Synchronous, at parse time — NOT on DOMContentLoaded. #quarto-header is
+  // parsed well before this point, so the header is final before quarto-nav.js
+  // installs its ResizeObserver and takes its first measurement.
+  var bar = document.getElementById("gm-topbar");
+  var hdr = document.getElementById("quarto-header");
+  if (!bar) return;
+  if (hdr) {
+    hdr.insertBefore(bar, hdr.firstChild);
+    bar.removeAttribute("hidden");
+  }
+
+  // ── Active site link ────────────────────────────────────────────────────────
+  // Which book this is has to be derived, not hard-coded, so the file stays
+  // identical across the two. __gmPdfHref is preferred over location.pathname
+  // because it carries the book segment even when the site is served from a
+  // root that does not — a local `python -m http.server _book`, for instance.
+  var path = window.location.pathname;
+  var siteKey = window.__gmPdfHref || path;
+  var links = bar.querySelectorAll(".gm-sitenav-links a[data-gm-site]");
+  for (var i = 0; i < links.length; i++) {
+    if (siteKey.indexOf(links[i].getAttribute("data-gm-site")) !== -1) {
+      links[i].setAttribute("aria-current", "page");
+    }
+  }
+
+  // ── PDF button ──────────────────────────────────────────────────────────────
+  // Href is per-book, so it comes from _quarto.yml rather than living here.
+  var pdf = document.getElementById("gm-pdf-link");
+  if (pdf && window.__gmPdfHref) {
+    pdf.setAttribute("href", window.__gmPdfHref);
+    pdf.removeAttribute("hidden");
+  }
+
+  // ── Breadcrumb ──────────────────────────────────────────────────────────────
+  // Built fresh rather than moving Quarto's node, which its own JS rewrites at
+  // DOMContentLoaded. Every read has a fallback: a Quarto markup change should
+  // cost a segment, not the bar.
+  function text(el) { return el ? el.textContent.trim() : ""; }
+
+  var titleLink = document.querySelector("#quarto-sidebar .sidebar-title a");
+  var bookTitle = text(titleLink);
+  var bookHref = titleLink ? titleLink.getAttribute("href") : null;
+
+  var pageTitle =
+    text(document.querySelector(".quarto-page-breadcrumbs .breadcrumb-item:last-child")) ||
+    text(document.querySelector("#quarto-sidebar .sidebar-item-text.sidebar-link.active")) ||
+    text(document.querySelector("#quarto-sidebar .active > .sidebar-item-text")) ||
+    document.title;
+
+  // At the book root the page title is Quarto's "Welcome", which would make a
+  // third segment that says nothing. Stop at the book instead.
+  var atRoot = false;
+  if (titleLink) {
+    try {
+      var strip = function (p) { return p.replace(/index\.html$/, ""); };
+      atRoot = strip(new URL(titleLink.href, window.location.href).pathname) === strip(path);
+    } catch (e) { /* leave atRoot false */ }
+  }
+
+  var crumbs = [{ label: "Government Methods", href: HOME }];
+  if (bookTitle) crumbs.push({ label: bookTitle, href: atRoot ? null : bookHref });
+  if (!atRoot && pageTitle) crumbs.push({ label: pageTitle, href: null });
+
+  var ol = bar.querySelector(".gm-crumbs ol");
+  if (ol) {
+    for (var c = 0; c < crumbs.length; c++) {
+      var li = document.createElement("li");
+      if (crumbs[c].href) {
+        var a = document.createElement("a");
+        a.href = crumbs[c].href;
+        a.textContent = crumbs[c].label;
+        li.appendChild(a);
+      } else {
+        li.textContent = crumbs[c].label;
+        li.setAttribute("aria-current", "page");
+      }
+      ol.appendChild(li);
+    }
+  }
+
+  // ── Prev/next arrows ────────────────────────────────────────────────────────
+  // Deferred: .page-navigation sits after <main>, so it is not parsed yet.
+  // Read getAttribute("href"), not .href — quarto-nav.js rewrites the property
+  // at DOMContentLoaded, and the raw attribute sidesteps that.
+  function pager(sel) {
+    var a = document.querySelector(".page-navigation " + sel + " a.pagination-link");
+    if (!a) return null;
+    return {
+      href: a.getAttribute("href"),
+      label: text(a.querySelector(".nav-page-text")) || text(a)
+    };
+  }
+
+  function makeArrow(item, glyph, word) {
+    var el, tools = bar.querySelector(".gm-bar-tools");
+    if (!tools) return;
+    if (item && item.href) {
+      el = document.createElement("a");
+      el.className = "gm-pager-btn";
+      el.href = item.href;
+      el.title = word + ": " + item.label;
+      el.setAttribute("aria-label", word + ": " + item.label);
+    } else {
+      // Keep the slot so the tool row does not shift width between pages.
+      el = document.createElement("span");
+      el.className = "gm-pager-btn is-disabled";
+      el.setAttribute("aria-hidden", "true");
+    }
+    el.textContent = glyph;
+    tools.insertBefore(el, tools.firstChild);
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var next = pager(".nav-page-next");
+    var prev = pager(".nav-page-previous");
+    makeArrow(next, "›", "Next");   // inserted first, ends up second
+    makeArrow(prev, "‹", "Previous");
+  });
+})();
+</script>

@@ -178,11 +178,39 @@
     tools.insertBefore(el, tools.firstChild);
   }
 
+  // ── Quarto's own controls ───────────────────────────────────────────────────
+  // Below 992px Bootstrap un-hides .quarto-secondary-nav, which would stack a
+  // third fixed row under our two. Its toggle and search are the ONLY way to
+  // reach the sidebar and search on a phone, so they move into our tool row
+  // rather than being hidden with it.
+  //
+  // Safe to move: neither depends on its ancestor. The toggle is a Bootstrap
+  // collapse driven by a delegated listener and data-bs-target; search is an
+  // inline onclick calling window.quartoOpenSearch().
+  //
+  // The guard matters more than the move: the secondary nav is hidden ONLY if
+  // both buttons were found and relocated. If a future Quarto changes this
+  // markup, the result is a redundant third row — not an unreachable sidebar.
+  function adoptQuartoControls() {
+    var tools = bar.querySelector(".gm-bar-tools");
+    var snav = document.querySelector(".quarto-secondary-nav");
+    if (!tools || !snav) return;
+    var toggle = snav.querySelector("button.quarto-btn-toggle");
+    var search = snav.querySelector("button.quarto-search-button");
+    if (!toggle || !search) return;
+    toggle.classList.add("gm-icon-btn", "gm-adopted", "gm-only-narrow");
+    search.classList.add("gm-icon-btn", "gm-adopted");
+    tools.appendChild(toggle);
+    tools.appendChild(search);
+    snav.style.display = "none";
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     var next = pager(".nav-page-next");
     var prev = pager(".nav-page-previous");
     makeArrow(next, "›", "Next");   // inserted first, ends up second
     makeArrow(prev, "‹", "Previous");
+    adoptQuartoControls();
   });
 })();
 </script>

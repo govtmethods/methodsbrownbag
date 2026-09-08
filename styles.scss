@@ -535,6 +535,26 @@ body.nav-sidebar { padding-top: var(--gm-topbar-h); }
 // Kept in the layout, not removed, so the row does not shift between pages.
 .gm-pager-btn.is-disabled { opacity: 0.3; cursor: default; }
 
+// Quarto's sidebar-toggle and search, relocated into the tool row by
+// gm-sitenav.html so they survive .quarto-secondary-nav being hidden.
+// Bootstrap's .btn brings its own padding and focus ring; strip both so they
+// sit flush with our icon buttons.
+.gm-bar-tools .gm-adopted.btn {
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  font-size: 0.85rem;
+}
+
+.gm-bar-tools .gm-adopted .bi::before { vertical-align: -0.05em; }
+
+// The sidebar is permanently visible at >=992px, so its toggle is noise there.
+.gm-only-narrow { display: none; }
+
+@media (max-width: 991.98px) {
+  .gm-only-narrow { display: inline-flex; }
+}
+
 @media (max-width: 560px) {
   .gm-sitenav  { padding: 0 1rem; }
   .gm-crumbbar { padding: 0 1rem; }

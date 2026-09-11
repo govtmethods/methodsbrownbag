@@ -1,10 +1,8 @@
-# Welcome {.unnumbered}
+# About the series {.unnumbered}
 
 **Methods Brown Bag** is a workshop series run by graduate students in the Department of Government at Georgetown University. Each session covers a tool, workflow, or research design concept — with reproducible examples in R and Quarto.
 
-Sessions are held during the academic year. Materials from past sessions are collected here as a living reference.
-
-[Download PDF](https://govtmethods.github.io/methodsbrownbag/Methods-Brown-Bag.pdf){.btn .btn-outline-secondary .btn-sm}
+Sessions are held during the academic year. Materials from past sessions are collected here as a living reference, on the web and as a [single PDF](https://govtmethods.github.io/methodsbrownbag/Methods-Brown-Bag.pdf).
 
 ---
 

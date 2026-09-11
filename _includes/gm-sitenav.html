@@ -63,8 +63,6 @@
 
 <script>
 (function () {
-  var HOME = "https://govtmethods.github.io/";
-
   // ── Mount ───────────────────────────────────────────────────────────────────
   // Synchronous, at parse time — NOT on DOMContentLoaded. #quarto-header is
   // parsed well before this point, so the header is final before quarto-nav.js
@@ -115,8 +113,8 @@
     text(document.querySelector("#quarto-sidebar .active > .sidebar-item-text")) ||
     document.title;
 
-  // At the book root the page title is Quarto's "Welcome", which would make a
-  // third segment that says nothing. Stop at the book instead.
+  // At the book root the page title is the index chapter's heading, which
+  // would make a second segment that says little. Stop at the book instead.
   var atRoot = false;
   if (titleLink) {
     try {
@@ -124,8 +122,13 @@
       atRoot = strip(new URL(titleLink.href, window.location.href).pathname) === strip(path);
     } catch (e) { /* leave atRoot false */ }
   }
+  // Styling hook: styles.scss hides the book-title block on the index page,
+  // where the bar and the site link already name the book.
+  if (atRoot) document.documentElement.classList.add("gm-at-root");
 
-  var crumbs = [{ label: "Government Methods", href: HOME }];
+  // The crumb starts at the book, not the site: the wordmark in row 1 is the
+  // home link, and repeating it 30px lower said nothing new.
+  var crumbs = [];
   if (bookTitle) crumbs.push({ label: bookTitle, href: atRoot ? null : bookHref });
   if (!atRoot && pageTitle) crumbs.push({ label: pageTitle, href: null });
 

@@ -110,11 +110,13 @@ p, li, td, th { color: var(--gm-fg); }
   border-right: 1px solid var(--gm-rule);
 }
 
-#quarto-sidebar .sidebar-title {
-  font-family: var(--gm-serif);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--gm-fg) !important;
+// The book is already named in the top bar (active site link, breadcrumb), so
+// the sidebar is a chapter list only. The title stays in the DOM — hidden, not
+// removed — because gm-sitenav.html reads the book name and root URL from it.
+// The repo icon beside it duplicates the right column's "View source".
+#quarto-sidebar .sidebar-title,
+#quarto-sidebar .sidebar-tools-main {
+  display: none;
 }
 
 #quarto-sidebar .sidebar-link,
@@ -230,8 +232,11 @@ thead, tbody, tfoot, tr, td, th { border-color: var(--gm-rule) !important; }
   margin-bottom: 0.45rem;
 }
 
-// Meta row: collapse into a single inline line "Author · Date"
-.quarto-title-meta {
+// Meta row: collapse into a single inline line "Author · Date".
+// Quarto's own rule is `#title-block-header.quarto-title-block.default
+// .quarto-title-meta { display: grid }` — one id and two classes. Match it or
+// the date drops to a second, right-shifted line.
+#title-block-header.quarto-title-block.default .quarto-title-meta {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -248,7 +253,8 @@ thead, tbody, tfoot, tr, td, th { border-color: var(--gm-rule) !important; }
   font-size: 0.84rem;
   color: var(--gm-muted);
 
-  p, p.date { margin: 0; color: var(--gm-muted); }
+  // Inline, or the block <p> breaks the line after the dot separator.
+  p, p.date { display: inline; margin: 0; color: var(--gm-muted); }
 }
 
 // Dot separator before the second+ meta item
@@ -305,9 +311,8 @@ html[data-theme="dark"] .gm-item:hover {
 
 .gm-item-kicker {
   font-family: var(--gm-sans);
-  font-size: 0.75rem;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.01em;
   color: var(--gm-muted);
   margin-bottom: 0.2rem;
 }
@@ -393,6 +398,11 @@ html[data-theme="dark"] .gm-icon-btn:hover {
 
 #gm-topbar { display: none; }
 #quarto-header > #gm-topbar { display: block; }
+
+// On the index page Quarto prints the book title as a title block above the
+// chapter heading. The bar already names the book twice on that screen;
+// gm-sitenav.html adds this class at the root so the block can go.
+html.gm-at-root #title-block-header { display: none; }
 
 body.nav-sidebar { padding-top: var(--gm-topbar-h); }
 

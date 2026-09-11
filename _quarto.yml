@@ -12,16 +12,25 @@ book:
  # - "Parushya (PhD $4^{th}$ Year)"
   repo-url: https://github.com/govtmethods/methodsbrownbag
   repo-actions: [source, issue]
+  # Seasons are book parts: a heading in the sidebar, a group on the index,
+  # and a `part` field in chapters-meta.json. Newest season first; within a
+  # season, chapters in session-date order. New chapters go under the
+  # current (top) season.
   chapters:
     - index.qmd
-    - chapters/01-intro.qmd
-    - chapters/02-github.qmd
-    - chapters/03-network-analysis.qmd
-    - chapters/04-Under-Regression.qmd
-    - chapters/05-text-as-data.qmd
-    - chapters/06-formal-logic.qmd
-    - chapters/07-Vibe-coding.qmd
-    - chapters/08-text-as-data-principles.qmd
+    - part: "Season 2 (2026–27)"
+      chapters:
+        - chapters/09-linear-algebra.qmd
+    - part: "Season 1 (2025–26)"
+      chapters:
+        - chapters/01-intro.qmd
+        - chapters/02-github.qmd
+        - chapters/03-network-analysis.qmd
+        - chapters/04-Under-Regression.qmd
+        - chapters/05-text-as-data.qmd
+        - chapters/06-formal-logic.qmd
+        - chapters/07-Vibe-coding.qmd
+        - chapters/08-text-as-data-principles.qmd
 
 format:
   html:
@@ -97,14 +106,24 @@ format:
                   // ── Index listing: render session cards ────────────────────
                   const container = document.getElementById("gm-session-list");
                   if (!container) return;
-                  container.innerHTML = chapters.map(function (c, i) {
-                    const kicker = "Session " + (i + 1) + (c.date ? " · " + c.date : "");
-                    const author = c.author ? '<p class="gm-item-desc">' + c.author + "</p>" : "";
-                    return '<a href="' + c.href + '" class="gm-item">' +
-                      '<div class="gm-item-kicker">' + kicker + "</div>" +
-                      '<div class="gm-item-title">' + c.title + "</div>" +
-                      author +
-                      "</a>";
+                  // Group by book part (season); sessions number within a part.
+                  const groups = [];
+                  chapters.forEach(function (c) {
+                    const key = c.part || "";
+                    let g = groups.find(function (x) { return x.part === key; });
+                    if (!g) { g = { part: key, items: [] }; groups.push(g); }
+                    g.items.push(c);
+                  });
+                  container.innerHTML = groups.map(function (g) {
+                    const heading = g.part ? '<h2 class="gm-season">' + g.part + "</h2>" : "";
+                    return heading + g.items.map(function (c, i) {
+                      const kicker = "Session " + (i + 1) + (c.date ? " · " + c.date : "");
+                      const author = c.author ? '<p class="gm-item-desc">' + c.author + "</p>" : "";
+                      return '<a href="' + c.href + '" class="gm-item">' +
+                        '<div class="gm-item-kicker">' + kicker + "</div>" +
+                        '<div class="gm-item-title">' + c.title + "</div>" +
+                        author + "</a>";
+                    }).join("");
                   }).join("");
                 })
                 .catch(function () {}); // silently fail if JSON not yet generated

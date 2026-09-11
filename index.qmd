@@ -28,15 +28,35 @@ get_file <- function(ch) {
   else NULL
 }
 
-config        <- yaml.load_file("_quarto.yml")
-chapter_files <- Filter(Negate(is.null), lapply(config$book$chapters, function(ch) {
-  f <- get_file(ch)
-  if (is.null(f) || f == "index.qmd") NULL else f
-}))
+walk_chapters <- function(chs, part = "") {
+  out <- list()
+  for (ch in chs) {
+    if (is.list(ch) && !is.null(ch$part)) {
+      out <- c(out, walk_chapters(ch$chapters, as.character(ch$part)))
+    } else {
+      f <- get_file(ch)
+      if (!is.null(f) && f != "index.qmd") out[[length(out) + 1]] <- list(file = f, part = part)
+    }
+  }
+  out
+}
 
+config          <- yaml.load_file("_quarto.yml")
+chapter_entries <- walk_chapters(config$book$chapters)
+chapter_files   <- lapply(chapter_entries, function(e) e$file)
+chapter_parts   <- sapply(chapter_entries, function(e) e$part)
+
+current_part <- NULL
+n_in_part    <- 0
 for (i in seq_along(chapter_files)) {
   f <- chapter_files[[i]]
   if (!file.exists(f)) next
+  if (nzchar(chapter_parts[[i]]) && !identical(chapter_parts[[i]], current_part)) {
+    current_part <- chapter_parts[[i]]
+    n_in_part    <- 0
+    cat("\n## ", current_part, " {.unnumbered}\n\n", sep = "")
+  }
+  n_in_part <- n_in_part + 1
   lines  <- readLines(f, warn = FALSE)
   delims <- which(trimws(lines) == "---")
   if (length(delims) < 2) next
@@ -53,7 +73,7 @@ for (i in seq_along(chapter_files)) {
   date_str <- or_empty(parsed$date)
 
   meta <- Filter(nchar, c(author_str, date_str))
-  cat("**Session ", i, " — ", title, "**  \n", sep = "")
+  cat("**Session ", n_in_part, " — ", title, "**  \n", sep = "")
   if (length(meta)) cat(paste(meta, collapse = " · "), "\n")
   cat("\n")
 }

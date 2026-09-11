@@ -290,6 +290,15 @@ html[data-theme="dark"] {
   margin-top: 1.5rem;
 }
 
+.gm-season {
+  font-size: 1.2rem;
+  margin: 1.4rem 0 0.2rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--gm-rule);
+}
+
+.gm-season:first-child { margin-top: 0; }
+
 .gm-item {
   display: block;
   text-decoration: none;
@@ -411,8 +420,11 @@ body.nav-sidebar { padding-top: var(--gm-topbar-h); }
   max-height: calc(100vh - var(--gm-topbar-h));
 }
 
-// Quarto's own breadcrumb duplicates row 2; it is mobile-only and unstyled.
-.quarto-secondary-nav nav.quarto-page-breadcrumbs { display: none; }
+// Quarto's own breadcrumbs duplicate row 2 (secondary nav, mobile-only) and
+// the sidebar (the "Part > Chapter" line above a chapter title in a book with
+// parts). Both go.
+.quarto-secondary-nav nav.quarto-page-breadcrumbs,
+#title-block-header nav.quarto-title-breadcrumbs { display: none !important; } // beats Bootstrap's d-lg-block
 
 // ── Row 1: site nav ───────────────────────────────────────────────────────────
 .gm-sitenav {

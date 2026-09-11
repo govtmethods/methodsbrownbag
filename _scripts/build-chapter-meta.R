@@ -10,22 +10,32 @@ or_default <- function(x, default) if (is.null(x) || identical(x, "")) default e
 config   <- yaml.load_file("_quarto.yml")
 chapters <- config$book$chapters
 
-# chapters can be strings or lists (e.g. list(text=..., file=...))
+# chapters can be strings, lists (e.g. list(text=..., file=...)), or parts
+# (list(part=..., chapters=...)). Parts are walked and their label is carried
+# into the JSON as `part`, so the index and About page can group by season.
 get_file <- function(ch) {
   if (is.character(ch)) ch
   else if (is.list(ch) && !is.null(ch$file)) ch$file
   else NULL
 }
 
-chapter_files <- Filter(
-  Negate(is.null),
-  lapply(chapters, function(ch) {
-    f <- get_file(ch)
-    if (is.null(f) || f == "index.qmd") NULL else f
-  })
-)
+walk_chapters <- function(chs, part = "") {
+  out <- list()
+  for (ch in chs) {
+    if (is.list(ch) && !is.null(ch$part)) {
+      out <- c(out, walk_chapters(ch$chapters, as.character(ch$part)))
+    } else {
+      f <- get_file(ch)
+      if (!is.null(f) && f != "index.qmd") out[[length(out) + 1]] <- list(file = f, part = part)
+    }
+  }
+  out
+}
 
-meta <- lapply(chapter_files, function(f) {
+chapter_entries <- walk_chapters(chapters)
+
+meta <- lapply(chapter_entries, function(entry) {
+  f <- entry$file
   if (!file.exists(f)) return(NULL)
 
   lines  <- readLines(f, warn = FALSE)
@@ -53,7 +63,8 @@ meta <- lapply(chapter_files, function(f) {
     href   = sub("\\.qmd$", ".html", f),
     title  = or_default(parsed$title, f),
     author = author_str,
-    date   = or_default(as.character(parsed$date), "")
+    date   = or_default(as.character(parsed$date), ""),
+    part   = entry$part
   )
 })
 

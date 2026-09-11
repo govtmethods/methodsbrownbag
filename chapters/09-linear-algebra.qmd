@@ -1,0 +1,25 @@
+---
+title: "Linear Algebra for Political Scientists"
+author: "Diana Kazarian"
+date: "September 2026"
+date-format: "MMMM YYYY"
+---
+
+A session on the linear algebra that political science methods lean on: vectors and matrices, the operations regression is built from, and how to read them when they appear in a paper or a textbook.
+
+The full notes are published as their own site, **LAPS**, at [dianakazarian.github.io/laps](https://dianakazarian.github.io/laps/). They are embedded below; open the link for the full-width version.
+
+::: {.content-visible when-format="html"}
+```{=html}
+<iframe
+  src="https://dianakazarian.github.io/laps/"
+  title="Linear Algebra for Political Scientists"
+  loading="lazy"
+  style="width:100%; height:75vh; margin:1rem 0 1.5rem; border:1px solid var(--gm-rule); border-radius:6px;">
+</iframe>
+```
+:::
+
+::: {.content-visible when-format="pdf"}
+Notes: <https://dianakazarian.github.io/laps/>
+:::

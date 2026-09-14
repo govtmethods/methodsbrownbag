@@ -253,13 +253,32 @@ thead, tbody, tfoot, tr, td, th { border-color: var(--gm-rule) !important; }
   font-size: 0.84rem;
   color: var(--gm-muted);
 
-  // Inline, or the block <p> breaks the line after the dot separator.
-  p, p.date { display: inline; margin: 0; color: var(--gm-muted); }
+  // inline-flex, not inline. Quarto writes each author as its own
+  // `<p>Name </p>` on its own source line, so inline display renders both the
+  // newline between the tags and each tag's trailing space -- which puts a gap
+  // before the comma below ("Name , Name"). A flex container drops
+  // whitespace-only nodes between items and trims each item's trailing space.
+  // Still inline so the dot separator does not break onto a second line.
+  display: inline-flex;
+  align-items: baseline;
+
+  // Block, i.e. plain flex items. Sized explicitly because Quarto's own
+  // stylesheet loads after the theme bundle and overrides the container.
+  p, p.date {
+    display: block;
+    margin: 0;
+    font-size: 0.84rem;
+    color: var(--gm-muted);
+  }
+
+  // Quarto emits one <p> per author; separate the second and later ones.
+  p + p::before { content: ", "; }
 }
 
 // Dot separator before the second+ meta item
 .quarto-title-meta div + div .quarto-title-meta-contents::before {
   content: "\00a0·\00a0";
+  font-size: 0.84rem;
   color: var(--gm-muted);
 }
 

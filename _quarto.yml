@@ -20,7 +20,7 @@ book:
     - index.qmd
     - part: "Season 2 (2026–27)"
       chapters:
-        - chapters/09-linear-algebra.qmd
+        - chapters/10-linear-algebra.qmd
     - part: "Season 1 (2025–26)"
       chapters:
         - chapters/01-intro.qmd
@@ -29,8 +29,9 @@ book:
         - chapters/04-Under-Regression.qmd
         - chapters/05-text-as-data.qmd
         - chapters/06-formal-logic.qmd
-        - chapters/07-Vibe-coding.qmd
-        - chapters/08-text-as-data-principles.qmd
+        - chapters/07-spatial-data-maps.qmd
+        - chapters/08-Vibe-coding.qmd
+        - chapters/09-text-as-data-principles.qmd
 
 format:
   html:

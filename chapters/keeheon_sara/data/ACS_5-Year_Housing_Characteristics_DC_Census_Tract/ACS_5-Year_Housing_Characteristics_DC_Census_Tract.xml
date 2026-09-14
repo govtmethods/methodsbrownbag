@@ -1,0 +1,945 @@
+<?xml version="1.0" encoding="UTF-8"?><metadata>
+    <idinfo>
+        <citation>
+            <citeinfo>
+                <origin/>
+                <pubdate>20250228</pubdate>
+                <title>ACS 5-Year Housing Characteristics DC Census Tract</title>
+                <geoform>vector digital data</geoform>
+                <pubinfo>
+                    <pubplace/>
+                    <publish>Office of the Chief Technology Officer</publish>
+                </pubinfo>
+            </citeinfo>
+        </citation>
+        <descript>
+            <abstract>Occupancy status, Units, Rooms, Year built, Owner/Renter (Tenure), Mortgage/Rent costs, and more. This service is updated annually with American Community Survey (ACS) 5-year data. Contact: District of Columbia, Office of Planning. Email: planning@dc.gov. Geography: Census Tracts. Current Vintage: 2019-2023. ACS Table(s): DP04. Data downloaded from: Census Bureau's API for American Community Survey. Date of API call: January 2, 2025. National Figures: data.census.gov. Please cite the Census and ACS when using this data. Data Note from the Census: Data are based on a sample and are subject to sampling variability. The degree of uncertainty for an estimate arising from sampling variability is represented through the use of a margin of error. The value shown here is the 90 percent margin of error. The margin of error can be interpreted as providing a 90 percent probability that the interval defined by the estimate minus the margin of error and the estimate plus the margin of error (the lower and upper confidence bounds) contains the true value. In addition to sampling variability, the ACS estimates are subject to nonsampling error (for a discussion of nonsampling variability, see Accuracy of the Data). The effect of nonsampling error is not represented in these tables. Data Processing Notes: This layer is updated automatically when the most current vintage of ACS data is released each year, usually in December. The layer always contains the latest available ACS 5-year estimates. It is updated annually within days of the Census Bureau's release schedule. Boundaries come from the US Census TIGER geodatabases. Boundaries are updated at the same time as the data updates (annually), and the boundary vintage appropriately matches the data vintage as specified by the Census. These are Census boundaries with water and/or coastlines clipped for cartographic purposes. For census tracts, the water cutouts are derived from a subset of the 2020 AWATER (Area Water) boundaries offered by TIGER. For state and county boundaries, the water and coastlines are derived from the coastlines of the 500k TIGER Cartographic Boundary Shapefiles. The original AWATER and ALAND fields are still available as attributes within the data table (units are square meters). Field alias names were created based on the Table Shells file available from the American Community Survey Summary File Documentation page. Data processed using R statistical package and ArcGIS Desktop. Margin of Error was not included in this layer but is available from the Census Bureau. Contact the Office of Planning for more information about obtaining Margin of Error values.</abstract>
+            <purpose>This layer contains the most current release of data from the American Community Survey (ACS) about housing characteristics. These are 5-year estimates shown by 2020 Census Tract boundaries.</purpose>
+        </descript>
+        <status>
+            <progress>Complete</progress>
+            <update>Annually</update>
+        </status>
+        <spdom>
+            <bounding>
+                <westbc>-77.14074011718749</westbc>
+                <eastbc>-76.89354773437499</eastbc>
+                <northbc>39.00962959609984</northbc>
+                <southbc>38.77479683242797</southbc>
+            </bounding>
+        </spdom>
+        <keywords>
+            <theme>
+                <themekt>None</themekt>
+                <themekey>demographics</themekey>
+            </theme>
+            <place>
+                <placekt>None</placekt>
+                <placekey>Washington DC</placekey>
+            </place>
+        </keywords>
+        <accconst>None</accconst>
+        <useconst>This work is licensed under a Creative Commons Attribution 4.0 International License.</useconst>
+        <ptcontac>
+            <cntinfo>
+                <cntorgp>
+                    <cntorg>Office of Planning</cntorg>
+                </cntorgp>
+                <cntpos>State Data Center</cntpos>
+                <cntaddr>
+                    <addrtype>mailing and physical</addrtype>
+                    <address>899 North Capitol Street, NE, Suite 7100</address>
+                    <city>Washington</city>
+                    <state>DC</state>
+                    <postal>20003</postal>
+                    <country>US</country>
+                </cntaddr>
+                <cntvoice>(202) 442-7600</cntvoice>
+                <cntfax>(202) 442-7638</cntfax>
+                <cntemail>planning@dc.gov</cntemail>
+                <hours>8:30 am to 5 pm</hours>
+            </cntinfo>
+        </ptcontac>
+        <ptcontac>
+            <cntinfo>
+                <cntorgp>
+                    <cntorg>Office of the Chief Technology Officer</cntorg>
+                </cntorgp>
+                <cntpos>GIS Data Coordinator</cntpos>
+                <cntaddr>
+                    <addrtype>mailing and physical</addrtype>
+                    <address>200 I Street, SE</address>
+                    <city>Washington</city>
+                    <state>DC</state>
+                    <postal>20003</postal>
+                    <country>US</country>
+                </cntaddr>
+                <cntvoice>(202) 727-2277</cntvoice>
+                <cntfax>(202) 727-6857</cntfax>
+                <cntemail>octo@dc.gov</cntemail>
+                <hours>8:30 am to 5:30 pm</hours>
+            </cntinfo>
+        </ptcontac>
+        <datacred>Office of Planning</datacred>
+        <native>Version 6.2 (Build 9200) ; Esri ArcGIS 10.8.1.14362</native>
+    </idinfo>
+    <dataqual>
+        <lineage>
+            <procstep>
+                <procdesc>The ACS 2019-2023 vintage for the Demographic Characteristics datasets underwent a major modification, resulting in 55 data fields being altered. Other demographic datasets including Economic, Social, and Housing underwent minor modifications.</procdesc>
+                <procdate>20250228</procdate>
+            </procstep>
+        </lineage>
+    </dataqual>
+    <spdoinfo>
+        <direct>Vector</direct>
+        <ptvctinf>
+            <sdtsterm>
+                <sdtstype>GT-polygon composed of chains</sdtstype>
+                <ptvctcnt>0</ptvctcnt>
+            </sdtsterm>
+        </ptvctinf>
+    </spdoinfo>
+    <eainfo>
+        <detailed>
+            <enttyp>
+                <enttypl>DCGIS.ACS_Housing_DC_CensusTract</enttypl>
+            </enttyp>
+            <attr>
+                <attrlabl>OBJECTID</attrlabl>
+                <attrdef>Internal feature number.</attrdef>
+                <attrdefs>Esri</attrdefs>
+                <attrdomv>
+                                        
+                    <udom>Sequential unique whole numbers that are automatically generated.</udom>
+                                    
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>Shape</attrlabl>
+                <attrdef>Feature geometry.</attrdef>
+                <attrdefs>Esri</attrdefs>
+                <attrdomv>
+                                        
+                    <udom>Coordinates defining the features.</udom>
+                                    
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>STATEFP</attrlabl>
+                <attrdef>Census state code</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>COUNTYFP</attrlabl>
+                <attrdef>Census county code</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>TRACTCE</attrlabl>
+                <attrdef>Census tract code</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>GEOID</attrlabl>
+                <attrdef>Census tract identifier; a concatenation of Current state FIPS code, county FIPS code, and census tract code</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>GEOIDFQ</attrlabl>
+                <attrdef>Current fully qualified GEOID; used to join data tables from data.census.gov</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>NAME</attrlabl>
+                <attrdef>Current census tract name, this is the census tract code converted to an integer or integer plus 2- character decimal if the last two characters of the code are not both zeros.</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>NAMELSAD</attrlabl>
+                <attrdef>Current translated legal/statistical area description and the census tract name</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>MTFCC</attrlabl>
+                <attrdef>MAF/TIGER Feature Class Code</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>FUNCSTAT</attrlabl>
+                <attrdef>Current functional status</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>ALAND</attrlabl>
+                <attrdef>Land Area</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>AWATER</attrlabl>
+                <attrdef>Water Area</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>INTPTLAT</attrlabl>
+                <attrdef>Current latitude of the internal point</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0001E</attrlabl>
+                <attrdef>HOUSING OCCUPANCY:  Total housing units</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0002E</attrlabl>
+                <attrdef>HOUSING OCCUPANCY:  Total housing units:  Occupied housing units</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0003E</attrlabl>
+                <attrdef>HOUSING OCCUPANCY:  Total housing units:  Vacant housing units</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0004E</attrlabl>
+                <attrdef>HOUSING OCCUPANCY:  Total housing units:  Homeowner vacancy rate</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0005E</attrlabl>
+                <attrdef>HOUSING OCCUPANCY:  Total housing units:  Rental vacancy rate</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0006E</attrlabl>
+                <attrdef>UNITS IN STRUCTURE:  Total housing units</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0007E</attrlabl>
+                <attrdef>UNITS IN STRUCTURE:  Total housing units:  1-unit, detached</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0008E</attrlabl>
+                <attrdef>UNITS IN STRUCTURE:  Total housing units:  1-unit, attached</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0009E</attrlabl>
+                <attrdef>UNITS IN STRUCTURE:  Total housing units:  2 units</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0010E</attrlabl>
+                <attrdef>UNITS IN STRUCTURE:  Total housing units:  3 or 4 units</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0011E</attrlabl>
+                <attrdef>UNITS IN STRUCTURE:  Total housing units:  5 to 9 units</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0012E</attrlabl>
+                <attrdef>UNITS IN STRUCTURE:  Total housing units:  10 to 19 units</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0013E</attrlabl>
+                <attrdef>UNITS IN STRUCTURE:  Total housing units:  20 or more units</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0014E</attrlabl>
+                <attrdef>UNITS IN STRUCTURE:  Total housing units:  Mobile home</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0015E</attrlabl>
+                <attrdef>UNITS IN STRUCTURE:  Total housing units:  Boat, RV, van, etc.</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0016E</attrlabl>
+                <attrdef>YEAR STRUCTURE BUILT:  Total housing units</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0017E</attrlabl>
+                <attrdef>YEAR STRUCTURE BUILT:  Total housing units:  Built 2020 or later</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0018E</attrlabl>
+                <attrdef>YEAR STRUCTURE BUILT:  Total housing units:  Built 2010 to 2019</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0019E</attrlabl>
+                <attrdef>YEAR STRUCTURE BUILT:  Total housing units:  Built 2000 to 2009</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0020E</attrlabl>
+                <attrdef>YEAR STRUCTURE BUILT:  Total housing units:  Built 1990 to 1999</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0021E</attrlabl>
+                <attrdef>YEAR STRUCTURE BUILT:  Total housing units:  Built 1980 to 1989</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0022E</attrlabl>
+                <attrdef>YEAR STRUCTURE BUILT:  Total housing units:  Built 1970 to 1979</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0023E</attrlabl>
+                <attrdef>YEAR STRUCTURE BUILT:  Total housing units:  Built 1960 to 1969</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0024E</attrlabl>
+                <attrdef>YEAR STRUCTURE BUILT:  Total housing units:  Built 1950 to 1959</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0025E</attrlabl>
+                <attrdef>YEAR STRUCTURE BUILT:  Total housing units:  Built 1940 to 1949</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0026E</attrlabl>
+                <attrdef>YEAR STRUCTURE BUILT:  Total housing units:  Built 1939 or earlier</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0027E</attrlabl>
+                <attrdef>ROOMS:  Total housing units</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0028E</attrlabl>
+                <attrdef>ROOMS:  Total housing units:  1 room</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0029E</attrlabl>
+                <attrdef>ROOMS:  Total housing units:  2 rooms</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0030E</attrlabl>
+                <attrdef>ROOMS:  Total housing units:  3 rooms</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0031E</attrlabl>
+                <attrdef>ROOMS:  Total housing units:  4 rooms</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0032E</attrlabl>
+                <attrdef>ROOMS:  Total housing units:  5 rooms</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0033E</attrlabl>
+                <attrdef>ROOMS:  Total housing units:  6 rooms</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0034E</attrlabl>
+                <attrdef>ROOMS:  Total housing units:  7 rooms</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0035E</attrlabl>
+                <attrdef>ROOMS:  Total housing units:  8 rooms</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0036E</attrlabl>
+                <attrdef>ROOMS:  Total housing units:  9 rooms or more</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0037E</attrlabl>
+                <attrdef>ROOMS:  Total housing units:  Median rooms</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0038E</attrlabl>
+                <attrdef>BEDROOMS:  Total housing units</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0039E</attrlabl>
+                <attrdef>BEDROOMS:  Total housing units:  No bedroom</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0040E</attrlabl>
+                <attrdef>BEDROOMS:  Total housing units:  1 bedroom</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0041E</attrlabl>
+                <attrdef>BEDROOMS:  Total housing units:  2 bedrooms</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0042E</attrlabl>
+                <attrdef>BEDROOMS:  Total housing units:  3 bedrooms</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0043E</attrlabl>
+                <attrdef>BEDROOMS:  Total housing units:  4 bedrooms</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0044E</attrlabl>
+                <attrdef>BEDROOMS:  Total housing units:  5 or more bedrooms</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0045E</attrlabl>
+                <attrdef>HOUSING TENURE:  Occupied housing units</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0046E</attrlabl>
+                <attrdef>HOUSING TENURE:  Occupied housing units:  Owner-occupied</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0047E</attrlabl>
+                <attrdef>HOUSING TENURE:  Occupied housing units:  Renter-occupied</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0048E</attrlabl>
+                <attrdef>HOUSING TENURE:  Occupied housing units:  Average household size of owner-occupied unit</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0049E</attrlabl>
+                <attrdef>HOUSING TENURE:  Occupied housing units:  Average household size of renter-occupied unit</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0050E</attrlabl>
+                <attrdef>YEAR HOUSEHOLDER MOVED INTO UNIT:  Occupied housing units</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0051E</attrlabl>
+                <attrdef>YEAR HOUSEHOLDER MOVED INTO UNIT:  Occupied housing units:  Moved in 2021 or later</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0052E</attrlabl>
+                <attrdef>YEAR HOUSEHOLDER MOVED INTO UNIT:  Occupied housing units:  Moved in 2018 to 2020</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0053E</attrlabl>
+                <attrdef>YEAR HOUSEHOLDER MOVED INTO UNIT:  Occupied housing units:  Moved in 2010 to 2017</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0054E</attrlabl>
+                <attrdef>YEAR HOUSEHOLDER MOVED INTO UNIT:  Occupied housing units:  Moved in 2000 to 2009</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0055E</attrlabl>
+                <attrdef>YEAR HOUSEHOLDER MOVED INTO UNIT:  Occupied housing units:  Moved in 1990 to 1999</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0056E</attrlabl>
+                <attrdef>YEAR HOUSEHOLDER MOVED INTO UNIT:  Occupied housing units:  Moved in 1989 and earlier</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0057E</attrlabl>
+                <attrdef>VEHICLES AVAILABLE:  Occupied housing units</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0058E</attrlabl>
+                <attrdef>VEHICLES AVAILABLE:  Occupied housing units:  No vehicles available</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0059E</attrlabl>
+                <attrdef>VEHICLES AVAILABLE:  Occupied housing units:  1 vehicle available</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0060E</attrlabl>
+                <attrdef>VEHICLES AVAILABLE:  Occupied housing units:  2 vehicles available</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0061E</attrlabl>
+                <attrdef>VEHICLES AVAILABLE:  Occupied housing units:  3 or more vehicles available</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0062E</attrlabl>
+                <attrdef>HOUSE HEATING FUEL:  Occupied housing units</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0063E</attrlabl>
+                <attrdef>HOUSE HEATING FUEL:  Occupied housing units:  Utility gas</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0064E</attrlabl>
+                <attrdef>HOUSE HEATING FUEL:  Occupied housing units:  Bottled, tank, or LP gas</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0065E</attrlabl>
+                <attrdef>HOUSE HEATING FUEL:  Occupied housing units:  Electricity</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0066E</attrlabl>
+                <attrdef>HOUSE HEATING FUEL:  Occupied housing units:  Fuel oil, kerosene, etc.</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0067E</attrlabl>
+                <attrdef>HOUSE HEATING FUEL:  Occupied housing units:  Coal or coke</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0068E</attrlabl>
+                <attrdef>HOUSE HEATING FUEL:  Occupied housing units:  Wood</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0069E</attrlabl>
+                <attrdef>HOUSE HEATING FUEL:  Occupied housing units:  Solar energy</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0070E</attrlabl>
+                <attrdef>HOUSE HEATING FUEL:  Occupied housing units:  Other fuel</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0071E</attrlabl>
+                <attrdef>HOUSE HEATING FUEL:  Occupied housing units:  No fuel used</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0072E</attrlabl>
+                <attrdef>SELECTED CHARACTERISTICS:  Occupied housing units</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0073E</attrlabl>
+                <attrdef>SELECTED CHARACTERISTICS:  Occupied housing units:  Lacking complete plumbing facilities</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0074E</attrlabl>
+                <attrdef>SELECTED CHARACTERISTICS:  Occupied housing units:  Lacking complete kitchen facilities</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0075E</attrlabl>
+                <attrdef>SELECTED CHARACTERISTICS:  Occupied housing units:  No telephone service available</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0076E</attrlabl>
+                <attrdef>OCCUPANTS PER ROOM:  Occupied housing units</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0077E</attrlabl>
+                <attrdef>OCCUPANTS PER ROOM:  Occupied housing units:  1.00 or less</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0078E</attrlabl>
+                <attrdef>OCCUPANTS PER ROOM:  Occupied housing units:  1.01 to 1.50</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0079E</attrlabl>
+                <attrdef>OCCUPANTS PER ROOM:  Occupied housing units:  1.51 or more</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0080E</attrlabl>
+                <attrdef>VALUE:  Owner-occupied units</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0081E</attrlabl>
+                <attrdef>VALUE:  Owner-occupied units:  Less than $50,000</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0082E</attrlabl>
+                <attrdef>VALUE:  Owner-occupied units:  $50,000 to $99,999</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0083E</attrlabl>
+                <attrdef>VALUE:  Owner-occupied units:  $100,000 to $149,999</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0084E</attrlabl>
+                <attrdef>VALUE:  Owner-occupied units:  $150,000 to $199,999</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0085E</attrlabl>
+                <attrdef>VALUE:  Owner-occupied units:  $200,000 to $299,999</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0086E</attrlabl>
+                <attrdef>VALUE:  Owner-occupied units:  $300,000 to $499,999</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0087E</attrlabl>
+                <attrdef>VALUE:  Owner-occupied units:  $500,000 to $999,999</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0088E</attrlabl>
+                <attrdef>VALUE:  Owner-occupied units:  $1,000,000 or more</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0089E</attrlabl>
+                <attrdef>VALUE:  Owner-occupied units:  Median (dollars)</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0090E</attrlabl>
+                <attrdef>MORTGAGE STATUS:  Owner-occupied units</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0091E</attrlabl>
+                <attrdef>MORTGAGE STATUS:  Owner-occupied units:  Housing units with a mortgage</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0092E</attrlabl>
+                <attrdef>MORTGAGE STATUS:  Owner-occupied units:  Housing units without a mortgage</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0093E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS (SMOC):  Housing units with a mortgage</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0094E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS (SMOC):  Housing units with a mortgage:  Less than $500</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0095E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS (SMOC):  Housing units with a mortgage:  $500 to $999</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0096E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS (SMOC):  Housing units with a mortgage:  $1,000 to $1,499</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0097E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS (SMOC):  Housing units with a mortgage:  $1,500 to $1,999</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0098E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS (SMOC):  Housing units with a mortgage:  $2,000 to $2,499</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0099E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS (SMOC):  Housing units with a mortgage:  $2,500 to $2,999</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0100E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS (SMOC):  Housing units with a mortgage:  $3,000 or more</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0101E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS (SMOC):  Housing units with a mortgage:  Median (dollars)</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0102E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS (SMOC):  Housing units without a mortgage</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0103E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS (SMOC):  Housing units without a mortgage:  Less than $250</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0104E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS (SMOC):  Housing units without a mortgage:  $250 to $399</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0105E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS (SMOC):  Housing units without a mortgage:  $400 to $599</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0106E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS (SMOC):  Housing units without a mortgage:  $600 to $799</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0107E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS (SMOC):  Housing units without a mortgage:  $800 to $999</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0108E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS (SMOC):  Housing units without a mortgage:  $1,000 or more</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0109E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS (SMOC):  Housing units without a mortgage:  Median (dollars)</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0110E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI):  Housing units with a mortgage (excluding units where SMOCAPI cannot be computed)</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0111E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI):  Housing units with a mortgage (excluding units where SMOCAPI cannot be computed):  Less than 20.0 percent</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0112E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI):  Housing units with a mortgage (excluding units where SMOCAPI cannot be computed):  20.0 to 24.9 percent</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0113E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI):  Housing units with a mortgage (excluding units where SMOCAPI cannot be computed):  25.0 to 29.9 percent</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0114E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI):  Housing units with a mortgage (excluding units where SMOCAPI cannot be computed):  30.0 to 34.9 percent</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0115E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI):  Housing units with a mortgage (excluding units where SMOCAPI cannot be computed):  35.0 percent or more</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0116E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI):  Housing units with a mortgage (excluding units where SMOCAPI cannot be computed):  Not computed</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0117E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI):  Housing unit without a mortgage (excluding units where SMOCAPI cannot be computed)</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0118E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI):  Housing unit without a mortgage (excluding units where SMOCAPI cannot be computed):  Less than 10.0 percent</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0119E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI):  Housing unit without a mortgage (excluding units where SMOCAPI cannot be computed):  10.0 to 14.9 percent</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0120E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI):  Housing unit without a mortgage (excluding units where SMOCAPI cannot be computed):  15.0 to 19.9 percent</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0121E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI):  Housing unit without a mortgage (excluding units where SMOCAPI cannot be computed):  20.0 to 24.9 percent</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0122E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI):  Housing unit without a mortgage (excluding units where SMOCAPI cannot be computed):  25.0 to 29.9 percent</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0123E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI):  Housing unit without a mortgage (excluding units where SMOCAPI cannot be computed):  30.0 to 34.9 percent</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0124E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI):  Housing unit without a mortgage (excluding units where SMOCAPI cannot be computed):  35.0 percent or more</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0125E</attrlabl>
+                <attrdef>SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI):  Housing unit without a mortgage (excluding units where SMOCAPI cannot be computed):  Not computed</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0126E</attrlabl>
+                <attrdef>GROSS RENT:  Occupied units paying rent</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0127E</attrlabl>
+                <attrdef>GROSS RENT:  Occupied units paying rent:  Less than $500</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0128E</attrlabl>
+                <attrdef>GROSS RENT:  Occupied units paying rent:  $500 to $999</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0129E</attrlabl>
+                <attrdef>GROSS RENT:  Occupied units paying rent:  $1,000 to $1,499</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0130E</attrlabl>
+                <attrdef>GROSS RENT:  Occupied units paying rent:  $1,500 to $1,999</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0131E</attrlabl>
+                <attrdef>GROSS RENT:  Occupied units paying rent:  $2,000 to $2,499</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0132E</attrlabl>
+                <attrdef>GROSS RENT:  Occupied units paying rent:  $2,500 to $2,999</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0133E</attrlabl>
+                <attrdef>GROSS RENT:  Occupied units paying rent:  $3,000 or more</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0134E</attrlabl>
+                <attrdef>GROSS RENT:  Occupied units paying rent:  Median (dollars)</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0135E</attrlabl>
+                <attrdef>GROSS RENT:  Occupied units paying rent:  No rent paid</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0136E</attrlabl>
+                <attrdef>GROSS RENT AS A PERCENTAGE OF HOUSEHOLD INCOME (GRAPI):  Occupied units paying rent (excluding units where GRAPI cannot be computed)</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0137E</attrlabl>
+                <attrdef>GROSS RENT AS A PERCENTAGE OF HOUSEHOLD INCOME (GRAPI):  Occupied units paying rent (excluding units where GRAPI cannot be computed):  Less than 15.0 percent</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0138E</attrlabl>
+                <attrdef>GROSS RENT AS A PERCENTAGE OF HOUSEHOLD INCOME (GRAPI):  Occupied units paying rent (excluding units where GRAPI cannot be computed):  15.0 to 19.9 percent</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0139E</attrlabl>
+                <attrdef>GROSS RENT AS A PERCENTAGE OF HOUSEHOLD INCOME (GRAPI):  Occupied units paying rent (excluding units where GRAPI cannot be computed):  20.0 to 24.9 percent</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0140E</attrlabl>
+                <attrdef>GROSS RENT AS A PERCENTAGE OF HOUSEHOLD INCOME (GRAPI):  Occupied units paying rent (excluding units where GRAPI cannot be computed):  25.0 to 29.9 percent</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0141E</attrlabl>
+                <attrdef>GROSS RENT AS A PERCENTAGE OF HOUSEHOLD INCOME (GRAPI):  Occupied units paying rent (excluding units where GRAPI cannot be computed):  30.0 to 34.9 percent</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0142E</attrlabl>
+                <attrdef>GROSS RENT AS A PERCENTAGE OF HOUSEHOLD INCOME (GRAPI):  Occupied units paying rent (excluding units where GRAPI cannot be computed):  35.0 percent or more</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>DP04_0143E</attrlabl>
+                <attrdef>GROSS RENT AS A PERCENTAGE OF HOUSEHOLD INCOME (GRAPI):  Occupied units paying rent (excluding units where GRAPI cannot be computed):  Not computed</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>INTPTLON</attrlabl>
+                <attrdef>Current longitude of the internal point</attrdef>
+                <attrdefs>U. S. Census Bureau</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>SE_ANNO_CAD_DATA</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>SHAPE.AREA</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>SHAPE.LEN</attrlabl>
+            </attr>
+        </detailed>
+    </eainfo>
+    <metainfo>
+        <metd>20250303</metd>
+        <metc>
+            <cntinfo>
+                <cntorgp>
+                    <cntorg>Office of Planning</cntorg>
+                </cntorgp>
+                <cntpos>State Data Center</cntpos>
+                <cntaddr>
+                    <addrtype>mailing and physical</addrtype>
+                    <address>899 North Capitol Street, NE, Suite 7100</address>
+                    <city>Washington</city>
+                    <state>DC</state>
+                    <postal>20003</postal>
+                    <country>US</country>
+                </cntaddr>
+                <cntvoice>(202) 442-7600</cntvoice>
+                <cntfax>(202) 442-7638</cntfax>
+                <cntemail>planning@dc.gov</cntemail>
+                <hours>8:30 am to 5 pm</hours>
+            </cntinfo>
+        </metc>
+        <metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+        <metstdv>FGDC-STD-001-1998</metstdv>
+        <mettc>local time</mettc>
+    </metainfo>
+</metadata>

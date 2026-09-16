@@ -3,8 +3,6 @@ title: "Across Time and Space: Reproducible Research Projects"
 subtitle: File Management, Workflow, and Version Control
 author: "Parushya"
 date: September 18, 2026
-# TODO: add `date: "Month D, YYYY"` once the session is scheduled, then check
-# that 11 is still the right number in _quarto.yml (chapter 10 is Sept 2026).
 ---
 
 A project has to survive two journeys: **across time**, so that the you of next
@@ -17,16 +15,15 @@ repository.
 ::: {.callout-note}
 ## Companion chapters
 
-The series has covered the first two topics before, in more depth than one
-session allows:
+This session consolidates two earlier ones. They ran in Season 1 as separate
+sittings and are kept as the record of when the material was first taught:
 
-- [File Management and Workflow](01-intro.html) (August 2025) — absolute versus
-  relative paths, R Projects, the `here` package, a standard folder layout
-- [Version Control with Git and Github](02-github.html) (September 2025) —
-  installation, the staging model, remotes and GitHub
+- [File Management and Workflow](01-intro.html) — 29 August 2025
+- [Version Control with Git and Github](02-github.html) — 4 September 2025
 
-Read those as the reference. This chapter revisits the same ground as a single
-workflow, and ends somewhere they do not.
+The material here is the same. What is new is the sequence: one pass from a
+folder on your laptop to a site on the web, ending with the website those two
+chapters never reached.
 :::
 
 ::: callout-note
@@ -575,6 +572,95 @@ In addition to git functions, Github adds similar but additional stages. Compare
 
 knitr::include_graphics("github.png")
 ```
+
+## Bonus — Putting It All Together: Making Your Own Website
+
+::: {.callout-warning}
+## FLAG: drafted, not pulled from a session
+
+Neither Season 1 chapter covers this, so unlike everything above, the words in
+this section are not yours. Rewrite them in your own voice before teaching.
+:::
+
+Run this if there is time; otherwise send it home with people. Nothing new is
+needed. After the three parts above you already have a project folder, a git
+repository, and a GitHub remote. A personal website is one more file in that
+repository.
+
+### Quarto as the site generator
+
+The `.qmd` file that renders a problem set also renders a web page. The only
+difference is a line in `_quarto.yml` telling Quarto the project is a website
+rather than a document.
+
+```yaml
+project:
+  type: website
+
+website:
+  title: "Your Name"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: research.qmd
+        text: Research
+```
+
+A minimal site is four files:
+
+```
+📦 my-website
+├─ _quarto.yml
+├─ index.qmd        # landing page
+├─ research.qmd
+└─ cv.pdf
+```
+
+### Publishing it
+
+One command, run from the project folder in the same terminal you used in Part 2:
+
+`quarto publish gh-pages`
+
+This renders the site, pushes the output to a branch called `gh-pages`, and
+points GitHub Pages at it. You do not write a workflow file, and you do not
+commit rendered HTML to `main`.
+
+**The repository name decides your URL.** A repository named
+`<username>.github.io` is served at `https://<username>.github.io/`. Every other
+repository is served from a subpath, `https://<username>.github.io/<reponame>/`.
+Name the repository before you publish, not after.
+
+::: callout-note
+
+#### Website Practice
+
+1.  On Github.com, make a new repository named `<your-username>.github.io`.
+
+2.  Make an R Project in a folder of that name, then `git init` and connect the
+    remote exactly as you did in Part 3.
+
+3.  Add a `_quarto.yml` with `project: type: website`, and an `index.qmd` with a
+    heading and two lines about yourself.
+
+4.  Run `quarto preview` and check it in your browser.
+
+5.  Run `quarto publish gh-pages` and answer the prompt.
+
+6.  Wait a minute, then open `https://<your-username>.github.io/`.
+:::
+
+### How this book is published
+
+This book does not use `quarto publish`. It uses a GitHub Actions workflow,
+`.github/workflows/pages.yml`, which renders on GitHub's machines every time
+someone pushes to `main`. Nobody renders for deployment on a laptop.
+
+That is the argument from Part 1 applied to the website itself: if publishing
+depended on one person's computer, the site would be reproducible only by that
+person. Worth knowing it exists; `quarto publish` is the right tool for a
+personal site.
 
 ## Takeaways
 

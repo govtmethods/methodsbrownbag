@@ -21,6 +21,7 @@ book:
     - part: "Season 2 (2026–27)"
       chapters:
         - chapters/10-linear-algebra.qmd
+        - chapters/11-reproducible-research.qmd
     - part: "Season 1 (2025–26)"
       chapters:
         - chapters/01-intro.qmd
@@ -32,6 +33,10 @@ book:
         - chapters/07-spatial-data-maps.qmd
         - chapters/08-Vibe-coding.qmd
         - chapters/09-text-as-data-principles.qmd
+    # Not in a season. The explicit `::: {#refs}` div inside it is what pins the
+    # bibliography here; without it the PDF dumps every citation after whatever
+    # chapter happens to be last. See DECISIONS.md.
+    - references.qmd
 
 format:
   html:

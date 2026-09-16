@@ -1,0 +1,14 @@
+---
+# `@*` includes every entry from the bibliography files, not only the keys that
+# happen to be cited. Quarto's implicit collection leaves this page empty in this
+# project's HTML build; this makes the list explicit and format-independent.
+nocite: |
+  @*
+---
+
+# References {.unnumbered}
+
+Every work cited across the sessions, in one list.
+
+::: {#refs}
+:::

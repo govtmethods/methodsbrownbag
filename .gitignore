@@ -53,9 +53,22 @@ renv/python/
 
 # Intermediate files
 index.*.md
+references.*.md
 site_libs/
 chapters/*.md
 *_files/
 _book/
 *.tex
 *.rmd
+
+# Per-file renders (`quarto render index.qmd`, or rendering one chapter from the
+# editor) write HTML next to the source instead of into _book/. The book build
+# never needs these, and an unguarded `git add .` would otherwise commit build
+# output into the repo.
+#
+# Both patterns are deliberately narrow: a leading slash keeps `_includes/*.html`
+# (real source) visible, and `chapters/*.html` matches only direct children, so
+# tracked chapter assets like chapters/BrownBag_RONG_Minha/Brownbag_Network.html
+# are untouched.
+/*.html
+chapters/*.html

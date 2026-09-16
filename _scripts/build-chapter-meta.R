@@ -5,7 +5,13 @@
 library(yaml)
 library(jsonlite)
 
-or_default <- function(x, default) if (is.null(x) || identical(x, "")) default else x
+# NB the length(x) == 0 guard: a chapter with no `date:` yields
+# as.character(NULL) == character(0), which is neither NULL nor "" and
+# serialises to [] — truthy in the consuming JS, so the index kicker would
+# render a dangling " · " separator.
+or_default <- function(x, default) {
+  if (is.null(x) || length(x) == 0 || identical(x, "")) default else x
+}
 
 config   <- yaml.load_file("_quarto.yml")
 chapters <- config$book$chapters
@@ -26,7 +32,10 @@ walk_chapters <- function(chs, part = "") {
       out <- c(out, walk_chapters(ch$chapters, as.character(ch$part)))
     } else {
       f <- get_file(ch)
-      if (!is.null(f) && f != "index.qmd") out[[length(out) + 1]] <- list(file = f, part = part)
+      # index.qmd and references.qmd are chapters but not sessions.
+      if (!is.null(f) && !(f %in% c("index.qmd", "references.qmd"))) {
+        out[[length(out) + 1]] <- list(file = f, part = part)
+      }
     }
   }
   out

@@ -35,7 +35,10 @@ walk_chapters <- function(chs, part = "") {
       out <- c(out, walk_chapters(ch$chapters, as.character(ch$part)))
     } else {
       f <- get_file(ch)
-      if (!is.null(f) && f != "index.qmd") out[[length(out) + 1]] <- list(file = f, part = part)
+      # index.qmd and references.qmd are chapters but not sessions.
+      if (!is.null(f) && !(f %in% c("index.qmd", "references.qmd"))) {
+        out[[length(out) + 1]] <- list(file = f, part = part)
+      }
     }
   }
   out

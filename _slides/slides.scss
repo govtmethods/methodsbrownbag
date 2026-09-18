@@ -9,17 +9,18 @@
 
 $font-family-sans-serif: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !default;
 $presentation-font-size-root: 34px;
-// Deck-only divergence from the site: headings are Helvetica in phthalo
-// green (PG7), not Libre Caslon in ink. The books' own styles.scss is
-// untouched, so this does not affect the chapter pages or mathcamp.
-// Helvetica is a system font — no webfont to load, and Arial/Liberation Sans
-// stand in on machines that lack it.
+// Deck-only divergence from the site: headings are Helvetica rather than
+// Libre Caslon. The colour stays the site's ink, so the deck reads as the same
+// family as the chapter pages. The books' own styles.scss is untouched, so
+// neither the chapter pages nor mathcamp are affected. Helvetica is a system
+// font — no webfont to load, and Arial/Liberation Sans stand in on machines
+// that lack it.
 $presentation-heading-font: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $presentation-heading-font-weight: 600;
 
 $body-bg: #fbfbf9;
 $body-color: #1f2d3a;
-$presentation-heading-color: #123524;
+$presentation-heading-color: #1f2d3a;
 $link-color: #1f5ea8;
 
 $code-block-font-size: 0.62em;

@@ -1,0 +1,29 @@
+# A separate, tiny Quarto project: the projected deck for chapter 11.
+#
+# It lives in an underscore-prefixed directory because Quarto skips those when
+# it collects a project's inputs — so the book render provably cannot pick this
+# file up and try to render it as a chapter. The book's post-render hook
+# (`quarto render _slides` in ../_quarto.yml) is what builds it, which means CI
+# builds it too: nobody hand-renders for deployment.
+#
+# Output goes straight into the book's output directory, so the deck is part of
+# the Pages artifact and the chapter can reach it at ../slides/.
+
+project:
+  type: default
+  output-dir: ../_book/slides
+
+format:
+  revealjs:
+    theme: [simple, slides.scss]
+    slide-number: true
+    incremental: false
+    chalkboard: false
+    # The deck is embedded in an <iframe> on the chapter page. With reveal's
+    # default URL-hash navigation on, every slide change rewrites the parent
+    # page's address bar.
+    history: false
+    hash: false
+
+execute:
+  freeze: false

@@ -3,6 +3,11 @@ project:
   output-dir: _book
   post-render:
     - Rscript _scripts/build-chapter-meta.R
+    # The chapter 11 deck. `_slides/` is its own tiny Quarto project (revealjs
+    # is not a book format, so a chapter cannot emit one); the underscore keeps
+    # it out of the book's inputs. Running it here means CI builds it too, and
+    # a local `quarto render` never leaves the chapter's iframe empty.
+    - quarto render _slides
 
 book:
   title: "Methods Brown Bag"
@@ -217,3 +222,6 @@ csl: chapters/John-Vibe-Coding/chicago-author-date.csl
 
 resources:
   - "chapters/Minha Kim and Samirah/toy_dataset_100.csv"
+  # The folder-structure script, offered as a download from the chapter and
+  # from the projected deck (_slides/). Not rendered, just copied to _book/.
+  - "chapters/000-setup.R"

@@ -9,12 +9,17 @@
 
 $font-family-sans-serif: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !default;
 $presentation-font-size-root: 34px;
-$presentation-heading-font: "Libre Caslon Text", Georgia, serif !default;
+// Deck-only divergence from the site: headings are Helvetica in phthalo
+// green (PG7), not Libre Caslon in ink. The books' own styles.scss is
+// untouched, so this does not affect the chapter pages or mathcamp.
+// Helvetica is a system font — no webfont to load, and Arial/Liberation Sans
+// stand in on machines that lack it.
+$presentation-heading-font: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $presentation-heading-font-weight: 600;
 
 $body-bg: #fbfbf9;
 $body-color: #1f2d3a;
-$presentation-heading-color: #1f2d3a;
+$presentation-heading-color: #123524;
 $link-color: #1f5ea8;
 
 $code-block-font-size: 0.62em;
@@ -44,3 +49,128 @@ $code-block-border-color: #c9c9c4;
 
 .reveal .footnote,
 .reveal .small { font-size: 0.62em; color: #4a5560; }
+
+// A slide that is one full-bleed figure and its caption. The stock heading is
+// too heavy next to a figure, and reveal's default figure margins waste the
+// vertical space the image needs.
+.reveal .slide.gm-figure {
+  h2 {
+    font-size: .82em;
+    line-height: 1.2;
+    margin-bottom: .25em;
+  }
+
+  figure { margin: 0; }
+
+  figcaption,
+  .figure-caption {
+    font-size: .46em;
+    line-height: 1.35;
+    color: #4a5560;
+    margin-top: .4em;
+    text-align: left;
+  }
+}
+
+// `{.smaller}` shrinks body text but *enlarges* the heading: Quarto ships
+// `.reveal .slides section.smaller h2 { font-size: calc(2.28571em) }`. On a
+// slide that runs to the bottom edge that title costs two lines and pushes the
+// last bullet out of the 700px box. Use `.gm-tight` alongside `.smaller`.
+//
+// The selector has to out-specify Quarto's, hence `section.smaller.gm-tight`
+// rather than the shorter `.slide.gm-tight` — that one loses on element count
+// and silently does nothing.
+.reveal .slides section.smaller.gm-tight {
+  // Quarto's value is 2.28571em, which wraps this deck's longest title to two
+  // lines; 2.0em is the first that fits on one. Note the em resolves against
+  // the section's own reduced size under `.smaller`, not the 34px root.
+  h2 {
+    font-size: 1.95em;
+    line-height: 1.15;
+    margin-bottom: .3em;
+  }
+
+  ul { margin-top: 0; }
+  li { margin-bottom: .05em; }
+}
+
+// The expanded folder tree. Not a chart — a hierarchy with ~30 leaves, whose
+// only real problem was density: as one 40-line ASCII tree it had to be set at
+// 0.58em to fit, which is unreadable from the back of a room. The three
+// top-level folders are siblings, so splitting them into three columns loses
+// nothing and cuts each column's line budget to about a third.
+//
+// Folder vs file is carried by weight and ink, never by colour alone.
+.reveal .slide .gm-tree {
+  font-family: var(--r-code-font, monospace);
+  // Calibrated against the 700px box: 1.05em overflows, .95em is the largest
+  // that fits with the title on one line (hence `.gm-tight` on the heading).
+  font-size: .95em;
+  line-height: 1.45;
+
+  .gm-tree-root {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 .8em;
+    padding-bottom: .4em;
+    margin-bottom: .7em;
+    border-bottom: 1px solid #c9c9c4;
+  }
+
+  .gm-tree-pkg { font-weight: 600; color: #1f2d3a; }
+  .gm-tree-files { color: #4a5560; }
+
+  // Uneven on purpose: Scripts holds the longest filenames, Outputs the
+  // shortest. Equal thirds forced the long ones to wrap, and a wrapped path is
+  // harder to read than a slightly narrower column.
+  .gm-tree-cols {
+    display: grid;
+    grid-template-columns: 1fr 1.12fr .72fr;
+    gap: 0 1.6em;
+  }
+
+  .gm-tree-col > h4 {
+    font-family: inherit;
+    font-size: 1em;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #1f2d3a;
+    margin: 0 0 .35em;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding-left: .9em;
+    border-left: 1px solid #dcdcd6;
+  }
+
+  .gm-tree-col > ul {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  // A path that wraps reads as two entries; keep each on one line.
+  li { margin: .05em 0; white-space: nowrap; }
+
+  // Folders keep full ink; the files they hold recede.
+  .d1, .d2 { color: #1f2d3a; }
+  .leaf { color: #4a5560; }
+}
+
+// The merged exercise slide runs a two-column layout with a code block in the
+// right column. At the deck's default $code-block-font-size it overflows the
+// 700px box by 34px and clips the closing note; .52em is the first that fits.
+.reveal .slide.gm-exercise pre code {
+  font-size: .52em;
+}
+
+// The opening slide: three short prompts, read out while people settle. It
+// wants to be quiet and roomy, not a wall of type.
+.reveal .slides section.smaller.gm-before {
+  font-size: .78em;
+
+  li { margin-bottom: .55em; }
+}

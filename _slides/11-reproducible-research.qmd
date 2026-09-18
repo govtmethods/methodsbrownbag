@@ -6,45 +6,78 @@ date: September 18, 2026
 bibliography: references.bib
 ---
 
-## Across time and space
+## Before we start {.smaller .gm-before}
 
-<!-- 1 — Title -->
+::: {.incremental}
+- Some [setup](../chapters/11-reproducible-research.html#setup) for today — a
+  GitHub account, git installed
+- Who here has watched *Interstellar*?
+- Pick out a favourite picture of yourself and copy it to desktop
+:::
 
-<!--
-FLAG: skeleton, not finished slides.
+## Ideas develop, data moves, and code changes {.smaller .gm-tight}
 
-The deck now follows the 17-point outline agreed for the session; each slide is
-marked with its outline number in a comment above the heading so the two stay
-traceable. Everything below a heading is a PLACEHOLDER — the wording, the
-examples and the exercises are to be written in a later pass. Do not read the
-prose here as drafted content.
+::: {.incremental}
 
-Two things to know before editing:
+- You are working on a research project
+- The theory develops to include new confounders
+- New measurements are defined
+- Corresponding variables from different datasets are merged
+- Those datasets live across `../desktop`, `../downloads`, `quant1sept26`, and so on
+- You do a draft and close
+- Five months later, you rerun the code. Bam!
+- You had cleaned the desktop because well.. productivity-maxxxing!
+- You had moved the code folder, to make space in a drive!
+- Worse, you had thought of a log-log transformation for ggplot, but then
+  deleted the code 3 months back
+- Even worse, you found a collaborator interested in the same topic
+  - You send the code folder
+  - It doesn't run, because the dataset is not found and the paths don't resolve!
 
-1. The absolute/relative paths figure (outline 6) is a COPY of the
-   `fig-repro-paths` chunk in chapters/11-reproducible-research.qmd, not a
-   shared file. If the figure changes, it has to change in both places.
-2. Items the outline itself left open are marked `[?]` in the outline and
-   carried here as `FLAG: OPEN` comments. Resolve them with the presenter
-   rather than inventing an answer.
--->
+:::
 
-**Across time** — the you of next November re-runs what the you of this
-September wrote.
 
-**Across space** — it runs on a machine that is not yours.
+## Ideas, data, and code, have an *Interstellar* Journey {.smaller}
 
-<!-- FLAG: placeholder. Decide whether the title slide's YAML is enough and
-     this framing slide moves to the motivation block instead. -->
+::: {.incremental}
 
-<!-- 2 — Motivation -->
-# Data and code live in weird places
+- Change across time
+  - modified code, new operationalizations
+  - new data merged
+  - older code finds new use
 
-## Paths break {.smaller}
+- Move across space
+  - New folders
+  - New machines
+  - New collaborators
+
+:::
+
+. . .
+
+A good project would move seamlessly across them --- and at the very least,
+save a headache.
+
+
+## It's not just you, it's me
+
+
+Broken Promises (Paths) 
 
 `C:/Users/.../OneDrive - University/Desktop/final_FINAL_v3/data.dta`
 
+. . .
+
+My code from 9 years ago
+
+![](images/old-paths-code.png){.nostretch width="82%" fig-align="center"}
+
+
+## And others too {.smaller}
+
 Replication packages are full of them too.
+
+. . .
 
 ::: {.incremental}
 - Download a package from a journal archive
@@ -53,9 +86,15 @@ Replication packages are full of them too.
 :::
 
 
+## Wider problem, undercuts transparent science {.gm-figure}
+
+![Reproducibility in a stratified random sample of 600 papers published from 2009 to 2018 in 62 journals spanning the social and behavioural sciences [@miskeInvestigatingReproducibilitySocial2026].](images/repro-by-field-figure.png){.nostretch width="100%" fig-align="center"}
+
 ## Transparency {.smaller}
 
 Reproducibility is a key aspect of research transparency
+
+. . .
 
 APSA names three parts of research transparency [@elmanTransparentSocialInquiry2018]:
 
@@ -77,19 +116,20 @@ can someone else follow the reasoning from the data to the claim?
 
 So are **reproducibility** and **replicability** the same thing?
 
-. . .
-
-
 
 <!-- 4 — Definitions -->
 ## Reproducible and replicable {.smaller}
 
 Following @barbaTerminologiesReproducibleResearch2018:
 
+. . .
+
 |  | Same data, same code | New data, new study |
 |---|---|---|
 | **Reproducible** | ✓ same result | — |
 | **Replicable** | — | ✓ same finding |
+
+. . .
 
 ::: {.incremental}
 - **Reproducible research** — authors provide all the necessary data and the
@@ -102,15 +142,11 @@ Following @barbaTerminologiesReproducibleResearch2018:
 
 
 
-<!-- FLAG: placeholder. A short before/after of an uncommented vs. commented
-     script. Keep it to one screenful. -->
+# Part 1 — File Management and Workflow {.smaller}
 
-<!-- 5 — Roadmap -->
-# Part 1 — File Management and Workflow
+##
 
-## The first half {.smaller}
-
-This comes *on top of* well-commented code and judiciously named objects.
+This comes *on top of* [well-commented code and judiciously named objects](https://cran.r-project.org/web/packages/rockchalk/vignettes/Rstyle.pdf).
 
 ::: {.incremental}
 1. **Paths** — absolute and relative
@@ -305,7 +341,7 @@ Built-in mechanism in RStudio for seamless file management and usage of relative
 
 :::: {.columns}
 ::: {.column width="52%"}
-![](../chapters/new-project.png)
+![](images/new-project.png)
 
 ::: {.small}
 Source: [R for Data Science](https://r4ds.hadley.nz/workflow-scripts)
@@ -475,66 +511,45 @@ ggsave(here("output", "fig1.png"))
 
 Three folders and the `.Rproj`. Everything below is elaboration on this.
 
-## Standardized folder structure — Expanded {.smaller}
+## Standardized folder structure — Expanded {.smaller .gm-tight}
 
-::: {style="font-size:0.58em"}
-```         
-📦 govt-8001-dataessay
-├─ govt-8001-dataessay.RProj
-├─ 000-setup.R
-├─ 001-eda.qmd
-├─ 002-analysis.qmd
-├─ 003-manuscript.qmd
-├─ Data
-│  ├─ Raw
-│  │  ├─ Dataset1
-│  │  │  ├─ dataset1.csv
-│  │  │  └─ codebook-dataset1.pdf
-│  │  └─ Dataset2
-│  │     ├─ ...dta
-│  │     └─ codebook-dataset2.pdf
-│  └─ Clean
-│     └─ Merged-df1-df2.csv
-├─ Scripts
-│  ├─ R-scripts
-│  │  ├─ plotting-some-variable.R
-│  │  └─ exploring-different-models.R
-│  ├─ Stata-Scripts
-│  │  └─ seeing-variable-labels.do
-│  └─ Python-Scripts
-│     └─ scraping-data-from-website.py
-└─ Outputs
-   ├─ Plots
-   │  ├─ ...jpeg
-   │  └─ ...png
-   ├─ Tables
-   │  └─ .csv
-   └─ Text
-      └─ ...txt
-```
-:::
+<div class="gm-tree">
+<div class="gm-tree-root"><span class="gm-tree-pkg">📦 govt-8001-dataessay</span><span class="gm-tree-files">govt-8001-dataessay.RProj · 000-setup.R · 001-eda.qmd · 002-analysis.qmd · 003-manuscript.qmd</span></div>
+<div class="gm-tree-cols">
+<div class="gm-tree-col"><h4>Data</h4><ul><li class="d1">Raw<ul><li class="d2">Dataset1<ul><li class="leaf">dataset1.csv</li><li class="leaf">codebook-dataset1.pdf</li></ul></li><li class="d2">Dataset2<ul><li class="leaf">…dta</li><li class="leaf">codebook-dataset2.pdf</li></ul></li></ul></li><li class="d1">Clean<ul><li class="leaf">Merged-df1-df2.csv</li></ul></li></ul></div>
+<div class="gm-tree-col"><h4>Scripts</h4><ul><li class="d1">R-scripts<ul><li class="leaf">plotting-some-variable.R</li><li class="leaf">exploring-different-models.R</li></ul></li><li class="d1">Stata-Scripts<ul><li class="leaf">seeing-variable-labels.do</li></ul></li><li class="d1">Python-Scripts<ul><li class="leaf">scraping-data-from-website.py</li></ul></li></ul></div>
+<div class="gm-tree-col"><h4>Outputs</h4><ul><li class="d1">Plots<ul><li class="leaf">…jpeg</li><li class="leaf">…png</li></ul></li><li class="d1">Tables<ul><li class="leaf">.csv</li></ul></li><li class="d1">Text<ul><li class="leaf">…txt</li></ul></li></ul></div>
+</div>
+</div>
 
-<!-- Copied from the chapter's "Standardized Folder and File Structure" tree.
-     One deliberate difference: the chapter closes 003-manuscript.qmd with `└─`
-     in the middle of the list, which draws a broken tree on a projector. It is
-     `├─` here. Worth fixing in the chapter too. -->
+<!-- Was a single 40-line ASCII tree set at 0.58em, which is unreadable on a
+     projector. Same content, three parallel columns: the three top-level
+     folders are siblings, so nothing about the hierarchy is lost, and each
+     column is short enough to set at a readable size. Folder vs file is
+     carried by weight and ink, not colour. -->
 
-## Exercise — build the minimal one by hand {.smaller}
+## Exercise — build the folder structure {.smaller .gm-tight .gm-exercise}
 
-Point and click. That is the whole exercise.
+The project itself already exists — `File > New Project > New Directory` made
+the folder and put the `.Rproj` in it. Only the three folders inside are left.
+
+:::: {.columns}
+::: {.column width="46%"}
+**By hand**
 
 ::: {.incremental}
-1. Make a folder called `govt-8001-dataessay`, wherever your coursework lives
-2. Inside it, make three more: `Data`, `Scripts`, `Outputs`
-3. In RStudio: `File > New Project > Existing Directory`, and point it at that folder
+1. RStudio's **Files** pane, bottom right
+2. **New Folder**, three times: `Data`, `Scripts`, `Outputs`
 :::
 
-. . .
+::: {.fragment}
+**Checkpoint** — the Files pane lists all three beside
+`govt-8001-dataessay.Rproj`.
+:::
+:::
 
-**Checkpoint** — `govt-8001-dataessay.Rproj` now sits in the folder, and RStudio's
-top-right corner names the project.
-
-## …or let a script do it {.smaller}
+::: {.column width="54%"}
+**…or let a script do it**
 
 `000-setup.R` builds the same tree — the nested subfolders too — from wherever
 the project root happens to be.
@@ -554,22 +569,24 @@ for (folder in folders) {
 - Save it in the project root, beside the `.Rproj`
 - Open it in the project's RStudio window and run it once
 :::
+:::
+::::
 
 ::: {.fragment}
-It creates `Data/`, `Scripts/`, `Outputs/` and every subfolder, plus a starter
-`.gitignore`. Running it twice is safe: it leaves anything that already exists
-alone. Windows, macOS or Linux — it builds every path with `here()`, so there are
-no backslash problems.
+Running it twice is safe: it leaves anything that already exists alone. It builds
+every path with `here()`, so there are no backslash problems on Windows.
 :::
 
-<!-- FLAG: this pair now covers what outline 10 ("Let's work — manual folder
-     creation / link setup / start R project / run setup") was going to do.
-     Decide whether that later slide becomes a recap or goes. -->
+<!-- Was two slides. The manual exercise used to open by creating the folder and
+     end with `New Project > Existing Directory` — both already done on the
+     R Projects slide, so the class was being walked through the same setup
+     twice. Trimmed to the part that is actually new, with the script as the
+     alternative route rather than a slide of its own. -->
 
 <!-- 11 — Version control -->
 # Part 2 — Version Control with Git
 
-## The second half {.smaller}
+## {.smaller}
 
 ::: {.incremental}
 1. **What version control is** — and what Git keeps
@@ -594,7 +611,7 @@ how the thinking moved as the project went on.
 
 ## Check-ins over time
 
-![](../chapters/git-vcs.png){.nostretch width="88%" fig-align="center"}
+![](images/git-vcs.png){.nostretch width="88%" fig-align="center"}
 
 ::: {.small}
 Git stores each version as a snapshot of the whole folder, with a timestamp
@@ -612,7 +629,7 @@ attached. Source: [Pro Git — What is Git?](https://git-scm.com/book/en/v2/Gett
 :::
 :::
 ::: {.column width="55%"}
-![](../chapters/git-stages.png){.nostretch width="100%"}
+![](images/git-stages.png){.nostretch width="100%"}
 
 ::: {.small}
 Modification happens in your own folder, staging in the staging area, and

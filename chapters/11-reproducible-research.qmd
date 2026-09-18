@@ -46,7 +46,7 @@ chapters never reached.
 :::
 
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip collapse="true" #setup}
 
 ### Setup
 

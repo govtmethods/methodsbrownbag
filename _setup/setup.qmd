@@ -1,0 +1,23 @@
+---
+title: "Across Time and Space: Reproducible Research Projects"
+subtitle: "Setup — do this before the session"
+author: "Parushya"
+date: September 18, 2026
+toc: true
+toc-depth: 2
+---
+
+The session assumes git is installed and your machine can talk to GitHub. That
+is all this page is for. It takes about 8 minutes, and doing it beforehand means
+the session can start on the material rather than on installers.
+
+{{< include ../_setup-steps.qmd >}}
+
+## When you are done
+
+- **[The chapter](https://govtmethods.github.io/methodsbrownbag/chapters/11-reproducible-research.html)** — the written
+  version, with everything the session covers and more.
+- **[The slides](https://govtmethods.github.io/methodsbrownbag/slides/11-reproducible-research.html)** — the projected deck.
+
+Bring a favourite picture of yourself, too. You will want it for the website you
+build at the end.

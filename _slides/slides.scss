@@ -175,3 +175,18 @@ $code-block-border-color: #c9c9c4;
 
   li { margin-bottom: .55em; }
 }
+
+// The QR beside the setup link on the opening slide. It encodes the absolute
+// public URL, not the deck's relative href, because a phone scanning it has no
+// idea where the deck is served from. Generated once into images/qr-setup.svg
+// at error-correction level H, so it still scans off a projector at an angle;
+// nothing is fetched at runtime and there is no CDN to fail in a lecture room.
+.reveal .slide .gm-qr {
+  text-align: center;
+
+  p:last-child {
+    margin-top: .3em;
+    font-size: .62em;
+    color: #4a5560;
+  }
+}

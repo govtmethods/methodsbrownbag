@@ -8,12 +8,25 @@ bibliography: references.bib
 
 ## Before we start {.smaller .gm-before}
 
+:::: {.columns}
+::: {.column width="64%"}
 ::: {.incremental}
-- Some [setup](../chapters/11-reproducible-research.html#setup) for today — a
+- Some [setup](../setup.html) for today — a
   GitHub account, git installed
 - Who here has watched *Interstellar*?
-- Pick out a favourite picture of yourself and copy it to desktop
+- Pick out a favourite picture of yourself — you will want it for your website
+  at the end
 :::
+:::
+
+::: {.column width="36%"}
+::: {.gm-qr}
+![](images/qr-setup.svg){.nostretch width="70%" fig-align="center"}
+
+Scan for the setup steps
+:::
+:::
+::::
 
 ## Ideas develop, data moves, and code changes {.smaller .gm-tight}
 

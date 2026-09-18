@@ -1,0 +1,24 @@
+# The pre-session setup page, as its own tiny Quarto project.
+#
+# A book project renders only the files listed under `book: chapters:`, so a
+# standalone page cannot simply sit at the book root — it would never be built.
+# This mirrors the arrangement `_slides/` already uses: an underscore-prefixed
+# directory (Quarto skips those when it collects the book's inputs) with its
+# own config, writing straight into the book's output directory so the page is
+# part of the Pages artifact at /setup.html.
+#
+# It is built by the book's post-render hook, which means CI builds it with no
+# workflow change.
+
+project:
+  type: default
+  output-dir: ../_book
+
+format:
+  html:
+    theme: [journal, ../styles.scss]
+    toc: true
+    toc-depth: 2
+    code-overflow: wrap
+    number-sections: false
+    highlight-style: kate

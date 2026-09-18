@@ -8,6 +8,10 @@ project:
     # it out of the book's inputs. Running it here means CI builds it too, and
     # a local `quarto render` never leaves the chapter's iframe empty.
     - quarto render _slides
+    # The setup page, same arrangement as the deck above: a book renders only
+    # what `book: chapters:` lists, so a standalone page needs its own tiny
+    # project writing into _book/.
+    - quarto render _setup
 
 book:
   title: "Methods Brown Bag"
